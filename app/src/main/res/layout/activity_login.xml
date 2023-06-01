@@ -16,7 +16,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="EasyRead"
         android:textColor="#FFFF"
-        android:textSize="32dp"
+        android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
