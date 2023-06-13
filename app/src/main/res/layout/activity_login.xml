@@ -30,14 +30,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="234dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:text="Welcome to"
         android:textColor="@color/white"
-        android:text="Welcome\nBack"
-        android:textSize="36dp"
+        android:textSize="38dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton" />
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
+        app:layout_constraintVertical_bias="0.202" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -54,24 +57,32 @@
 
             <EditText
                 android:id="@+id/editTextTextPersonName4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="36dp"
+                android:background="@color/edit_text_background"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
                 android:ems="10"
+                android:hint="Email or Username"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/editTextTextPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
                 android:layout_marginTop="32dp"
+                android:background="@color/edit_text_background"
+                android:drawableLeft="@drawable/baseline_lock_24"
                 android:ems="10"
+                android:hint="Password"
                 android:inputType="textPassword"
+                android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
@@ -81,10 +92,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
                 android:text="Forgot Password?"
                 android:textColor="@color/app_theme"
                 android:textStyle="bold"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
@@ -94,7 +105,10 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
                 android:text="SIGN IN"
+                android:textSize="16dp"
+                android:background="@drawable/round_btn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,6 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginStart="5dp"
                     android:text="Sign Up"
                     android:textColor="@color/app_theme"
                     android:textStyle="bold" />
@@ -129,6 +144,15 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="288dp"
+        android:layout_height="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/logo_easyread__1_" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
