@@ -7,11 +7,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.TextView;
+
 
 
 public class loginActivity extends AppCompatActivity {
 
     private Button signInBtn;
+    private TextView linkSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +23,22 @@ public class loginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
-        signInBtn = findViewById(R.id.signInBtn);
+        signInBtn = findViewById(R.id.signUpBtn);
 
         signInBtn.setOnClickListener(view -> {
             Intent homeActivity = new Intent(loginActivity.this, HomeActivity.class);
             startActivity(homeActivity);
         });
+
+        linkSignUp = findViewById(R.id.linkToSignUp);
+        linkSignUp.setOnClickListener(view -> {
+            Intent linkSignUpActivity = new Intent(loginActivity.this, SIgnUpActivity.class);
+            startActivity(linkSignUpActivity);
+        });
+
+
+
+
 
 
     }
