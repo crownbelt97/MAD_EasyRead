@@ -9,6 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="app_theme">#009dff</color>
+    <color name="second_app_theme">#384FFF</color>
+    <color name="third_app_theme">#2977FF</color>
+    <color name="fourth_app_theme">#8AEFFF</color>
     <color name="app_theme_light">#f6fbff</color>
     <color name="edit_text_border">#03a9f4</color>
     <color name="edit_text_background">#f6fbff</color>
