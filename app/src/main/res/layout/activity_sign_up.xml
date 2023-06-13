@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_theme"
-    tools:context=".LoginActivity">
+    tools:context=".SIgnUpActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -20,7 +20,7 @@
         android:layout_height="62dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="52dp"
-        android:text="Welcome to"
+        android:text="Sign Up to"
         android:textColor="@color/white"
         android:textSize="38dp"
         android:textStyle="bold"
@@ -48,11 +48,11 @@
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/edit_text_background"
-                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawableLeft="@drawable/baseline_account_circle_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="#2977ff"
                 android:ems="10"
-                android:hint="Email or Username"
+                android:hint="Username"
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,11 +61,31 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:id="@+id/editTextTextPersonName3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:drawableTint="#2977ff"
+                android:ems="10"
+                android:hint="Email "
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+
+            <EditText
                 android:id="@+id/editTextTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/baseline_lock_24"
@@ -76,20 +96,9 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:text="Forgot Password?"
-                android:textColor="@color/app_theme"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
             <Button
                 android:id="@+id/signUpBtn"
@@ -98,7 +107,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/round_btn"
-                android:text="SIGN IN"
+                android:text="SIGN UP"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -120,15 +129,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Don't have an account?" />
+                    android:text="Already have an account?" />
 
                 <TextView
-                    android:id="@+id/linkToSignUp"
+                    android:id="@+id/linkToSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="Sign Up"
+                    android:text="Sign In"
                     android:textColor="@color/app_theme"
                     android:textStyle="bold" />
             </LinearLayout>
