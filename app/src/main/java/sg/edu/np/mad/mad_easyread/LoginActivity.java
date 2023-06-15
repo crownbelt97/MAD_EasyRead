@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 
 
-public class loginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Button signInBtn;
     private TextView linkSignUp;
@@ -26,13 +26,13 @@ public class loginActivity extends AppCompatActivity {
         signInBtn = findViewById(R.id.signUpBtn);
 
         signInBtn.setOnClickListener(view -> {
-            Intent homeActivity = new Intent(loginActivity.this, HomeActivity.class);
+            Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(homeActivity);
         });
 
         linkSignUp = findViewById(R.id.linkToSignUp);
         linkSignUp.setOnClickListener(view -> {
-            Intent linkSignUpActivity = new Intent(loginActivity.this, SIgnUpActivity.class);
+            Intent linkSignUpActivity = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(linkSignUpActivity);
         });
 

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SIgnUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private TextView linkSignIn;
 
@@ -24,7 +24,7 @@ public class SIgnUpActivity extends AppCompatActivity {
         linkSignIn = findViewById(R.id.linkToSignIn);
 
         linkSignIn.setOnClickListener(view -> {
-            Intent linkSignInActivity = new Intent(SIgnUpActivity.this, loginActivity.class);
+            Intent linkSignInActivity = new Intent(SignUpActivity.this, LoginActivity.class);
             startActivity(linkSignInActivity);
         });
 
