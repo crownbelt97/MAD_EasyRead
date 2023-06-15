@@ -7,19 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity">
 
+
     <TextView
         android:id="@+id/WelcomeTxt"
         android:layout_width="283dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="252dp"
         android:text="Read books to improve your knowledge"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/WelcomeLogin"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <ImageView
         android:id="@+id/imageView"
@@ -47,6 +47,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/linkHome"
+        android:layout_width="170dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="196dp"
+        android:background="@drawable/round_btn_bgwhite"
+        android:text="HOME"
+        android:textColor="@color/third_app_theme"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

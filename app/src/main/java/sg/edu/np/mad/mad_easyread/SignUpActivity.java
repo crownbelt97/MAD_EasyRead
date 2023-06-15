@@ -56,7 +56,6 @@ public class SignUpActivity extends AppCompatActivity {
             if(mPrefs.contains("UserLists")) {
                 String userListJson = mPrefs.getString("UserLists", "");
                 List<User> registeredUser = gson.fromJson(userListJson, List.class);
-
                 registeredUser.add(newUser);
                 String json = gson.toJson(registeredUser);
                 prefsEditor.putString("UserLists", json).commit();
