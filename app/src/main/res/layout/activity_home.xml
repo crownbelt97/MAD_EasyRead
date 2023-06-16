@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/second_app_theme"
+    android:background="@color/white"
     tools:context=".HomeActivity">
 
     <ImageView
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/microsoftteams_image" />
+        app:srcCompat="@drawable/logo_easyread_new" />
 
     <TextView
         android:id="@+id/textView2"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Popular Now"
-        android:textColor="@color/white"
+        android:textColor="@color/second_app_theme"
         android:textSize="36dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Top Charts"
-        android:textColor="@color/white"
+        android:textColor="@color/second_app_theme"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView" />
@@ -92,5 +92,7 @@
         </LinearLayout>
 
     </HorizontalScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
