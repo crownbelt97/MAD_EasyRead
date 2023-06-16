@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
-
+import android.widget.Toast;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(homeActivity);
             } else {
                 // Logic to show error message here (Dialog)
+                Toast.makeText(getApplicationContext(), "Invalid Username Email or Password", Toast.LENGTH_SHORT).show();
+
             }
         });
 

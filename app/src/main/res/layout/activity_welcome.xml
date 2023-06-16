@@ -83,4 +83,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="386dp"
+        android:layout_height="345dp"
+        app:layout_constraintBottom_toTopOf="@+id/WelcomeTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/welcomelogo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

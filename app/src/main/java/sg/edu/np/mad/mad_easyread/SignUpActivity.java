@@ -53,6 +53,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             User newUser = new User(enteredUsername, enteredEmail, enteredPassword);
 
+
+
             if(mPrefs.contains("UserLists")) {
                 String userListJson = mPrefs.getString("UserLists", "");
                 List<User> registeredUser = gson.fromJson(userListJson, List.class);
