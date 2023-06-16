@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if(foundedUser != null) {
                 prefsEditor.putBoolean("UserLoggedIn", true).commit();
-                Intent homeActivity = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent homeActivity = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(homeActivity);
             } else {
                 // Logic to show error message here (Dialog)

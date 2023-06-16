@@ -28,7 +28,7 @@ public class WelcomeActivity extends AppCompatActivity {
         welcomeSignup = findViewById(R.id.WelcomeSignUp);
 
         homeBtn.setOnClickListener(view -> {
-            Intent homeActivity = new Intent(WelcomeActivity.this, HomeActivity.class);
+            Intent homeActivity = new Intent(WelcomeActivity.this, MainActivity.class);
             startActivity(homeActivity);
         });
 
