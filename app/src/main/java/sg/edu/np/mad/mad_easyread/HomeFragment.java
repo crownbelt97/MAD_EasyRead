@@ -1,5 +1,6 @@
 package sg.edu.np.mad.mad_easyread;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -18,9 +19,17 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class HomeFragment extends Fragment {
+    private Button logoutBtn;
+    FirebaseAuth mAuth;
+
     public HomeFragment()
     {
 
@@ -39,7 +48,23 @@ public class HomeFragment extends Fragment {
         if (actionBar != null) {
             actionBar.hide();
         }
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        logoutBtn = view.findViewById(R.id.logoutBtn);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
+        logoutBtn.setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent welcomeIntent = new Intent(getActivity(), WelcomeActivity.class);
+            startActivity(welcomeIntent);
+            getActivity().finish();
+        });
+
+        return view;
+
 
     }
 

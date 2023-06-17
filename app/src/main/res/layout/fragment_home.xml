@@ -27,6 +27,7 @@
             app:srcCompat="@drawable/logo_easyread_new" />
 
         <Button
+            android:id="@+id/logoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
