@@ -1,7 +1,6 @@
 package sg.edu.np.mad.mad_easyread;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,13 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.text.TextUtils;
-import java.util.ArrayList;
-import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.google.gson.Gson;
+
 
 public class SignUpActivity extends AppCompatActivity {
 
