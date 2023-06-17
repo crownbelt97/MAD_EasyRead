@@ -49,13 +49,13 @@
                     android:layout_width="170dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="184dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginTop="24dp"
                     android:text="john@gmail.com"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name2"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -77,13 +77,13 @@
                     android:layout_width="113dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="36dp"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginTop="24dp"
                     android:text="Email"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -91,13 +91,13 @@
                     android:layout_width="113dp"
                     android:layout_height="36dp"
                     android:layout_marginStart="36dp"
-                    android:layout_marginTop="240dp"
+                    android:layout_marginTop="24dp"
                     android:text="Password"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name3"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -105,13 +105,13 @@
                     android:layout_width="170dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="184dp"
-                    android:layout_marginTop="240dp"
+                    android:layout_marginTop="24dp"
                     android:text="*******"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name4"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
@@ -134,7 +134,7 @@
                     android:layout_height="60dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="172dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/round_btn"
                     android:text="LOG OUT"
                     android:textColor="@color/white"

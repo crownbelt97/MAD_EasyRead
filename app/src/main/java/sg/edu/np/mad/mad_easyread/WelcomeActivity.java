@@ -7,12 +7,28 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseAuth;
+
+
 public class WelcomeActivity extends AppCompatActivity {
+
 
     private Button homeBtn;
     private Button welcomeLogin;
     private Button welcomeSignup;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            Intent homeIntent = new Intent(WelcomeActivity.this, MainActivity.class);
+            startActivity(homeIntent);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

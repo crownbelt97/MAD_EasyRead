@@ -10,18 +10,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.text.TextUtils;
 import com.google.gson.Gson;
 import android.widget.Toast;
 import java.util.List;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button signInBtn;
     private TextView linkSignUp;
-
+    FirebaseAuth mAuth;
     private EditText emailOrUsernameField;
     private EditText passwordField;
+
 
 
     @Override
@@ -32,35 +36,41 @@ public class LoginActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        mAuth = FirebaseAuth.getInstance();
 
         emailOrUsernameField = findViewById(R.id.emailOrUsernameField);
         passwordField = findViewById(R.id.passwordField);
 
         signInBtn = findViewById(R.id.signInBtn);
-        signInBtn.setOnClickListener(view -> {
-            SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-            SharedPreferences.Editor prefsEditor = mPrefs.edit();
-            Gson gson = new Gson();
-            String userListJson = mPrefs.getString("UserLists", "");
-            List<User> registeredUser = gson.fromJson(userListJson, List.class);
+        signInBtn.setOnClickListener(v -> {
+            String email, password;
+            email = String.valueOf(emailOrUsernameField.getText());
+            password = String.valueOf(passwordField.getText());
 
-            String enteredEmailOrUsername = emailOrUsernameField.getText().toString();
-            String enteredPasswordField = passwordField.getText().toString();
-
-            User foundedUser = registeredUser.stream().filter(customer -> (customer.getEmail().equals(enteredEmailOrUsername) || customer.getUsername().equals(enteredEmailOrUsername))
-                    && customer.getPassword().equals(enteredPasswordField)).findFirst().orElse(null);
-
-            if(foundedUser != null) {
-                prefsEditor.putBoolean("UserLoggedIn", true).commit();
-                Intent homeActivity = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(homeActivity);
-            } else {
-                // Logic to show error message here (Dialog)
-                Toast.makeText(getApplicationContext(), "Invalid Username Email or Password", Toast.LENGTH_SHORT).show();
-
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(LoginActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(LoginActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(LoginActivity.this, task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(LoginActivity.this, "Login Success.", Toast.LENGTH_SHORT).show();
+                            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(homeIntent);
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
 
         linkSignUp = findViewById(R.id.linkToSignUp);
         linkSignUp.setOnClickListener(view -> {

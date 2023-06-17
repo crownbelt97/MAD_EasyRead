@@ -8,17 +8,20 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.Toast;
+import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private Button signUpBtn;
-
+    FirebaseAuth mAuth;
     private TextView linkSignIn;
 
     @Override
@@ -31,9 +34,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         linkSignIn = findViewById(R.id.linkToSignIn);
-
+        mAuth = FirebaseAuth.getInstance();
         EditText emailField = findViewById(R.id.emailField);
-        EditText usernameField = findViewById(R.id.usernameField);
         EditText passwordField = findViewById(R.id.passwordField);
 
         linkSignIn.setOnClickListener(view -> {
@@ -42,38 +44,36 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         signUpBtn = findViewById(R.id.signUpBtn);
-        signUpBtn.setOnClickListener(view -> {
-            SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
-            SharedPreferences.Editor prefsEditor = mPrefs.edit();
-            Gson gson = new Gson();
+        signUpBtn.setOnClickListener(v -> {
+            String email, password;
+            email = String.valueOf(emailField.getText());
+            password = String.valueOf(passwordField.getText());
 
-            String enteredEmail = emailField.getText().toString();
-            String enteredUsername = usernameField.getText().toString();
-            String enteredPassword = passwordField.getText().toString();
-
-            User newUser = new User(enteredUsername, enteredEmail, enteredPassword);
-
-
-
-            if(mPrefs.contains("UserLists")) {
-                String userListJson = mPrefs.getString("UserLists", "");
-                List<User> registeredUser = gson.fromJson(userListJson, List.class);
-                registeredUser.add(newUser);
-                String json = gson.toJson(registeredUser);
-                prefsEditor.putString("UserLists", json).commit();
-            } else {
-                List<User> registeredUser = new ArrayList();
-
-                registeredUser.add(newUser);
-                String json = gson.toJson(registeredUser);
-                prefsEditor.putString("UserLists", json).commit();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(SignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
+                return;
             }
 
-            // Need to change to LoginActivity
-            Intent homeActivity = new Intent(SignUpActivity.this, LoginActivity.class);
-            startActivity(homeActivity);
-        });
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(SignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(SignUpActivity.this, task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(SignUpActivity.this, "Sign Up Success, Please login", Toast.LENGTH_SHORT).show();
+                            Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            startActivity(loginIntent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(SignUpActivity.this, "Sign Up failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
     }
 
 }
