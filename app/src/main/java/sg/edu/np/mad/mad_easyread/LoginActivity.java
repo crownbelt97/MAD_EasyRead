@@ -3,10 +3,12 @@ package sg.edu.np.mad.mad_easyread;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +16,15 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import android.widget.Toast;
 import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,9 +32,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button signInBtn;
     private TextView linkSignUp;
+    public ProgressDialog loginprogress;
     FirebaseAuth mAuth;
     private EditText emailOrUsernameField;
     private EditText passwordField;
+    private TextView forgotPass;
 
 
 
@@ -40,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
         emailOrUsernameField = findViewById(R.id.emailOrUsernameField);
         passwordField = findViewById(R.id.passwordField);
+        forgotPass = findViewById(R.id.forgotPassword);
 
         signInBtn = findViewById(R.id.signInBtn);
         signInBtn.setOnClickListener(v -> {

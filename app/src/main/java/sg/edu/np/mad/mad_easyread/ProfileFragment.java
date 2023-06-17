@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +21,7 @@ public class ProfileFragment extends Fragment {
     FirebaseAuth mAuth;
     EditText usernameEditText;
     EditText emailEditText;
-    EditText passwordEditText;
+    TextView passReset;
 
     Button updateBtn;
     Button logoutBtn;
@@ -46,7 +47,7 @@ public class ProfileFragment extends Fragment {
 
         usernameEditText = view.findViewById(R.id.usernameEditText);
         emailEditText = view.findViewById(R.id.emailEditText);
-        passwordEditText = view.findViewById(R.id.passwordEditText);
+        passReset = view.findViewById(R.id.passReset);
 
         logoutBtn = view.findViewById(R.id.logout);
         updateBtn = view.findViewById(R.id.updateBtn);
@@ -61,6 +62,17 @@ public class ProfileFragment extends Fragment {
         emailEditText.setEnabled(false);
 
 
+        passReset.setOnClickListener(v -> {
+            String email = emailEditText.getText().toString();
+
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getActivity(), "Password reset email sent!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Failed to send password reset email.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
 
 
         updateBtn.setOnClickListener(v -> {
@@ -76,6 +88,8 @@ public class ProfileFragment extends Fragment {
                     startActivity(getActivity().getIntent());
                 }
             });
+
+
         });
 
         logoutBtn.setOnClickListener(v -> {
