@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Book Name"
+            android:textSize="25sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView17"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/logout_btn"
+            android:text="Log Out"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></Button>
+
+        <ScrollView
+            android:id="@+id/verticalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:scrollbars="none"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoutBtn">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/outline_topbottom">
+
+                    <ImageView
+                        android:id="@+id/details_Cover"
+                        android:layout_width="126dp"
+                        android:layout_height="170dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="30dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/details_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Book Name"
+                        android:layout_marginLeft="25dp"
+                        android:textColor="@color/black"
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/details_Cover"
+                        app:layout_constraintTop_toTopOf="@+id/details_Cover" />
+
+                    <TextView
+                        android:id="@+id/details_Author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="By Book Author"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toEndOf="@+id/details_Cover"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Title" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="235dp"
+                    android:background="@drawable/outline_bottom">
+
+
+                    <TextView
+                        android:id="@+id/details_Ratings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ratings"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="30dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/details_Length"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Length"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/details_Ratings" />
+
+                    <TextView
+                        android:id="@+id/details_Format"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Format"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/details_Length" />
+
+                    <TextView
+                        android:id="@+id/details_Publisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Publisher"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/details_Format" />
+
+                    <TextView
+                        android:id="@+id/details_Released"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Released"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/details_Publisher" />
+
+                    <TextView
+                        android:id="@+id/details_Rating_Data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="30dp"
+                        android:text="3.5/5"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toEndOf="@+id/details_Ratings"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/details_Length_Data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="1000 Pages"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Rating_Data" />
+
+                    <TextView
+                        android:id="@+id/details_Format_Data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Book"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Length_Data" />
+
+                    <TextView
+                        android:id="@+id/details_Publisher_Data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Book Publisher"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Format_Data" />
+
+                    <TextView
+                        android:id="@+id/details_Released_Data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="13 October 2020"
+                        android:textSize="17sp"
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Publisher_Data" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/outline_bottom">
+
+
+                    <TextView
+                        android:id="@+id/details_Category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hardcover Fiction"
+                        android:padding="9dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/category_btn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/outline_bottom">
+
+
+                    <TextView
+                        android:id="@+id/details_Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/details_Description_Data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                        android:textColor="@color/black"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/details_Description" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
