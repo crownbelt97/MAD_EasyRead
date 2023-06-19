@@ -39,14 +39,10 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
 
-        homeBtn = findViewById(R.id.linkHome);
         welcomeLogin = findViewById(R.id.WelcomeLogin);
         welcomeSignup = findViewById(R.id.WelcomeSignUp);
 
-        homeBtn.setOnClickListener(view -> {
-            Intent homeActivity = new Intent(WelcomeActivity.this, MainActivity.class);
-            startActivity(homeActivity);
-        });
+
 
         welcomeLogin.setOnClickListener(view -> {
             Intent loginActivity = new Intent(WelcomeActivity.this, LoginActivity.class);
