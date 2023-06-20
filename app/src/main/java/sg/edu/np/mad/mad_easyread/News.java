@@ -3,11 +3,18 @@ package sg.edu.np.mad.mad_easyread;
 public class News {
 
     String heading;
-    int titleImage;
 
-    public News(String heading, int titleImage) {
+    String image;
+
+    String author;
+
+    String rank;
+
+    public News(String heading, String image, String author, String rank) {
         this.heading = heading;
-        this.titleImage = titleImage;
+        this.image = image;
+        this.rank = rank;
+        this.author = author;
     }
 
 }
