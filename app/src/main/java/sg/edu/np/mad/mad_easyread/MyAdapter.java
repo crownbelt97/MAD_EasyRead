@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         News news = newsArrayList.get(position);
         holder.tvHeading.setText(news.heading);
-        holder.titleImage.setImageResource(news.titleImage);
+        Picasso.get().load(news.image).into(holder.titleImage);
+        holder.tvAuthor.setText(news.author);
+        holder.tvRank.setText(news.rank);
     }
 
     @Override
@@ -45,13 +49,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ShapeableImageView titleImage;
+        ImageView titleImage;
         TextView tvHeading;
+
+        TextView tvAuthor;
+
+        TextView tvRank;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             titleImage = itemView.findViewById(R.id.title_image);
             tvHeading = itemView.findViewById(R.id.tvHeading);
+            tvAuthor = itemView.findViewById(R.id.tvAuthor);
+            tvRank = itemView.findViewById(R.id.tvRank);
         }
     }
 }
