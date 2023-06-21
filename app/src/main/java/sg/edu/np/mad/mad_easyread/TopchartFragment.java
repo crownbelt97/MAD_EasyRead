@@ -53,8 +53,6 @@ public class TopchartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView tv = view.findViewById(R.id.textView7);
-
         tc_Detailed_List = new ArrayList<BookDetails>();
 
         bookArrayList = new ArrayList<>();
@@ -68,6 +66,7 @@ public class TopchartFragment extends Fragment {
                     JSONObject obj = response.getJSONObject("results");
                     JSONArray array = obj.getJSONArray("books");
 
+                    //Loop to iterate through the books array to get the respective data
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject o = array.getJSONObject(i);
                         String title = o.getString("title");
@@ -82,11 +81,14 @@ public class TopchartFragment extends Fragment {
 
                         double rank = o.getInt("rank");
 
+                        //Creating BookDetails objects to put into ArrayList tc_Detailed_List that will be used later on to create 'News' objects for the recyclerview
                         BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
                         tc_Detailed_List.add(bookDetails);
 
                     }
 
+                    //For loop to iterate through the tc_Detailed_List of BookDetails objects to create 'News' objects
+                    //which will be added to the bookArrayList which will be used to display into the recyclerview
                     for (int i = 0; i < tc_Detailed_List.size(); i++) {
                         int rank = (int) Math.round(tc_Detailed_List.get(i).getRating());
                         String rankDisplay = "Rank #" + Integer.toString(rank);
@@ -95,17 +97,25 @@ public class TopchartFragment extends Fragment {
                         bookArrayList.add(news);
                     }
 
+                    //Assigns the RecyclerView widget to the recyclerView variable
                     recyclerView = view.findViewById(R.id.recyclerviewTopChart);
+                    //Creates a new instance of LinearLayoutManager and assigns it as the layout manager for the recyclerView
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    //Set a fixed size for the RecyclerView
                     recyclerView.setHasFixedSize(true);
+                    //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
                     MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList);
+                    //Sets the created MyAdapter as the adapter for the recyclerView
                     recyclerView.setAdapter(myAdapter);
+                    //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data
                     myAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+
+            //Error listener as part of the volley library necessities
         }, new Response.ErrorListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -114,6 +124,7 @@ public class TopchartFragment extends Fragment {
             }
         });
 
+        //Adds the request to the request queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
 

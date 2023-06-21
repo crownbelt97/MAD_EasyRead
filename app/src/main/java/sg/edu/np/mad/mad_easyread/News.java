@@ -10,6 +10,7 @@ public class News {
 
     String rank;
 
+    //Constructor
     public News(String heading, String image, String author, String rank) {
         this.heading = heading;
         this.image = image;
