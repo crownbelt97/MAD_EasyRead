@@ -59,26 +59,37 @@ public class TopchartFragment extends Fragment {
 
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=y6og1zAOyVjSobnuULUpQwC4ivOlVQ0u";
 
+        //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+            //Callback that is invoked when a network request is successful and receives a response from the server
             @Override
             public void onResponse(JSONObject response) {
+                //Try and catch blocks part of volley library as part of exception handling
                 try {
+                    //"array" stores the top15 books from the NYTimes top books list
                     JSONObject obj = response.getJSONObject("results");
                     JSONArray array = obj.getJSONArray("books");
 
                     //Loop to iterate through the books array to get the respective data
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject o = array.getJSONObject(i);
+
+                        // Getting the title string and book_image link (that will be displayed through the picasso library)
                         String title = o.getString("title");
                         String link = o.getString("book_image");
 
+                        //Accessing and getting the isbn13 of the book
                         JSONArray a = o.getJSONArray("isbns");
                         JSONObject isbns = a.getJSONObject(0);
                         String isbn = isbns.getString("isbn13");
 
+                        //Getting the authors from the book but storing it in an array to match
+                        // the class asNYTimes api stores the authors in a single string.
                         String authors = o.getString("author");
                         String[] authorArray = {authors};
 
+                        //Getting the rank of the book but changing the type to double to match the class
                         double rank = o.getInt("rank");
 
                         //Creating BookDetails objects to put into ArrayList tc_Detailed_List that will be used later on to create 'News' objects for the recyclerview
