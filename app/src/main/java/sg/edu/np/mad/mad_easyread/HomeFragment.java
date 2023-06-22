@@ -324,7 +324,7 @@ public class HomeFragment extends Fragment {
                                     Book book = lr_list.get(x);
                                     Log.d("lr_list1",lr_list.toString());
                                     String image_url = book.getBook_Image().replace("http:", "https:");
-                                    lr_text_views.get(x).setText(book.getTitle());
+                                    lr_text_views.get(x).setText(book.getTitle().toUpperCase());
                                     Picasso.get().load(image_url).fit().into(lr_image_views.get(x));
                                     Log.d("image link",book.getBook_Image());
 
@@ -335,7 +335,7 @@ public class HomeFragment extends Fragment {
                                     Book book = re_list.get(x);
                                     Log.d("re_list1", re_list.toString());
                                     String image_url = book.getBook_Image().replace("http:", "https:");
-                                    re_text_views.get(x).setText(book.getTitle());
+                                    re_text_views.get(x).setText(book.getTitle().toUpperCase());
                                     Picasso.get().load(image_url).fit().into(re_image_views.get(x));
                                     Log.d("image link", book.getBook_Image());
 

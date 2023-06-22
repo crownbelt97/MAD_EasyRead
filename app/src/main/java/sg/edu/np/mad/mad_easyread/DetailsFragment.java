@@ -1,5 +1,7 @@
 package sg.edu.np.mad.mad_easyread;
 
+import static org.jsoup.nodes.Document.OutputSettings.Syntax.html;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +26,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+
+import org.jsoup.Jsoup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -322,7 +326,7 @@ public class DetailsFragment extends Fragment {
                             release.setText(finalBook.getRelease());
 
                             TextView description = view.findViewById(R.id.details_Description_Data);
-                            if (finalBook.getDescription().contains("____________"))
+                            /*if (finalBook.getDescription().contains("____________"))
                             {
                                 String [] description_data = finalBook.getDescription().split("____________");
                                 description_data[1] = description_data[1].replace("<p>","");
@@ -352,7 +356,10 @@ public class DetailsFragment extends Fragment {
                             {
                                 String description_data = finalBook.getDescription();
                                 description.setText(description_data);
-                            }
+                            } */
+                            String description_data = finalBook.getDescription();
+                            description_data = Jsoup.parse(description_data).text();
+                            description.setText(description_data);
 
 
 
