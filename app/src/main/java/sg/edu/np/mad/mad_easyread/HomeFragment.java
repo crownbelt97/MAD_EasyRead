@@ -78,13 +78,15 @@ public class HomeFragment extends Fragment {
             actionBar.hide();
         }
 
+        // Layout inflater that instantiates a layout XML file into its corresponding View objects
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         logoutBtn = view.findViewById(R.id.logoutBtn);
 
         mAuth = FirebaseAuth.getInstance();
 
-
+        //On click listener to sign a user out of their account and brings them
+        // back to the welcome page upon clicking the log out button.
         logoutBtn.setOnClickListener(v -> {
             mAuth.signOut();
             Intent welcomeIntent = new Intent(getActivity(), WelcomeActivity.class);
@@ -93,10 +95,12 @@ public class HomeFragment extends Fragment {
         });
 
 
-        // TOP CHARTS
+        // TOP CHARTS SECTION
 
+        //Array of the ids of all the text views of the horizontal scrollview displaying the top charts top 5 books
         int[] textViews = {R.id.tc_textview1, R.id.tc_textview2, R.id.tc_textview3, R.id.tc_textview4, R.id.tc_textview5};
 
+        //Array of the ids of all the image views of the horizontal scrollview displaying the top charts top 5 books
         int[] imageViews = {R.id.tc_imageview1, R.id.tc_imageview2, R.id.tc_imageview3, R.id.tc_imageview4, R.id.tc_imageview5};
 
         // RECOMMNEDED FOR YOU
@@ -140,32 +144,47 @@ public class HomeFragment extends Fragment {
         List<Book> re_list = new ArrayList<>();
         List<Book> lr_list = new ArrayList<>();
 
+        //Url that will be used to retrieve the current top books from the NYTimes book api
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=y6og1zAOyVjSobnuULUpQwC4ivOlVQ0u";
         String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
         String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
 
+        //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+            //Callback that is invoked when a network request is successful and receives a response from the server
             @Override
             public void onResponse(JSONObject response) {
+                //Try and catch blocks part of volley library as part of exception handling
                 try {
+
+                    //"array" stores the top15 books from the NYTimes top books list
                     JSONObject obj = response.getJSONObject("results");
                     JSONArray array = obj.getJSONArray("books");
 
+                    //'For loop' to iterate through the books in the array
                     for(int i = 0; i < array.length(); i++){
                         JSONObject o = array.getJSONObject(i);
+
+                        // Getting the title string and book_image link (that will be displayed through the picasso library)
                         String title = o.getString("title");
                         String link = o.getString("book_image");
 
+                        //Accessing and getting the isbn13 of the book
                         JSONArray a = o.getJSONArray("isbns");
                         JSONObject isbns = a.getJSONObject(0);
                         String isbn = isbns.getString("isbn13");
 
+                        //Getting the authors from the book but storing it in an array to match
+                        // the class asNYTimes api stores the authors in a single string.
                         String authors = o.getString("author");
                         String[] authorArray = {authors};
 
+                        //Getting the rank of the book but changing the type to double to match the class
                         double rank = o.getInt("rank");
 
-
+                        //Setting the images and titles of the books to the respective textviews and imageviews
+                        //if the count is under 5, as there are 5 books in the main page.
                         if (i<5){
                             TextView tv = (TextView) view.findViewById(textViews[i]);
                             ImageView iv = (ImageView) view.findViewById(imageViews[i]);
@@ -174,6 +193,8 @@ public class HomeFragment extends Fragment {
                             Picasso.get().load(link).fit().into(iv);
                         }
 
+                        //Create Book and BookDetails objects for each book and adding it to ArrayLists so it can
+                        //be reused on other fragments. (will implement in the later stage)
                         Book book = new Book( title, link, isbn );
                         BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
                         tc_List.add(book);
@@ -193,6 +214,8 @@ public class HomeFragment extends Fragment {
 
 
 
+
+            //Error listener as part of the volley library necessities
         }, new Response.ErrorListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -338,6 +361,7 @@ public class HomeFragment extends Fragment {
             }
         }
 
+        //Adds the request to the request queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
         new MyTask().execute(url_ggl_re, null, null);
@@ -404,7 +428,7 @@ public class HomeFragment extends Fragment {
             view.findViewById(imageView).setOnClickListener(clickListener);
         }
 
-        // TOP CHARTS
+        // TOP CHARTS SECTION
 
         return view;
 
