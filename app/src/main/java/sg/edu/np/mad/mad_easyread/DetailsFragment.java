@@ -64,6 +64,7 @@ public class DetailsFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
 
+        //obtain url from previous fragment
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String details_link = sharedPref.getString("details_link", "empty");
 
@@ -89,6 +90,7 @@ public class DetailsFragment extends Fragment {
 
                 try {
 
+                    // Code to obtain data from Json using Gson
                     URL url = new URL (urls[0]);
                     HttpURLConnection http = (HttpURLConnection) url.openConnection();
                     http.setRequestMethod("GET");
@@ -103,18 +105,14 @@ public class DetailsFragment extends Fragment {
 
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     String input_data = gson.toJson(JsonParser.parseString(response.toString()));
-                    //System.out.println(input_data);
                     JsonObject jsonObject = new Gson().fromJson(input_data, JsonObject.class);
-                    //System.out.println((jsonObject.get("results").getAsJsonObject().toString()));
 
-                    //Gson g2 = new Gson();
-                    //Book b = g2.fromJson(gson.toJson(JsonParser.parseString(response.toString())), Book.class)
+
                     Map<String, Object> retMap = new Gson().fromJson(
                             gson.toJson(JsonParser.parseString(response.toString())) , new TypeToken<HashMap<String, Object>>() {}.getType()
                     );
                     if (url.toString().contains("googleapis")) {
-
-
+                        // parse json data to obtain neccessary fields
                         for (Map.Entry<String, Object> pair : retMap.entrySet()) {
                             String key = pair.getKey();
                             JsonObject volumeInfo = jsonObject.getAsJsonObject("volumeInfo");
@@ -160,7 +158,8 @@ public class DetailsFragment extends Fragment {
                             {
                                 Log.d("error",e.toString());
                             }
-
+                            //add details to bookdetails class
+                            //used for details fragment
                             book = new BookDetails(title,authors_java_array,book_image,description,ratings,format,Integer.parseInt(length),publisher,release,"na");
 
                             }
@@ -280,7 +279,7 @@ public class DetailsFragment extends Fragment {
             }
         }
 
-
+        //make url requests
         if (!details_link.contains("http"))
         {
 

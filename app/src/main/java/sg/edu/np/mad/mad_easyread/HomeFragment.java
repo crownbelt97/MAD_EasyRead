@@ -109,6 +109,8 @@ public class HomeFragment extends Fragment {
 
         ArrayList<TextView> re_text_views = new ArrayList<>();
 
+        // list for image and text views for each sections
+
         re_image_views.add(view.findViewById(R.id.re_imageview1));
         re_image_views.add(view.findViewById(R.id.re_imageview2));
         re_image_views.add(view.findViewById(R.id.re_imageview3));
@@ -236,6 +238,8 @@ public class HomeFragment extends Fragment {
                 String Response_message = "";
 
                 try {
+
+                    // Code to obtain data from Json using Gson
                     URL url = new URL (urls[0]);
                     HttpURLConnection http = (HttpURLConnection) url.openConnection();
                     http.setRequestMethod("GET");
@@ -249,17 +253,15 @@ public class HomeFragment extends Fragment {
                     }
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     String input_data = gson.toJson(JsonParser.parseString(response.toString()));
-                    //System.out.println(input_data);
                     JsonObject jsonObject = new Gson().fromJson(input_data, JsonObject.class);
-                    //System.out.println((jsonObject.get("results").getAsJsonObject().toString()));
 
-                    //Gson g2 = new Gson();
-                    //Book b = g2.fromJson(gson.toJson(JsonParser.parseString(response.toString())), Book.class)
+
+
                     Map<String, Object> retMap = new Gson().fromJson(
                             gson.toJson(JsonParser.parseString(response.toString())) , new TypeToken<HashMap<String, Object>>() {}.getType()
                     );
                     if (url.toString().contains("googleapis")) {
-
+                        // parse json data to obtain neccessary fields
                         for (Map.Entry<String, Object> pair : retMap.entrySet()) {
                             String key = pair.getKey();
                             if (Objects.equals(key, "items")) {
@@ -294,6 +296,8 @@ public class HomeFragment extends Fragment {
                                     {
                                         System.out.println(e);
                                     }
+                                    // use data to add to book class
+                                    // book class used for objects to be displayed
                                     Book book = new Book(title, book_image, selfLink);
                                     if (url.toString().contains("orderBy=newest")) {
                                         System.out.println(lr_list);
@@ -303,10 +307,6 @@ public class HomeFragment extends Fragment {
                                         System.out.println(re_list);
                                         re_list.add(book);
                                     }
-                                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPref.edit();
-                                    editor.putString("Iwanna", "suicide");
-                                    editor.apply();
 
 
                                 }
@@ -371,6 +371,9 @@ public class HomeFragment extends Fragment {
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             public void onClick(View v) {
+                //click listener for all image views
+                // when clicked, show details fragment
+                // and send string of book data url to details fragment
                 int id = v.getId();
                 for ( int x = 0; x < lr_image_views.size() ; x ++)
                 {
@@ -428,7 +431,6 @@ public class HomeFragment extends Fragment {
             view.findViewById(imageView).setOnClickListener(clickListener);
         }
 
-        // TOP CHARTS SECTION
 
         return view;
 
