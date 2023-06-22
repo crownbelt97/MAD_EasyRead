@@ -49,7 +49,6 @@ public class DetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -323,7 +322,38 @@ public class DetailsFragment extends Fragment {
                             release.setText(finalBook.getRelease());
 
                             TextView description = view.findViewById(R.id.details_Description_Data);
-                            description.setText(finalBook.getDescription());
+                            if (finalBook.getDescription().contains("____________"))
+                            {
+                                String [] description_data = finalBook.getDescription().split("____________");
+                                description_data[1] = description_data[1].replace("<p>","");
+                                description_data[1] = description_data[1].replace("<b>","");
+                                description_data[1] = description_data[1].replace("</b>","");
+                                description_data[1] = description_data[1].replace("<br>","");
+                                description.setText(description_data[1]);
+                            }else if (finalBook.getDescription().contains("<br><br>"))
+                            {
+                                String [] description_data = finalBook.getDescription().split("<br><br>");
+                                description_data[1] = description_data[1].replace("<p>","");
+                                description_data[1] = description_data[1].replace("<b>","");
+                                description_data[1] = description_data[1].replace("</b>","");
+                                description_data[1] = description_data[1].replace("<br>","");
+                                String string_data = "";
+                                for (int x = 0; x < description_data.length ; x++)
+                                {
+                                    String cur_str = description_data[x];
+                                    if (!cur_str.contains("<i>"))
+                                    {
+                                        string_data += cur_str;
+                                    }
+                                }
+                                description.setText(string_data);
+                            }
+                            else
+                            {
+                                String description_data = finalBook.getDescription();
+                                description.setText(description_data);
+                            }
+
 
 
                             sharedPref.edit().clear().apply();
