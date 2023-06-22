@@ -33,9 +33,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.concurrent.ExecutionException;
 
 
 public class DetailsFragment extends Fragment {
@@ -67,12 +69,15 @@ public class DetailsFragment extends Fragment {
         //obtain url from previous fragment
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String details_link = sharedPref.getString("details_link", "empty");
+        int ranking = sharedPref.getInt("rank",0);
 
         ArrayList<String> authors_nytimes = new ArrayList<>();
 
         String author_url = "https://openlibrary.org/api/books?bibkeys=ISBN:";
 
+
         final String[] key_nytimes = new String[1];
+
 
 
         class MyTask extends AsyncTask<String, Void, String> {
@@ -82,11 +87,14 @@ public class DetailsFragment extends Fragment {
                 book = null;
                 String message = "";
                 String Response_content = "";
-                //String description = "";
                 int Response_code = 0;
                 String Response_message = "";
+
+                //create variables for fields that may lack json data
+                //authors count is also declared since there may be mulitple authors
                 int authors_count = 0;
-                double ratings = 0;
+                double ratings = -1;
+                String description_input = "N/A";
 
                 try {
 
@@ -123,13 +131,12 @@ public class DetailsFragment extends Fragment {
                             authors_count = authors_java_array.length;
 
 
-                            String description;
                             try {
-                                description = volumeInfo.get("description").getAsString();
+                                description_input = volumeInfo.get("description").getAsString();
                             }
                             catch (Exception e)
                             {
-                                description = "N/A";
+                                description_input = "N/A";
                             }
 
                             String release = volumeInfo.get("publishedDate").getAsString();
@@ -144,14 +151,6 @@ public class DetailsFragment extends Fragment {
 
                             String book_image = imageLinks.get("thumbnail").getAsString();
 
-
-
-
-
-
-
-
-
                             try {
                                 ratings = volumeInfo.get("averageRating").getAsDouble();
                             } catch (Exception e)
@@ -160,13 +159,50 @@ public class DetailsFragment extends Fragment {
                             }
                             //add details to bookdetails class
                             //used for details fragment
-                            book = new BookDetails(title,authors_java_array,book_image,description,ratings,format,Integer.parseInt(length),publisher,release,"na");
+                            book = new BookDetails(title,authors_java_array,book_image,description_input,ratings,format,Integer.parseInt(length),publisher,release,"na");
 
                             }
                         }
 
-                    else if (url.toString().contains("ratings")){
+                    else if (url.toString().contains("jscmd=details")){
+                        JsonObject volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
 
+                        //get works jsonobject to get description of book
+
+                        JsonObject detail = volumeInfo.getAsJsonObject("details");
+                        JsonArray works = detail.getAsJsonArray("works");
+
+                        //get key for description url
+
+                        String description_key = works.get(0).getAsJsonObject().get("key").getAsString();
+
+
+
+                        //finish forming the description url
+                        String description_url ="https://openlibrary.org" + description_key + ".json";
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("description_url", description_url);
+                        editor.apply();
+                        Log.d("des",sharedPref.getString("description_url", "empty"));
+
+                    }
+                    else if (url.toString().contains("works"))
+                    {
+                        //try catch block to get description
+                        // since some json data lacks description field
+                        try
+                        {
+                            JsonObject description = jsonObject.getAsJsonObject("description");
+                            description_input = description.get("value").getAsString();
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("description", description_input);
+                            editor.apply();
+                            Log.d("description",sharedPref.getString("description", "empty"));
+
+                        } catch ( Exception e)
+                        {
+                            System.out.println(e);
+                        }
                     }
 
                     else{
@@ -196,8 +232,14 @@ public class DetailsFragment extends Fragment {
                         {
                             authors_java_array[x] = authorsinfo_java_array[x].get("name").getAsString();
                         }
-
-                        String length = volumeInfo.get("number_of_pages").getAsString();
+                        String length = "-1";
+                        //try catch since some json data lacks number of pages field
+                        try {
+                            length = volumeInfo.get("number_of_pages").getAsString();
+                        }catch (Exception e)
+                        {
+                            System.out.println(e);
+                        }
 
                         JsonObject cover = volumeInfo.getAsJsonObject("cover");
 
@@ -209,7 +251,7 @@ public class DetailsFragment extends Fragment {
 
                         key_nytimes[0] = volumeInfo.get("key").getAsString();
 
-                        book = new BookDetails(title,authors_java_array,book_image,null,0,"book",Integer.parseInt(length),publishers_data,release,"na");
+                        book = new BookDetails(title,authors_java_array,book_image,sharedPref.getString("description", "N/A"),ranking,"book",Integer.parseInt(length),publishers_data,release,"na");
 
 
                     }
@@ -217,52 +259,82 @@ public class DetailsFragment extends Fragment {
                     BookDetails finalBook = book;
                     int finalAuthors_count = authors_count;
                     String finalRatings = String.valueOf(ratings);
-                    getActivity().runOnUiThread(() -> {
 
-                        // Stuff that updates the UI
-                        String image_url = finalBook.getBook_Image().replace("http:", "https:");
-                        Picasso.get().load(image_url).into((ImageView) view.findViewById(R.id.details_Cover));
+                    if (book != null && !url.toString().contains("jscmd=details"))
+                    {
+                        getActivity().runOnUiThread(() -> {
 
-
-                        TextView author = view.findViewById(R.id.details_Author);
-                        String author_text = "";
-
-                        for (int x = 0; x < finalAuthors_count; x++)
-                        {
-                            author_text += finalBook.getAuthor(x);
-                        }
-                        author.setText(author_text);
-
-                        TextView title = view.findViewById(R.id.details_Title);
-                        title.setText(finalBook.getTitle());
-
-                        TextView length1 = view.findViewById(R.id.details_Length_Data);
-                        String text_input = String.valueOf(finalBook.getLength()) + " Pages";
-                        length1.setText(text_input);
-
-                        TextView ratings_view = view.findViewById(R.id.details_Rating_Data);
-                        ratings_view.setText(finalRatings);
+                            // Stuff that updates the UI
+                            String image_url = finalBook.getBook_Image().replace("http:", "https:");
+                            Picasso.get().load(image_url).into((ImageView) view.findViewById(R.id.details_Cover));
 
 
-                        TextView format = view.findViewById(R.id.details_Format_Data);
-                        format.setText(finalBook.getFormat());
+                            TextView author = view.findViewById(R.id.details_Author);
+                            String author_text = "";
 
-                        TextView publisher = view.findViewById(R.id.details_Publisher_Data);
-                        publisher.setText(finalBook.getPublisher());
+                            for (int x = 0; x < finalAuthors_count; x++) {
+                                author_text += finalBook.getAuthor(x);
+                            }
+                            author.setText(author_text);
 
-                        TextView release = view.findViewById(R.id.details_Released_Data);
-                        release.setText(finalBook.getRelease());
+                            TextView title = view.findViewById(R.id.details_Title);
+                            title.setText(finalBook.getTitle());
 
-                        TextView description = view.findViewById(R.id.details_Description_Data);
-                        description.setText(finalBook.getDescription());
+                            TextView length1 = view.findViewById(R.id.details_Length_Data);
+                            //change input if length of book is unavailable
+                            if (finalBook.getLength() == -1)
+                            {
+                                length1.setText("N/A");
+                            }
+                            else{
+                                String text_input = String.valueOf(finalBook.getLength()) + " Pages";
+                                Log.d("error",text_input);
+                                length1.setText(text_input);
+                            }
 
 
-                        sharedPref.edit().clear().apply();
+                            TextView ratings_view = view.findViewById(R.id.details_Rating_Data);
+                            TextView ratings_field = view.findViewById((R.id.details_Ratings));
+                            //ranking data differs when its from top chart
 
-                        System.out.println(sharedPref.getString("details_link", "empty"));
+                            if (!details_link.contains("http")) {
+                                String input_rank = String.valueOf(ranking) + "/15";
+                                ratings_view.setText(input_rank);
+                                //change ui field to make it more understandable
+                                ratings_field.setText("Ranking");
+                            } else {
+                                //change ratings output if lack of rating data
+                                if (finalRatings.equals("-1.0")) {
+                                    ratings_view.setText("N/A");
+                                } else {
+                                    ratings_view.setText(finalRatings);
+                                }
+
+                            }
+
+
+                            TextView format = view.findViewById(R.id.details_Format_Data);
+                            format.setText(finalBook.getFormat());
+
+                            TextView publisher = view.findViewById(R.id.details_Publisher_Data);
+                            publisher.setText(finalBook.getPublisher());
+
+                            TextView release = view.findViewById(R.id.details_Released_Data);
+                            release.setText(finalBook.getRelease());
+
+                            TextView description = view.findViewById(R.id.details_Description_Data);
+                            description.setText(finalBook.getDescription());
+
+
+                            sharedPref.edit().clear().apply();
+
+                            System.out.println(sharedPref.getString("details_link", "empty"));
+
+
 
 
                         });
+                    }
 
 
 
@@ -282,10 +354,29 @@ public class DetailsFragment extends Fragment {
         //make url requests
         if (!details_link.contains("http"))
         {
+            //create and call GET method for respective urls
 
-            String url = author_url + details_link + "&jscmd=data&format=json";
-            System.out.println(url);
-            new MyTask().execute(url, null, null);
+            String url_details = author_url + details_link + "&jscmd=details&format=json";
+            System.out.println(url_details);
+            // wait for this task to finish before calling the other tasks calls
+            try {
+                new MyTask().execute(url_details, null, null).get();
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+
+            //obtain description url from stored shared preference
+            String description_url = sharedPref.getString("description_url", "empty");
+            Log.d("tagged",description_url);
+            new MyTask().execute(description_url, null, null);
+
+
+            String url_data = author_url + details_link + "&jscmd=data&format=json";
+            System.out.println(url_data);
+            new MyTask().execute(url_data, null, null);
                 //new MyTask().execute("https://openlibrary.org/works" + key_nytimes[0] + "/ratings.json", null, null);
         }else
         {
