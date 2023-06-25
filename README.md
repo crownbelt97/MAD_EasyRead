@@ -35,3 +35,21 @@ Mikhail Adam Zahadi : <br>
 - Open Library API call of data <br>
 - Display Google Books API call data in BookDetails Fragment
 - Display respective API call data in Home Fragment, Popular Now and Recommended For You
+
+Stage 2 Plan: <br>
+
+Jeremy Chan Wei Wen & Phange Kah Yeng : <br>
+- Front-end <br>
+- Notifications <br>
+- Update UI on Feedback <br>
+
+
+Siu Chi Kit Wesley : <br>
+- Filter <br>
+- Search <br>
+- Update UI on Bokk details <br>
+
+
+ Mikhail Adam Zahadi <br>
+ - Reviews <br>
+ - Favourties <br>
