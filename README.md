@@ -20,6 +20,7 @@ Jeremy Chan Wei Wen & Phange Kah Yeng : <br>
 - UI and Back-end for Sign Up Page <br>
 - Storing Profile data in Database <br>
 - UI for Top Charts, Favourites and Profile Fragments <br>
+- Uploaded Application <br>
 
 
 Siu Chi Kit Wesley : <br>
