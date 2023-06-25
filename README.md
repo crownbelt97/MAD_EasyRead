@@ -9,6 +9,8 @@ Mikhail Adam Zahadi - S10239784 <br>
 EasyRead is an book brwosing application to find online books to read. EasyRead helps users in finding out what new books are released and what 
 books are recommended for the user. Users can scroll through top charts of books, favourite books they like and search books by categories like Fiction.
 
+**Link**: [Click here]([https://wesleysck.github.io/developmentalblog/](https://play.google.com/store/apps/details?id=sg.edu.np.mad.mad_easyread&pli=1))
+
 
 Stage 1 Contributions <br>
 
