@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:343254430783:android:1fba6fab536a1c2930348a",
+        "android_client_info": {
+          "package_name": "sg.edu.np.mad.easyread"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343254430783-hn1gbtlram6oa77e9vuqcnvv1ln6korv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFKlgvAeH4_MAP7JzTCbkc6ZF-ygvv1tI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343254430783-hn1gbtlram6oa77e9vuqcnvv1ln6korv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:343254430783:android:663be584855c035930348a",
         "android_client_info": {
           "package_name": "sg.edu.np.mad.mad_easyread"

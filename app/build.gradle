@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'sg.edu.np.mad.mad_easyread'
+    namespace 'sg.edu.np.mad.easyread'
     compileSdk 33
 
     defaultConfig {
-        applicationId "sg.edu.np.mad.mad_easyread"
+        applicationId "sg.edu.np.mad.easyread"
         minSdk 30
         targetSdk 33
         versionCode 1
