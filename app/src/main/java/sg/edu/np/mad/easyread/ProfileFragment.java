@@ -1,4 +1,4 @@
-package sg.edu.np.mad.mad_easyread;
+package sg.edu.np.mad.easyread;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import sg.edu.np.mad.easyread.R;
 
 public class ProfileFragment extends Fragment {
     FirebaseAuth mAuth;

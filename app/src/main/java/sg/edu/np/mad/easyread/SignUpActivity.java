@@ -1,4 +1,4 @@
-package sg.edu.np.mad.mad_easyread;
+package sg.edu.np.mad.easyread;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.auth.FirebaseUser;
+
+import sg.edu.np.mad.easyread.R;
 
 
 public class SignUpActivity extends AppCompatActivity {

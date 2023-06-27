@@ -1,6 +1,4 @@
-package sg.edu.np.mad.mad_easyread;
-
-import static org.jsoup.nodes.Document.OutputSettings.Syntax.html;
+package sg.edu.np.mad.easyread;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,11 +35,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Stack;
 import java.util.concurrent.ExecutionException;
+
+import sg.edu.np.mad.easyread.R;
 
 
 public class DetailsFragment extends Fragment {

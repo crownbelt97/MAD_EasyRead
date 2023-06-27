@@ -1,4 +1,4 @@
-package sg.edu.np.mad.mad_easyread;
+package sg.edu.np.mad.easyread;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
+
+import sg.edu.np.mad.easyread.R;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder>{
 

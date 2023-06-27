@@ -1,4 +1,4 @@
-package sg.edu.np.mad.mad_easyread;
+package sg.edu.np.mad.easyread;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,10 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import sg.edu.np.mad.easyread.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 

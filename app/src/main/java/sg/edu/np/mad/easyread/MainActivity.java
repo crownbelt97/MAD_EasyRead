@@ -1,4 +1,4 @@
-package sg.edu.np.mad.mad_easyread;
+package sg.edu.np.mad.easyread;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import sg.edu.np.mad.mad_easyread.databinding.ActivityMainBinding;
+
+import sg.edu.np.mad.easyread.R;
+import sg.edu.np.mad.easyread.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

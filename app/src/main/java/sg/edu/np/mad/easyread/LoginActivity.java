@@ -1,8 +1,7 @@
-package sg.edu.np.mad.mad_easyread;
+package sg.edu.np.mad.easyread;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
+
+import sg.edu.np.mad.easyread.R;
 
 public class LoginActivity extends AppCompatActivity {
 
