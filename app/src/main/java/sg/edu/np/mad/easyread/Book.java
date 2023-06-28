@@ -29,5 +29,6 @@ public class Book {
         this.book_image = book_image;
         this.details_link = details_link;
     }
+//
 
 }
