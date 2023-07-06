@@ -48,6 +48,11 @@ Jeremy Chan Wei Wen & Phang Kah Yeng : <br>
 - Front-end <br>
 - Notifications <br>
 - Update UI on Feedback <br>
+- Where to buy to book & prices
+- Place order?
+- National library where to borrow book
+- Excerpt of book like a chapter
+
 
 
 Siu Chi Kit Wesley : <br>
