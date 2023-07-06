@@ -13,10 +13,10 @@
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="sg.edu.np.mad.easyread.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name="sg.edu.np.mad.easyread.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name="sg.edu.np.mad.easyread.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="sg.edu.np.mad.easyread.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
