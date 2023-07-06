@@ -13,7 +13,7 @@ books are recommended for the user. Users can scroll through top charts of books
 
 Stage 1 Contributions <br>
 
-Jeremy Chan Wei Wen & Phange Kah Yeng : <br>
+Jeremy Chan Wei Wen & Phang Kah Yeng : <br>
 - Navigation Bar <br>
 - Recylcer View for Home Page <br>
 - Creating the Main Actitvity and respective Fragments e.g Top Chart <br>
