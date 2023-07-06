@@ -38,7 +38,7 @@ Mikhail Adam Zahadi : <br>
 
 Stage 2 Plan: <br>
 
-Jeremy Chan Wei Wen & Phange Kah Yeng : <br>
+Jeremy Chan Wei Wen & Phang Kah Yeng : <br>
 - Front-end <br>
 - Notifications <br>
 - Update UI on Feedback <br>

@@ -166,46 +166,41 @@ public class HomeFragment extends Fragment {
 
                     //'For loop' to iterate through the books in the array
                     for(int i = 0; i < array.length(); i++){
-                        try {
-                            JSONObject o = array.getJSONObject(i);
+                        JSONObject o = array.getJSONObject(i);
 
-                            // Getting the title string and book_image link (that will be displayed through the picasso library)
-                            String title = o.getString("title");
-                            String link = o.getString("book_image");
+                        // Getting the title string and book_image link (that will be displayed through the picasso library)
+                        String title = o.getString("title");
+                        String link = o.getString("book_image");
 
-                            //Accessing and getting the isbn13 of the book
-                            JSONArray a = o.getJSONArray("isbns");
-                            JSONObject isbns = a.getJSONObject(0);
-                            String isbn = isbns.getString("isbn13");
+                        //Accessing and getting the isbn13 of the book
+                        JSONArray a = o.getJSONArray("isbns");
+                        JSONObject isbns = a.getJSONObject(0);
+                        String isbn = isbns.getString("isbn13");
 
-                            //Getting the authors from the book but storing it in an array to match
-                            // the class asNYTimes api stores the authors in a single string.
-                            String authors = o.getString("author");
-                            String[] authorArray = {authors};
+                        //Getting the authors from the book but storing it in an array to match
+                        // the class asNYTimes api stores the authors in a single string.
+                        String authors = o.getString("author");
+                        String[] authorArray = {authors};
 
-                            //Getting the rank of the book but changing the type to double to match the class
-                            double rank = o.getInt("rank");
+                        //Getting the rank of the book but changing the type to double to match the class
+                        double rank = o.getInt("rank");
 
-                            //Setting the images and titles of the books to the respective textviews and imageviews
-                            //if the count is under 5, as there are 5 books in the main page.
-                            if (i < 5) {
-                                TextView tv = (TextView) view.findViewById(textViews[i]);
-                                ImageView iv = (ImageView) view.findViewById(imageViews[i]);
+                        //Setting the images and titles of the books to the respective textviews and imageviews
+                        //if the count is under 5, as there are 5 books in the main page.
+                        if (i<5){
+                            TextView tv = (TextView) view.findViewById(textViews[i]);
+                            ImageView iv = (ImageView) view.findViewById(imageViews[i]);
 
-                                tv.setText(title);
-                                Picasso.get().load(link).fit().into(iv);
-                            }
-
-                            //Create Book and BookDetails objects for each book and adding it to ArrayLists so it can
-                            //be reused on other fragments. (will implement in the later stage)
-                            Book book = new Book(title, link, isbn);
-                            BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
-                            tc_List.add(book);
-                            tc_Detailed_List.add(bookDetails);
-                        } catch (Exception e)
-                        {
-                            System.out.println(e);
+                            tv.setText(title);
+                            Picasso.get().load(link).fit().into(iv);
                         }
+
+                        //Create Book and BookDetails objects for each book and adding it to ArrayLists so it can
+                        //be reused on other fragments. (will implement in the later stage)
+                        Book book = new Book( title, link, isbn );
+                        BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
+                        tc_List.add(book);
+                        tc_Detailed_List.add(bookDetails);
 
                     }
 
@@ -294,7 +289,6 @@ public class HomeFragment extends Fragment {
 
                                         String description = "";
 
-
                                         try {
                                             description = volumeInfo.get("description").getAsString();
 
@@ -304,7 +298,6 @@ public class HomeFragment extends Fragment {
                                         // use data to add to book class
                                         // book class used for objects to be displayed
                                         Book book = new Book(title, book_image, selfLink);
-
                                         if (url.toString().contains("orderBy=newest")) {
                                             System.out.println(lr_list);
                                             lr_list.add(book);
@@ -312,7 +305,8 @@ public class HomeFragment extends Fragment {
                                             System.out.println(re_list);
                                             re_list.add(book);
                                         }
-                                    }catch (Exception e)
+
+                                    } catch(Exception e)
                                     {
                                         System.out.println(e);
                                     }
