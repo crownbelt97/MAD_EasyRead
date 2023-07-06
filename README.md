@@ -47,9 +47,10 @@ Jeremy Chan Wei Wen & Phange Kah Yeng : <br>
 Siu Chi Kit Wesley : <br>
 - Filter <br>
 - Search <br>
-- Update UI on Bokk details <br>
+- Update UI on Book details <br>
 
 
  Mikhail Adam Zahadi <br>
  - Reviews <br>
  - Favourties <br>
+ - Loading Page <br>
