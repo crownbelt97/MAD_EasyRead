@@ -24,18 +24,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import sg.edu.np.mad.easyread.R;
 
 public class LoginActivity extends AppCompatActivity {
-
     private Button signInBtn;
     private TextView linkSignUp;
-
     FirebaseAuth mAuth;
     private EditText emailField;
     private EditText passwordField;
     private TextView forgotPass;
-    
-    
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
