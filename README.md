@@ -5,7 +5,7 @@ Phang Kah Yeng - S10245147 <br>
 Siu Chi Kit Wesley - S10243612 <br>
 Mikhail Adam Zahadi - S10239784 <br>
 
-EasyRead is an book brwosing application to find online books to read. EasyRead helps users in finding out what new books are released and what 
+EasyRead is an book browsing application to find online books to read. EasyRead helps users in finding out what new books are released and what 
 books are recommended for the user. Users can scroll through top charts of books, favourite books they like and search books by categories like Fiction. <br>
 
 ### **Link**: [Click here](https://play.google.com/store/apps/details?id=sg.edu.np.mad.easyread) <br>
