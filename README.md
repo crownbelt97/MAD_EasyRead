@@ -52,5 +52,5 @@ Siu Chi Kit Wesley : <br>
 
  Mikhail Adam Zahadi <br>
  - Reviews <br>
- - Favourties <br>
+ - Favourites <br>
  - Loading Page <br>
