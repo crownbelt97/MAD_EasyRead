@@ -113,7 +113,14 @@ public class SearchFragment extends Fragment {
                             //Getting the authors from the book but storing it in an array to match
                             // the class asNYTimes api stores the authors in a single string.
                             JSONArray authorArray = obj.getJSONArray("authors");
-                            String[] stringArray = {"author"};
+                            String[] stringArray = null;
+                            if (authorArray != null) {
+                                int length = authorArray.length();
+                                stringArray = new String[length];
+                                for (int x = 0; x < length; x++) {
+                                    stringArray[x] = authorArray.optString(x);
+                                }
+                            }
 
                             //Getting the rank of the book but changing the type to double to match the class
 
