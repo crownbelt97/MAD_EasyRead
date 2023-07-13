@@ -55,7 +55,6 @@ import sg.edu.np.mad.easyread.R;
 public class HomeFragment extends Fragment {
 
 
-    private Button logoutBtn;
     FirebaseAuth mAuth;
 
     public HomeFragment()
@@ -80,19 +79,6 @@ public class HomeFragment extends Fragment {
 
         // Layout inflater that instantiates a layout XML file into its corresponding View objects
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        logoutBtn = view.findViewById(R.id.logoutBtn);
-
-        mAuth = FirebaseAuth.getInstance();
-
-        //On click listener to sign a user out of their account and brings them
-        // back to the welcome page upon clicking the log out button.
-        logoutBtn.setOnClickListener(v -> {
-            mAuth.signOut();
-            Intent welcomeIntent = new Intent(getActivity(), WelcomeActivity.class);
-            startActivity(welcomeIntent);
-            getActivity().finish();
-        });
 
 
         // TOP CHARTS SECTION
