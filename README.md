@@ -31,7 +31,7 @@ Phang Kah Yeng : <br>
 - UI and Back-end for Log In Page <br>
 - UI and Back-end for Sign Up Page <br>
 - Storing Profile data in Database <br>
-- 
+
 Siu Chi Kit Wesley : <br>
 - UI for Home and BookDetails Fragment  <br>
 - NY Times Book API call of data <br>
@@ -57,6 +57,7 @@ Jeremy Chan Wei Wen : <br>
 Phang Kah Yeng : <br>
 
 - Notifications <br>
+- Edit Profile <br>
 - Update UI on Feedback <br>
 
 Siu Chi Kit Wesley : <br>
