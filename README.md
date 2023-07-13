@@ -19,17 +19,19 @@ Description and explanation of how MAD concepts are applied
 
 Stage 1 Contributions <br>
 
-Jeremy Chan Wei Wen & Phang Kah Yeng : <br>
+Jeremy Chan Wei Wen : <br>
 - Navigation Bar <br>
 - Recylcer View for Home Page <br>
 - Creating the Main Actitvity and respective Fragments e.g Top Chart <br>
-- UI and Back-end for Log In Page <br>
-- UI and Back-end for Sign Up Page <br>
-- Storing Profile data in Database <br>
 - UI for Top Charts, Favourites and Profile Fragments <br>
 - Uploaded Application <br>
 
+Phang Kah Yeng : <br>
 
+- UI and Back-end for Log In Page <br>
+- UI and Back-end for Sign Up Page <br>
+- Storing Profile data in Database <br>
+- 
 Siu Chi Kit Wesley : <br>
 - UI for Home and BookDetails Fragment  <br>
 - NY Times Book API call of data <br>
@@ -44,16 +46,18 @@ Mikhail Adam Zahadi : <br>
 
 Stage 2 Plan: <br>
 
-Jeremy Chan Wei Wen & Phang Kah Yeng : <br>
+Jeremy Chan Wei Wen : <br>
 - Front-end <br>
-- Notifications <br>
-- Update UI on Feedback <br>
+- Social Feature, able to add friends and view their favourites
 - Where to buy to book & prices
 - Place order?
 - National library where to borrow book
-- Excerpt of book like a chapter
+- Excerpt of book like a chapter <br>
 
+Phang Kah Yeng : <br>
 
+- Notifications <br>
+- Update UI on Feedback <br>
 
 Siu Chi Kit Wesley : <br>
 - Filter <br>
