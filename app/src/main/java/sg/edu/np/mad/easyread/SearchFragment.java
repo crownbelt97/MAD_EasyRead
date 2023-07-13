@@ -68,7 +68,9 @@ public class SearchFragment extends Fragment {
             }
         });
 
-
+        view.findViewById(R.id.imageView17).setOnClickListener(v -> {
+            ((MainActivity)getActivity()).replaceFragment(new HomeFragment());
+        });
 
     }
 
@@ -164,6 +166,8 @@ public class SearchFragment extends Fragment {
         //Adds the request to the request queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
+
+
     }
 
 //    private void dataInitialize() {

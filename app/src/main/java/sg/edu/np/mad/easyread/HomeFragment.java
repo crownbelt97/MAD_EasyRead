@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
 
 
     FirebaseAuth mAuth;
+    ImageView imageView7;
 
     public HomeFragment()
     {
@@ -189,8 +190,6 @@ public class HomeFragment extends Fragment {
                         tc_Detailed_List.add(bookDetails);
 
                     }
-
-//                    int bruh = (int) Math.round(tc_Detailed_List.get(14).getRating());
 
 
 
@@ -356,7 +355,9 @@ public class HomeFragment extends Fragment {
         new MyTask().execute(url_ggl_re, null, null);
         new MyTask().execute(url_ggl_lr, null, null);
 
-
+        view.findViewById(R.id.imageView7).setOnClickListener(v -> {
+            ((MainActivity)getActivity()).replaceFragment(new SearchFragment());
+        });
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             public void onClick(View v) {
