@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new ProfileFragment());
                     break;
                 case R.id.favourite:
-                    replaceFragment(new SearchFragment());
+                    replaceFragment(new SettingsFragment());
                     break;
                 case R.id.topchart:
                     replaceFragment(new TopchartFragment());
