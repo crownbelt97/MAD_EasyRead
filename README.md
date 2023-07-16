@@ -27,9 +27,10 @@ Jeremy Chan Wei Wen : <br>
 - Uploaded Application <br>
 
 Phang Kah Yeng : <br>
-
+- UI Welcome Page <br>
 - UI and Back-end for Log In Page <br>
 - UI and Back-end for Sign Up Page <br>
+- Forgot and reset password feature <br>
 - Storing Profile data in Database <br>
 
 Siu Chi Kit Wesley : <br>

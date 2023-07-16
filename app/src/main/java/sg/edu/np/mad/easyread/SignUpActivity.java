@@ -13,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import sg.edu.np.mad.easyread.R;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signUpBtn;
     FirebaseAuth mAuth;
     private TextView linkSignIn;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +37,32 @@ public class SignUpActivity extends AppCompatActivity {
 
         linkSignIn = findViewById(R.id.linkToSignIn);
         mAuth = FirebaseAuth.getInstance();
+        EditText usernameField = findViewById(R.id.usernameField);
         EditText emailField = findViewById(R.id.emailField);
         EditText passwordField = findViewById(R.id.passwordField);
+        signUpBtn = findViewById(R.id.signUpBtn);
 
         linkSignIn.setOnClickListener(view -> {
             Intent linkSignInActivity = new Intent(SignUpActivity.this, LoginActivity.class);
             startActivity(linkSignInActivity);
         });
 
-        signUpBtn = findViewById(R.id.signUpBtn);
-        signUpBtn.setOnClickListener(v -> {
-            String email, password;
+
+        signUpBtn.setOnClickListener(v ->{
+            String username, email, password;
+            username = String.valueOf(usernameField.getText());
             email = String.valueOf(emailField.getText());
             password = String.valueOf(passwordField.getText());
 
-            if (TextUtils.isEmpty(email)) {
+            if(TextUtils.isEmpty(username)){
+                Toast.makeText(SignUpActivity.this, "Enter username", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(email)){
                 Toast.makeText(SignUpActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
                 return;
             }
-
-            if (TextUtils.isEmpty(password)) {
+            if(TextUtils.isEmpty(password)){
                 Toast.makeText(SignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -67,11 +76,20 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, "Sign Up Success, Please login", Toast.LENGTH_SHORT).show();
                             Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(loginIntent);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignUpActivity.this, "Sign Up failed.", Toast.LENGTH_SHORT).show();
                         }
                     });
+
+            database = FirebaseDatabase.getInstance();
+            reference = database.getReference("users");
+
+            Users user = new Users(username, email);
+            reference.child(username).setValue(user);
+
+
         });
     }
 
