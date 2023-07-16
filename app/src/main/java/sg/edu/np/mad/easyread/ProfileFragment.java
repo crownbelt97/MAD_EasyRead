@@ -16,10 +16,14 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import sg.edu.np.mad.easyread.R;
 
 public class ProfileFragment extends Fragment {
+    FirebaseDatabase database;
+    DatabaseReference reference;
     FirebaseAuth mAuth;
     EditText usernameEditText;
     EditText emailEditText;
@@ -47,6 +51,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+
         usernameEditText = view.findViewById(R.id.usernameEditText);
         emailEditText = view.findViewById(R.id.emailEditText);
         passReset = view.findViewById(R.id.passReset);
@@ -58,6 +63,7 @@ public class ProfileFragment extends Fragment {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String currentUserName = currentUser.getDisplayName();
+
 
         usernameEditText.setText(currentUserName);
         emailEditText.setText(currentUser.getEmail());
