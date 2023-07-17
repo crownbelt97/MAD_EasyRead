@@ -77,17 +77,17 @@ public class SignUpActivity extends AppCompatActivity {
                             Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(loginIntent);
 
+
+                            database = FirebaseDatabase.getInstance();
+                            reference = database.getReference("users");
+                            Users users = new Users(username, email);
+                            reference.child(username).setValue(users);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignUpActivity.this, "Sign Up failed.", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-            database = FirebaseDatabase.getInstance();
-            reference = database.getReference("users");
-
-            Users user = new Users(username, email);
-            reference.child(username).setValue(user);
 
 
         });
