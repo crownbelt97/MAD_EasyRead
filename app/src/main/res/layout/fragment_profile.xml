@@ -186,7 +186,7 @@
             app:layout_constraintTop_toBottomOf="@+id/button">
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/addfriendBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -208,7 +208,7 @@
                 android:background="@color/underline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/addfriendBtn" />
 
             <TextView
                 android:id="@+id/textView15"

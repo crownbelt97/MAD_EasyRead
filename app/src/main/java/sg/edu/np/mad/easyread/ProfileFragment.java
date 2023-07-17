@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ public class ProfileFragment extends Fragment {
     Button updateBtn;
     Button logoutBtn;
 
+    TextView addfriendBtn;
+
 
     public ProfileFragment(){
 
@@ -56,10 +59,17 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+//        View rootView = inflater.inflate(R.layout.fragment_addfriends, container, false);
+        addfriendBtn = view.findViewById(R.id.addfriendBtn);
+        addfriendBtn.setOnClickListener(v -> {
+            Intent addFriendIntent = new Intent(getActivity(), AddFriendsActivity.class);
+            startActivity(addFriendIntent);
+        });
         return view;
 
 
 
     }
+
+
 }

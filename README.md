@@ -49,7 +49,10 @@ Stage 2 Plan: <br>
 
 Jeremy Chan Wei Wen : <br>
 - Front-end <br>
-- Social Feature, able to add friends and view their favourites
+- Social Feature
+    - Search Profiles via username
+    - Friends can follow and unfollow each other
+    - Able to see Profile name, following, followers and likes
 - Where to buy to book & prices
 - Place order?
 - National library where to borrow book
