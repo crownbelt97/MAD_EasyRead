@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/second_app_theme"
+    android:background="@color/white"
     tools:context="sg.edu.np.mad.easyread.ProfileFragment">
 
 
@@ -14,147 +14,60 @@
         tools:context="sg.edu.np.mad.easyread.ProfileFragment">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="250dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/background_white"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="113dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="70dp"
-                    android:text="Username"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/name3"
-                    android:layout_width="113dp"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="36dp"
-                    android:text="Email"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/name"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/name5"
-                    android:layout_width="113dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="36dp"
-                    android:text="Password"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/name3"
-                    tools:ignore="MissingConstraints" />
-
-                <Button
-                    android:id="@+id/updateBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/round_btn_borderblue"
-                    android:text="Update Profile"
-                    android:textColor="@color/second_app_theme"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/logout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <Button
-                    android:id="@+id/logout"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:background="@drawable/round_btn"
-                    android:text="LOG OUT"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <EditText
-                    android:id="@+id/usernameEditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="70dp"
-                    android:ems="10"
-                    android:hint="Username"
-                    android:inputType="text"
-                    app:layout_constraintStart_toEndOf="@+id/name"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/emailEditText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="36dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    app:layout_constraintStart_toEndOf="@+id/name3"
-                    app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
-
-                <TextView
-                    android:id="@+id/passReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="37dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="36dp"
-                    android:text="Reset"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toEndOf="@+id/name5"
-                    app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
-
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="143dp"
             android:layout_height="113dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="60dp"
             android:src="@drawable/profile_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="181dp"
+            android:layout_height="131dp"
+            android:background="#9F2929"
+            tools:layout_editor_absoluteX="-3dp"
+            tools:layout_editor_absoluteY="428dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="85dp"
+            android:layout_height="147dp"
+            tools:layout_editor_absoluteY="287dp">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Following"
+                tools:layout_editor_absoluteX="288dp"
+                tools:layout_editor_absoluteY="276dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="82dp"
+            android:layout_height="153dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="134dp">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Likes"
+                tools:layout_editor_absoluteX="264dp"
+                tools:layout_editor_absoluteY="274dp" />
+
+            <TextView
+                android:id="@+id/likesView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13"
+                tools:layout_editor_absoluteX="303dp"
+                tools:layout_editor_absoluteY="250dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
