@@ -26,6 +26,7 @@ public class AddFriendsActivity extends AppCompatActivity {
     private ArrayList<String> allUsernames;
     private ArrayList<String> displayedUsernames;
     private ArrayAdapter<String> adapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,12 @@ public class AddFriendsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_friends);
 
-        ListView listView = findViewById(R.id.listView);
         allUsernames = new ArrayList<>();
         displayedUsernames = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, displayedUsernames);
+        listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
+        listView.setVisibility(ListView.GONE); // Hide the ListView by default
 
         SearchView searchView = findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -69,8 +71,7 @@ public class AddFriendsActivity extends AppCompatActivity {
                     allUsernames.add(usernameDB);
                 }
 
-                // Update the ListView with the new data
-                filterUsernames(""); // Initial filter to display an empty list
+                // We do not update the ListView here.
             }
 
             @Override
@@ -83,13 +84,22 @@ public class AddFriendsActivity extends AppCompatActivity {
     private void filterUsernames(String query) {
         displayedUsernames.clear();
 
-        for (String username : allUsernames) {
-            if (username.toLowerCase().contains(query.toLowerCase())) {
-                displayedUsernames.add(username);
+        if (query.isEmpty()) {
+            // Clear the search query, so we hide the ListView again
+            listView.setVisibility(ListView.GONE);
+        } else {
+            // Filter the usernames based on the search query
+            for (String username : allUsernames) {
+                if (username.toLowerCase().contains(query.toLowerCase())) {
+                    displayedUsernames.add(username);
+                }
             }
-        }
 
-        adapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
+
+            // Show the ListView since there are filtered results
+            listView.setVisibility(ListView.VISIBLE);
+        }
     }
 }
 
