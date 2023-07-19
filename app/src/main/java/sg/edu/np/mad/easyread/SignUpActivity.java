@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -78,6 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
                             startActivity(loginIntent);
 
 
+
                             database = FirebaseDatabase.getInstance();
                             reference = database.getReference("users");
                             Users users = new Users(username, email);
@@ -90,7 +93,8 @@ public class SignUpActivity extends AppCompatActivity {
                     });
 
 
-        });
+            });
     }
+
 
 }

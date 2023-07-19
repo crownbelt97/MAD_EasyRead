@@ -5,6 +5,7 @@ public class Users {
 
     private String Email;
     private String Password;
+    private String CreationDate;
 
 
 
@@ -12,8 +13,16 @@ public class Users {
         Username = username;
         Email = email;
 
+
     }
 
+    public String getCreationDate() {
+        return CreationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        CreationDate = creationDate;
+    }
 
     public String getEmail() {
         return Email;

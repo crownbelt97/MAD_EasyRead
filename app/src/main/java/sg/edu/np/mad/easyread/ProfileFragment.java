@@ -37,6 +37,8 @@ public class ProfileFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference reference;
+
+
     TextView addfriendBtn;
 
 
