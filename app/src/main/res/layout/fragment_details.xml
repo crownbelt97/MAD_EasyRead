@@ -32,28 +32,16 @@
             app:layout_constraintStart_toEndOf="@+id/imageView17"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/logoutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/logout_btn"
-            android:text="Log Out"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></Button>
-
         <ScrollView
             android:id="@+id/verticalScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logoutBtn">
+            tools:layout_editor_absoluteY="78dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,8 +57,8 @@
                         android:id="@+id/details_Cover"
                         android:layout_width="126dp"
                         android:layout_height="170dp"
-                        android:layout_weight="1"
                         android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
                         android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +69,8 @@
                         android:id="@+id/details_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Book Name"
                         android:layout_marginLeft="25dp"
+                        android:text="Book Name"
                         android:textColor="@color/black"
                         android:textSize="23sp"
                         android:textStyle="bold"
@@ -93,11 +81,11 @@
                         android:id="@+id/details_Author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="5dp"
                         android:text="By Book Author"
                         android:textColor="@color/black"
                         android:textSize="17sp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="5dp"
                         app:layout_constraintStart_toEndOf="@+id/details_Cover"
                         app:layout_constraintTop_toBottomOf="@+id/details_Title" />
 
@@ -113,12 +101,12 @@
                         android:id="@+id/details_Ratings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="30dp"
                         android:text="Ratings"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="30dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,12 +114,12 @@
                         android:id="@+id/details_Length"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
                         android:text="Length"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/details_Ratings" />
 
@@ -139,12 +127,12 @@
                         android:id="@+id/details_Format"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
                         android:text="Format"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/details_Length" />
 
@@ -152,12 +140,12 @@
                         android:id="@+id/details_Publisher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
                         android:text="Publisher"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/details_Format" />
 
@@ -165,12 +153,12 @@
                         android:id="@+id/details_Released"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
                         android:text="Released"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="15dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/details_Publisher" />
 
@@ -237,11 +225,11 @@
                         android:id="@+id/details_Category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hardcover Fiction"
-                        android:padding="9dp"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/category_btn"
+                        android:padding="9dp"
+                        android:text="Hardcover Fiction"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -257,12 +245,12 @@
                         android:id="@+id/details_Description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
                         android:text="Description"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -270,25 +258,24 @@
                         android:id="@+id/details_Description_Data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
-                        android:layout_marginTop="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/details_Description" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ScrollView
-                    android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="50dp"
                     android:layout_height="100dp"
+                    android:layout_marginTop="50dp"
+                    android:visibility="visible"
                     app:layout_constraintTop_toBottomOf="@id/details_Description_Data"
                     app:layout_constraintVertical_bias="1.0"
-                    tools:layout_editor_absoluteX="2dp">
-                </ScrollView>
+                    tools:layout_editor_absoluteX="2dp"></ScrollView>
 
             </LinearLayout>
 

@@ -38,12 +38,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import sg.edu.np.mad.easyread.R;
-
 
 public class DetailsFragment extends Fragment {
 
-    private Button logoutBtn;
     FirebaseAuth mAuth;
 
     public DetailsFragment() {
@@ -61,7 +58,7 @@ public class DetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
-        logoutBtn = view.findViewById(R.id.logoutBtn);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -392,13 +389,6 @@ public class DetailsFragment extends Fragment {
 
 
 
-
-        logoutBtn.setOnClickListener(v -> {
-            mAuth.signOut();
-            Intent welcomeIntent = new Intent(getActivity(), WelcomeActivity.class);
-            startActivity(welcomeIntent);
-            getActivity().finish();
-        });
 
         return view;
 

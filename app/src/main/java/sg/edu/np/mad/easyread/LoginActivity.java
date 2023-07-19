@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
@@ -17,9 +18,16 @@ import android.widget.TextView;
 import android.app.ProgressDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.TextUtils;
 import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import sg.edu.np.mad.easyread.R;
 
@@ -31,12 +39,15 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordField;
     private TextView forgotPass;
 
+    FirebaseDatabase database;
+    DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
@@ -69,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(homeIntent);
                             finish();
-                        } else {
+                        }
+
+                        else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
@@ -144,9 +157,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
 
 
-
         });
-
 
 
         linkSignUp = findViewById(R.id.linkToSignUp);
