@@ -7,14 +7,13 @@
     android:background="@color/white"
     tools:context="sg.edu.np.mad.easyread.ProfileFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F2F1F7"
         tools:context="sg.edu.np.mad.easyread.ProfileFragment">
 
-
+        <!-- User Profile Image -->
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="143dp"
@@ -26,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_android_24" />
 
+        <!-- Username TextView -->
         <TextView
             android:id="@+id/usernameTextView"
             android:layout_width="wrap_content"
@@ -37,6 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+        <!-- Following, Followers, Likes TextViews -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="wrap_content"
@@ -47,6 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameTextView">
 
+            <!-- Following -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="95dp"
@@ -84,6 +86,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Followers -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="84dp"
@@ -96,7 +99,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/ProfileFollowertextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -118,9 +121,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                    app:layout_constraintTop_toBottomOf="@+id/ProfileFollowertextView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Likes -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
                 android:layout_width="82dp"
@@ -158,6 +162,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- Edit Profile Button -->
         <Button
             android:id="@+id/EditProfileBtn"
             android:layout_width="match_parent"
@@ -173,6 +178,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
+        <!-- Add Friends Section -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout5"
             android:layout_width="399dp"
@@ -244,6 +250,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
+            <!-- To Be Continued (TBC) -->
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
@@ -261,6 +268,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- Log Out Button -->
         <Button
             android:id="@+id/logOutBtn"
             android:layout_width="match_parent"
@@ -275,7 +283,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
