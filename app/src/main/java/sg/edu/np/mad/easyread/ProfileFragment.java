@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment {
     Button logoutBtn;
 
     FirebaseUser currentUser;
-
+    Button editProfileBtn;
 
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -58,10 +58,10 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         usernameTextView = view.findViewById(R.id.usernameTextView);
-
+        editProfileBtn = view.findViewById(R.id.EditProfileBtn);
         logoutBtn = view.findViewById(R.id.logOutBtn);
+        addfriendBtn = view.findViewById(R.id.addfriendBtn);
         mAuth = FirebaseAuth.getInstance();
-
 
         reference = FirebaseDatabase.getInstance().getReference("users");
         currentUser = mAuth.getCurrentUser();
@@ -75,13 +75,9 @@ public class ProfileFragment extends Fragment {
                     if (dataSnapshot.exists()) {
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             String usernameDB = String.valueOf(userSnapshot.child("username").getValue(String.class));
-                            // Update the TextView with the found username
                             usernameTextView.setText(usernameDB);
-                            break; // Since emails are unique, no need to continue the loop
+                            break;
                         }
-                    } else {
-                        // The user with the target email does not exist in the database
-                        // Handle the case if necessary
                     }
                 }
 
@@ -90,15 +86,13 @@ public class ProfileFragment extends Fragment {
                     // Handle database error if necessary
                 }
             });
-        } else {
-            // No user is currently logged in, handle the case if necessary
         }
 
+        editProfileBtn.setOnClickListener(v -> {
+            Intent editIntent = new Intent(getActivity(), EditProfileActivity.class);
+            startActivity(editIntent);
+        });
 
-
-
-//        View rootView = inflater.inflate(R.layout.fragment_addfriends, container, false);
-        addfriendBtn = view.findViewById(R.id.addfriendBtn);
         addfriendBtn.setOnClickListener(v -> {
             Intent addFriendIntent = new Intent(getActivity(), AddFriendsActivity.class);
             startActivity(addFriendIntent);
