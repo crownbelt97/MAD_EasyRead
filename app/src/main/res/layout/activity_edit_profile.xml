@@ -30,7 +30,7 @@
         android:layout_width="360dp"
         android:layout_height="59dp"
         android:layout_marginTop="24dp"
-        android:hint="Birth date (optional)"
+        android:hint="Join Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">

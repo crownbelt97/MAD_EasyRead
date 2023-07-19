@@ -3,10 +3,12 @@ package sg.edu.np.mad.easyread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -79,6 +81,13 @@ public class AddFriendsActivity extends AppCompatActivity {
                 // Handle database error if necessary
             }
         });
+
+        // Set item click listener for the ListView
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedUsername = displayedUsernames.get(position);
+            // Handle navigation to the user's profile activity here
+            navigateToUserProfile(selectedUsername);
+        });
     }
 
     private void filterUsernames(String query) {
@@ -101,5 +110,12 @@ public class AddFriendsActivity extends AppCompatActivity {
             listView.setVisibility(ListView.VISIBLE);
         }
     }
-}
 
+    private void navigateToUserProfile(String username) {
+        // Navigate to the user's profile activity based on the selected username
+        // Replace UserProfileActivity.class with the actual name of the user's profile activity.
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
+    }
+}
