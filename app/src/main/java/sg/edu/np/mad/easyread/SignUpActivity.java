@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -74,6 +75,9 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
 
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                            String currentDate = sdf.format(new Date());
+
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(SignUpActivity.this, "Sign Up Success, Please login", Toast.LENGTH_SHORT).show();
                             Intent loginIntent = new Intent(SignUpActivity.this, LoginActivity.class);
@@ -85,6 +89,10 @@ public class SignUpActivity extends AppCompatActivity {
                             reference = database.getReference("users");
                             Users users = new Users(username, email);
                             reference.child(username).setValue(users);
+                            users.setCreationDate(currentDate); // Set the creation date
+                            reference.child(user.getUid()).setValue(users);
+
+
 
                         } else {
                             // If sign in fails, display a message to the user.

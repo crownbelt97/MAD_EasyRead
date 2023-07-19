@@ -4,10 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +35,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
     EditText joinDate;
 
+    Button updateBtn;
+
+    TextView passReset;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,8 @@ public class EditProfileActivity extends AppCompatActivity {
         updateUsername = findViewById(R.id.updateUsernameEditText);
         updateEmail = findViewById(R.id.updateEmailEditText);
         joinDate = findViewById(R.id.joinDate);
+        updateBtn = findViewById(R.id.updateBtn);
+        passReset = findViewById(R.id.passReset);
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
@@ -56,9 +68,10 @@ public class EditProfileActivity extends AppCompatActivity {
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             String usernameDB = String.valueOf(userSnapshot.child("username").getValue(String.class));
                             String emailDB = String.valueOf(userSnapshot.child("email").getValue(String.class));
+                            String creationDateDB = String.valueOf(userSnapshot.child("creationDate").getValue(String.class));
                             updateUsername.setText(usernameDB);
                             updateEmail.setText(emailDB);
-
+                            joinDate.setText(creationDateDB);
 
                             break;
                         }
@@ -73,8 +86,39 @@ public class EditProfileActivity extends AppCompatActivity {
         }
 
 
+        passReset.setOnClickListener(v -> {
+            String email = updateEmail.getText().toString();
+
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(EditProfileActivity.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EditProfileActivity.this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
 
 
+
+
+        updateBtn.setOnClickListener(view -> {
+            String newUsername = updateUsername.getText().toString().trim();
+
+            if (!TextUtils.isEmpty(newUsername)) {
+                DatabaseReference userRef = reference.child(currentUser.getUid());
+                userRef.child("username").setValue(newUsername)
+                        .addOnSuccessListener(aVoid -> {
+                            // Username update successful
+                            Toast.makeText(EditProfileActivity.this, "Username updated successfully!", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            // Failed to update the username
+                            Toast.makeText(EditProfileActivity.this, "Failed to update username.", Toast.LENGTH_SHORT).show();
+                        });
+            } else {
+                Toast.makeText(EditProfileActivity.this, "Please enter a new username.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
