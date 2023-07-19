@@ -2,11 +2,15 @@ package sg.edu.np.mad.easyread;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class UserProfileActivity extends AppCompatActivity {
+
+    TextView profileUsernameTextView;
 
 
     @Override
@@ -17,6 +21,15 @@ public class UserProfileActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_user_profile);
 
-        
+        profileUsernameTextView = findViewById(R.id.profileUsernameTextView);
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+
+        // Set the username to the TextView
+        profileUsernameTextView.setText(username);
+
+
+
     }
 }
