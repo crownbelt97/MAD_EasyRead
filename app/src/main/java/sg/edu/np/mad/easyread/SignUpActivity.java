@@ -88,7 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
                             database = FirebaseDatabase.getInstance();
                             reference = database.getReference("users");
                             Users users = new Users(username, email);
-                            reference.child(username).setValue(users);
                             users.setCreationDate(currentDate); // Set the creation date
                             reference.child(user.getUid()).setValue(users);
 
