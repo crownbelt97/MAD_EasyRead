@@ -2,6 +2,7 @@ package sg.edu.np.mad.easyread;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -103,19 +104,22 @@ public class EditProfileActivity extends AppCompatActivity {
 
         updateBtn.setOnClickListener(view -> {
             String newUsername = updateUsername.getText().toString().trim();
-
             if (!TextUtils.isEmpty(newUsername)) {
                 DatabaseReference userRef = reference.child(currentUser.getUid());
                 userRef.child("username").setValue(newUsername)
                         .addOnSuccessListener(aVoid -> {
                             // Username update successful
                             Toast.makeText(EditProfileActivity.this, "Username updated successfully!", Toast.LENGTH_SHORT).show();
+
                         })
                         .addOnFailureListener(e -> {
                             // Failed to update the username
                             Toast.makeText(EditProfileActivity.this, "Failed to update username.", Toast.LENGTH_SHORT).show();
                         });
-            } else {
+                Intent updateIntent = new Intent(EditProfileActivity.this, MainActivity.class);
+                startActivity(updateIntent);
+
+        } else {
                 Toast.makeText(EditProfileActivity.this, "Please enter a new username.", Toast.LENGTH_SHORT).show();
             }
         });
