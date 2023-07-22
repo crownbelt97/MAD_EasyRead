@@ -55,16 +55,30 @@ public class UserProfileActivity extends AppCompatActivity {
         profileFollowersTextView = findViewById(R.id.ProfileFollowertextView);
 
         Intent intent = getIntent();
-        String targetUsername = intent.getStringExtra("username");
+        String targetUserId = intent.getStringExtra("userId");
 
-        // Set the username to the TextView
-        profileUsernameTextView.setText(targetUsername);
+        DatabaseReference userProfileReference = reference.child(targetUserId);
+
+
+        userProfileReference.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String usernameDB = String.valueOf(dataSnapshot.child("username").getValue(String.class));
+                    profileUsernameTextView.setText(usernameDB);
+                }
+            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle database error if necessary
+                }
+        });
 
         // Check if the current user is already following the target user
         reference.child(currentUserId).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean isFollowing = dataSnapshot.hasChild(targetUsername);
+                boolean isFollowing = dataSnapshot.hasChild(targetUserId);
                 if (isFollowing) {
                     followBtn.setText("Unfollow");
                 } else {
@@ -81,15 +95,15 @@ public class UserProfileActivity extends AppCompatActivity {
         // Set an onClickListener for the follow button
         followBtn.setOnClickListener(view -> {
             if (followBtn.getText().equals("Follow")) {
-                followUser(currentUserId, targetUsername);
+                followUser(currentUserId, targetUserId);
             } else {
-                unfollowUser(currentUserId, targetUsername);
+                unfollowUser(currentUserId, targetUserId);
             }
         });
 
         // Initialize the DatabaseReference objects
-        followersReference = reference.child(targetUsername).child("followers");
-        followingReference = reference.child(targetUsername).child("following");
+        followersReference = reference.child(targetUserId).child("followers");
+        followingReference = reference.child(targetUserId).child("following");
 
         // Set up the listeners to update the follower and following counts in real-time
         followersReference.addValueEventListener(new ValueEventListener() {
@@ -122,9 +136,9 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     // Method to follow a user
-    private void followUser(String currentUserId, String targetUsername) {
-        reference.child(currentUserId).child("following").child(targetUsername).setValue(true);
-        reference.child(targetUsername).child("followers").child(currentUserId).setValue(true);
+    private void followUser(String currentUserId, String targetUserId) {
+        reference.child(currentUserId).child("following").child(targetUserId).setValue(true);
+        reference.child(targetUserId).child("followers").child(currentUserId).setValue(true);
 
         // Create a new value "following" for the current user in their data
         reference.child(currentUserId).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -134,7 +148,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     long followingCount = dataSnapshot.getChildrenCount();
                     // Increment the following count by 1 and update the value in the database
-                    reference.child(currentUserId).child("followingCount").setValue(followingCount + 1);
+                    reference.child(currentUserId).child("followingCount").setValue(followingCount);
                 } else {
                     // If the "following" value doesn't exist, set it to 1
                     reference.child(currentUserId).child("followingCount").setValue(1);
@@ -148,13 +162,13 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         followBtn.setText("Unfollow");
-        Toast.makeText(this, "You are now following " + targetUsername, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You are now following " + targetUserId, Toast.LENGTH_SHORT).show();
     }
 
     // Method to unfollow a user
-    private void unfollowUser(String currentUserId, String targetUsername) {
-        reference.child(currentUserId).child("following").child(targetUsername).removeValue();
-        reference.child(targetUsername).child("followers").child(currentUserId).removeValue();
+    private void unfollowUser(String currentUserId, String targetUserId) {
+        reference.child(currentUserId).child("following").child(targetUserId).removeValue();
+        reference.child(targetUserId).child("followers").child(currentUserId).removeValue();
 
         // Decrement the following count by 1 and update the value in the database
         reference.child(currentUserId).child("followingCount").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -175,6 +189,6 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         followBtn.setText("Follow");
-        Toast.makeText(this, "You have unfollowed " + targetUsername, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You have unfollowed " + targetUserId, Toast.LENGTH_SHORT).show();
     }
 }

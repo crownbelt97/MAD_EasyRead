@@ -25,10 +25,12 @@ import sg.edu.np.mad.easyread.R;
 
 public class AddFriendsActivity extends AppCompatActivity {
 
-    private ArrayList<String> allUsernames;
+    private ArrayList<User> usersList;
     private ArrayList<String> displayedUsernames;
     private ArrayAdapter<String> adapter;
     private ListView listView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,8 @@ public class AddFriendsActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_friends);
 
-        allUsernames = new ArrayList<>();
+        usersList = new ArrayList<>();
+
         displayedUsernames = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, displayedUsernames);
         listView = findViewById(R.id.listView);
@@ -66,14 +69,17 @@ public class AddFriendsActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                allUsernames.clear();
+                usersList.clear();
 
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    String usernameDB = String.valueOf(userSnapshot.child("username").getValue(String.class));
-                    allUsernames.add(usernameDB);
+                    String username = String.valueOf(userSnapshot.child("username").getValue(String.class));
+                    String email = String.valueOf(userSnapshot.child("email").getValue(String.class));
+                    String imageUrl = String.valueOf(userSnapshot.child("imageUrl").getValue(String.class));
+                    String userId = String.valueOf(userSnapshot.child("userId").getValue(String.class));
+                    usersList.add(new User(username, email, imageUrl, userId));
                 }
 
-                // We do not update the ListView here.
+
             }
 
             @Override
@@ -87,8 +93,12 @@ public class AddFriendsActivity extends AppCompatActivity {
         // Set item click listener for the ListView
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedUsername = displayedUsernames.get(position);
+            User selectedUser = usersList.stream()
+                                           .filter(user -> selectedUsername.equals(user.getUsername()))
+                                           .findAny()
+                                           .orElse(null);
             // Handle navigation to the user's profile activity here
-            navigateToUserProfile(selectedUsername);
+            navigateToUserProfile(selectedUser.getUserId());
         });
     }
 
@@ -100,9 +110,9 @@ public class AddFriendsActivity extends AppCompatActivity {
             listView.setVisibility(ListView.GONE);
         } else {
             // Filter the usernames based on the search query
-            for (String username : allUsernames) {
-                if (username.toLowerCase().contains(query.toLowerCase())) {
-                    displayedUsernames.add(username);
+            for (User user : usersList) {
+                if (user.getUsername().toLowerCase().contains(query.toLowerCase())) {
+                    displayedUsernames.add(user.getUsername());
                 }
             }
 

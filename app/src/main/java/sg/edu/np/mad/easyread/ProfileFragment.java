@@ -88,7 +88,6 @@ public class ProfileFragment extends Fragment {
                             }
                             else {
                                 followingCount.setText(followingCountDB);
-
                             }
                             break;
                         }
