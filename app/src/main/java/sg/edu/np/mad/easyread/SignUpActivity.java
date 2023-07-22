@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(SignUpActivity.this, task -> {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser Firebaseuser = mAuth.getCurrentUser();
 
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                             String currentDate = sdf.format(new Date());
@@ -87,11 +87,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                             database = FirebaseDatabase.getInstance();
                             reference = database.getReference("users");
-                            Users users = new Users(username, email);
-                            users.setCreationDate(currentDate); // Set the creation date
-                            reference.child(user.getUid()).setValue(users);
-
-
+                            User user = new User(username, email, "", Firebaseuser.getUid());
+                            user.setCreationDate(currentDate); // Set the creation date
+                            reference.child(user.getUserId()).setValue(user);
 
                         } else {
                             // If sign in fails, display a message to the user.

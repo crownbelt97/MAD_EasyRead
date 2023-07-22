@@ -83,7 +83,13 @@ public class ProfileFragment extends Fragment {
                             String usernameDB = String.valueOf(userSnapshot.child("username").getValue(String.class));
                             String followingCountDB = String.valueOf(userSnapshot.child("followingCount").getValue(long.class));
                             usernameTextView.setText(usernameDB);
-                            followingCount.setText(followingCountDB);
+                            if (followingCountDB == "null"){
+                                followingCount.setText("0");
+                            }
+                            else {
+                                followingCount.setText(followingCountDB);
+
+                            }
                             break;
                         }
                     }

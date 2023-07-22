@@ -82,6 +82,8 @@ public class AddFriendsActivity extends AppCompatActivity {
             }
         });
 
+
+
         // Set item click listener for the ListView
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedUsername = displayedUsernames.get(position);
@@ -111,11 +113,11 @@ public class AddFriendsActivity extends AppCompatActivity {
         }
     }
 
-    private void navigateToUserProfile(String username) {
+    private void navigateToUserProfile(String userId) {
         // Navigate to the user's profile activity based on the selected username
         // Replace UserProfileActivity.class with the actual name of the user's profile activity.
         Intent intent = new Intent(this, UserProfileActivity.class);
-        intent.putExtra("username", username);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 }
