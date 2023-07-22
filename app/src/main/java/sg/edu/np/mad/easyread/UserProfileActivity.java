@@ -110,8 +110,8 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Update the follower count when data changes
-                long followerCount = dataSnapshot.getChildrenCount();
-                profileFollowersTextView.setText(String.valueOf(followerCount));
+                long followersCount = dataSnapshot.getChildrenCount();
+                profileFollowersTextView.setText(String.valueOf(followersCount));
             }
 
             @Override
@@ -161,6 +161,26 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+        reference.child(targetUserId).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // If the current user's "following" value exists in the database
+                if (dataSnapshot.exists()) {
+                    long followersCount = dataSnapshot.getChildrenCount();
+                    // Increment the following count by 1 and update the value in the database
+                    reference.child(targetUserId).child("followersCount").setValue(followersCount);
+                } else {
+                    // If the "following" value doesn't exist, set it to 1
+                    reference.child(targetUserId).child("followersCount").setValue(1);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+
         followBtn.setText("Unfollow");
         Toast.makeText(this, "You are now following " + targetUserId, Toast.LENGTH_SHORT).show();
     }
@@ -178,6 +198,23 @@ public class UserProfileActivity extends AppCompatActivity {
                     long followingCount = dataSnapshot.getValue(Long.class);
                     if (followingCount > 0) {
                         reference.child(currentUserId).child("followingCount").setValue(followingCount - 1);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+
+        reference.child(targetUserId).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    long followersCount = dataSnapshot.getValue(Long.class);
+                    if (followersCount > 0) {
+                        reference.child(targetUserId).child("followersCount").setValue(followersCount - 1);
                     }
                 }
             }

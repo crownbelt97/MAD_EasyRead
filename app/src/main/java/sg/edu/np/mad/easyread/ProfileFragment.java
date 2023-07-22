@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment {
 
     TextView followingCount;
 
+    TextView followersCount;
 
     TextView addfriendBtn;
 
@@ -66,6 +67,7 @@ public class ProfileFragment extends Fragment {
         logoutBtn = view.findViewById(R.id.logOutBtn);
         addfriendBtn = view.findViewById(R.id.addfriendBtn);
         followingCount = view.findViewById(R.id.followingCount);
+        followersCount = view.findViewById(R.id.ProfileFollowertextView);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -82,6 +84,7 @@ public class ProfileFragment extends Fragment {
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             String usernameDB = String.valueOf(userSnapshot.child("username").getValue(String.class));
                             String followingCountDB = String.valueOf(userSnapshot.child("followingCount").getValue(long.class));
+                            String followersCountDB = String.valueOf(userSnapshot.child("followersCount").getValue(long.class));
                             usernameTextView.setText(usernameDB);
                             if (followingCountDB == "null"){
                                 followingCount.setText("0");
@@ -89,7 +92,15 @@ public class ProfileFragment extends Fragment {
                             else {
                                 followingCount.setText(followingCountDB);
                             }
+                            if (followersCountDB == "null"){
+                                followersCount.setText("0");
+                            }
+                            else {
+                                followersCount.setText(followersCountDB);
+                            }
+
                             break;
+
                         }
                     }
                 }
