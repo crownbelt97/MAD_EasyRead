@@ -98,7 +98,7 @@ public class AddFriendsActivity extends AppCompatActivity {
                                            .findAny()
                                            .orElse(null);
             // Handle navigation to the user's profile activity here
-            navigateToUserProfile(selectedUser.getUserId());
+            navigateToUserProfile(selectedUser.getUserId(), selectedUser.getUsername());
         });
     }
 
@@ -123,11 +123,12 @@ public class AddFriendsActivity extends AppCompatActivity {
         }
     }
 
-    private void navigateToUserProfile(String userId) {
+    private void navigateToUserProfile(String userId, String username) {
         // Navigate to the user's profile activity based on the selected username
         // Replace UserProfileActivity.class with the actual name of the user's profile activity.
         Intent intent = new Intent(this, UserProfileActivity.class);
         intent.putExtra("userId", userId);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 }

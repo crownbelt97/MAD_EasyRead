@@ -56,7 +56,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String targetUserId = intent.getStringExtra("userId");
-
+        String targetUsername = intent.getStringExtra("username");
         DatabaseReference userProfileReference = reference.child(targetUserId);
 
 
@@ -95,9 +95,9 @@ public class UserProfileActivity extends AppCompatActivity {
         // Set an onClickListener for the follow button
         followBtn.setOnClickListener(view -> {
             if (followBtn.getText().equals("Follow")) {
-                followUser(currentUserId, targetUserId);
+                followUser(currentUserId, targetUserId, targetUsername);
             } else {
-                unfollowUser(currentUserId, targetUserId);
+                unfollowUser(currentUserId, targetUserId, targetUsername);
             }
         });
 
@@ -136,7 +136,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     // Method to follow a user
-    private void followUser(String currentUserId, String targetUserId) {
+    private void followUser(String currentUserId, String targetUserId, String username) {
         reference.child(currentUserId).child("following").child(targetUserId).setValue(true);
         reference.child(targetUserId).child("followers").child(currentUserId).setValue(true);
 
@@ -182,11 +182,11 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         followBtn.setText("Unfollow");
-        Toast.makeText(this, "You are now following " + targetUserId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You are now following " + username, Toast.LENGTH_SHORT).show();
     }
 
     // Method to unfollow a user
-    private void unfollowUser(String currentUserId, String targetUserId) {
+    private void unfollowUser(String currentUserId, String targetUserId, String username) {
         reference.child(currentUserId).child("following").child(targetUserId).removeValue();
         reference.child(targetUserId).child("followers").child(currentUserId).removeValue();
 
@@ -226,6 +226,6 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         followBtn.setText("Follow");
-        Toast.makeText(this, "You have unfollowed " + targetUserId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You have unfollowed " + username, Toast.LENGTH_SHORT).show();
     }
 }
