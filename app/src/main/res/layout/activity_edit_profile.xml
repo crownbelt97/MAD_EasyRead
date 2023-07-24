@@ -39,8 +39,7 @@
             android:id="@+id/joinDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_account_circle_24"
-            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/baseline_calendar_month_24"
             android:text="Taimoor Sikander" />
     </com.google.android.material.textfield.TextInputLayout>
 
