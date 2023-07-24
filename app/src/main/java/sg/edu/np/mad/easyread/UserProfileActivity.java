@@ -2,8 +2,14 @@ package sg.edu.np.mad.easyread;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +38,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private DatabaseReference followersReference;
     private DatabaseReference followingReference;
+    private DatabaseReference notificationReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,8 @@ public class UserProfileActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String currentUserId = currentUser.getUid();
 
+
+
         profileUsernameTextView = findViewById(R.id.profileUsernameTextView);
         profileFollowingTextView = findViewById(R.id.ProfileFollowingtextView);
         profileFollowersTextView = findViewById(R.id.ProfileFollowertextView);
@@ -59,8 +68,26 @@ public class UserProfileActivity extends AppCompatActivity {
         String targetUsername = intent.getStringExtra("username");
         DatabaseReference userProfileReference = reference.child(targetUserId);
 
+        notificationReference = reference.child(targetUserId).child("notification_setting");
+        notificationReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    boolean notificationEnabled = dataSnapshot.getValue(Boolean.class);
+                    SharedPreferences sharedPref = getSharedPreferences("sg.edu.np.mad.easyread", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("notification_setting", notificationEnabled);
+                    editor.apply();
+                }
+            }
 
-        userProfileReference.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+
+        userProfileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -68,11 +95,14 @@ public class UserProfileActivity extends AppCompatActivity {
                     profileUsernameTextView.setText(usernameDB);
                 }
             }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle database error if necessary
-                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle database error if necessary
+            }
         });
+
+
 
         // Check if the current user is already following the target user
         reference.child(currentUserId).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,7 +146,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle database error if necessary
             }
         });
 
@@ -130,67 +159,67 @@ public class UserProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle database error if necessary
             }
         });
     }
 
     // Method to follow a user
-    private void followUser(String currentUserId, String targetUserId, String username) {
+    private void followUser(String currentUserId, String targetUserId, String targetUsername) {
         reference.child(currentUserId).child("following").child(targetUserId).setValue(true);
         reference.child(targetUserId).child("followers").child(currentUserId).setValue(true);
 
-        // Create a new value "following" for the current user in their data
+        SharedPreferences sharedPref = getSharedPreferences("sg.edu.np.mad.easyread", Context.MODE_PRIVATE);
+        boolean notificationEnabled = sharedPref.getBoolean("notification_setting", true);
+
+
+        // Set following in firebase realtime
         reference.child(currentUserId).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // If the current user's "following" value exists in the database
                 if (dataSnapshot.exists()) {
                     long followingCount = dataSnapshot.getChildrenCount();
-                    // Increment the following count by 1 and update the value in the database
                     reference.child(currentUserId).child("followingCount").setValue(followingCount);
                 } else {
-                    // If the "following" value doesn't exist, set it to 1
                     reference.child(currentUserId).child("followingCount").setValue(1);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle database error if necessary
             }
         });
 
+        // Set follower in firebase realtime
         reference.child(targetUserId).child("followers").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // If the current user's "following" value exists in the database
                 if (dataSnapshot.exists()) {
                     long followersCount = dataSnapshot.getChildrenCount();
-                    // Increment the following count by 1 and update the value in the database
                     reference.child(targetUserId).child("followersCount").setValue(followersCount);
                 } else {
-                    // If the "following" value doesn't exist, set it to 1
                     reference.child(targetUserId).child("followersCount").setValue(1);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle database error if necessary
             }
         });
 
         followBtn.setText("Unfollow");
-        Toast.makeText(this, "You are now following " + username, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You are now following " + targetUsername, Toast.LENGTH_SHORT).show();
+
+        if(notificationEnabled){
+            sendFollowNotification(currentUserId);
+        }
+
     }
 
     // Method to unfollow a user
-    private void unfollowUser(String currentUserId, String targetUserId, String username) {
+    private void unfollowUser(String currentUserId, String targetUserId, String targetUsername) {
         reference.child(currentUserId).child("following").child(targetUserId).removeValue();
         reference.child(targetUserId).child("followers").child(currentUserId).removeValue();
 
-        // Decrement the following count by 1 and update the value in the database
         reference.child(currentUserId).child("followingCount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -226,6 +255,56 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
         followBtn.setText("Follow");
-        Toast.makeText(this, "You have unfollowed " + username, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You have unfollowed " + targetUsername, Toast.LENGTH_SHORT).show();
     }
+
+
+    private void sendFollowNotification(String currentUserId) {
+
+        DatabaseReference userProfileReference = reference.child(currentUserId);
+        userProfileReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String currentUsernameDB = String.valueOf(dataSnapshot.child("username").getValue(String.class));
+                    ShowFollowNotification(currentUsernameDB);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    private void ShowFollowNotification(String followerUsername) {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "follow_channel_id";
+            String channelName = "Easyread";
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        // Create the notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(UserProfileActivity.this, "follow_channel_id")
+                .setSmallIcon(R.drawable.baseline_notifications_24)
+                .setContentTitle("You have a new follower!")
+                .setContentText(followerUsername + " start following you")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        // Show the notification
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.notify(2, builder.build());
+
+
+    }
+
+
 }
+
