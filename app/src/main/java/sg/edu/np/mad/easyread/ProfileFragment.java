@@ -83,10 +83,10 @@ public class ProfileFragment extends Fragment {
 
         reference = FirebaseDatabase.getInstance().getReference("users");
         currentUser = mAuth.getCurrentUser();
-
+        String targetId = currentUser.getUid();
         if (currentUser != null) {
             String targetEmail = currentUser.getEmail();
-            String targetId = currentUser.getUid();
+
 
             reference.orderByChild("email").equalTo(targetEmail).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -128,6 +128,26 @@ public class ProfileFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences("sg.edu.np.mad.easyread", Context.MODE_PRIVATE);
         boolean isNotificationEnabled = sharedPref.getBoolean("notification_setting", true);
 
+        // Set the initial switch state based on the value in SharedPreferences
+        notificationBtn.setChecked(isNotificationEnabled);
+
+        // Add a listener to update the switch state when the value changes in the database
+        reference.child(targetId).child("notification_setting").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    boolean notificationEnabled = dataSnapshot.getValue(Boolean.class);
+                    notificationBtn.setChecked(notificationEnabled);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle database error if necessary
+            }
+        });
+
+
         editProfileBtn.setOnClickListener(v -> {
             Intent editIntent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(editIntent);
@@ -155,9 +175,8 @@ public class ProfileFragment extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 // Get the current user ID
                 String targetId = currentUser.getUid();
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean("notification_setting", isChecked);
-                editor.apply();
+
+
                 // Update the "notification" field in the database based on the switch state
                 reference.child(targetId).child("notification_setting").setValue(isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
