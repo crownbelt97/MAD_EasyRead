@@ -206,28 +206,13 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        reference.child(targetUserId).child("notification_setting").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    long followersCount = dataSnapshot.getChildrenCount();
-                    reference.child(targetUserId).child("followersCount").setValue(followersCount);
-                } else {
-                    reference.child(targetUserId).child("followersCount").setValue(1);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
         followBtn.setText("Unfollow");
         Toast.makeText(this, "You are now following " + targetUsername, Toast.LENGTH_SHORT).show();
+
         if(notificationEnabled){
             sendFollowNotification(currentUserId);
         }
+
     }
 
     // Method to unfollow a user
@@ -275,25 +260,24 @@ public class UserProfileActivity extends AppCompatActivity {
 
 
     private void sendFollowNotification(String currentUserId) {
+
         DatabaseReference userProfileReference = reference.child(currentUserId);
         userProfileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String currentUsernameDB = String.valueOf(dataSnapshot.child("username").getValue(String.class));
-                    boolean notificationEnabled = dataSnapshot.child("notification_setting").getValue(Boolean.class);
-
-                    if (notificationEnabled) {
-                        ShowFollowNotification(currentUsernameDB);
-                    }
+                    ShowFollowNotification(currentUsernameDB);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle database error if necessary
+
             }
         });
+
+
     }
 
     private void ShowFollowNotification(String followerUsername) {
@@ -323,4 +307,3 @@ public class UserProfileActivity extends AppCompatActivity {
 
 
 }
-
