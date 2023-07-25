@@ -62,7 +62,10 @@ Phang Kah Yeng : <br>
 
 - Notifications <br>
 - Edit Profile <br>
-- Update UI on Feedback <br>
+    - Update username 
+    - Password reset using authentication firebase
+- Improved UI to make the app more visually appealing for users<br>
+
 
 Siu Chi Kit Wesley : <br>
 - Filter <br>
