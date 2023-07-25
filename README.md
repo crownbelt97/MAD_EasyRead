@@ -67,6 +67,8 @@ Phang Kah Yeng : <br>
 Siu Chi Kit Wesley : <br>
 - Filter <br>
 - Search <br>
+    - Search by author
+    - Search by title
 - Update UI on Book details <br>
 
 
