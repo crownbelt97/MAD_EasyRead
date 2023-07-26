@@ -89,7 +89,9 @@ public class SignUpActivity extends AppCompatActivity {
                             reference = database.getReference("users");
                             User user = new User(username, email, "", Firebaseuser.getUid());
                             user.setCreationDate(currentDate); // Set the creation date
+                            user.setNotification_setting(true);
                             reference.child(user.getUserId()).setValue(user);
+
 
                         } else {
                             // If sign in fails, display a message to the user.

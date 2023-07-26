@@ -3,9 +3,11 @@ package sg.edu.np.mad.easyread;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -16,10 +18,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -36,33 +47,99 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 
 public class DetailsFragment extends Fragment {
 
+
+
     FirebaseAuth mAuth;
+    //DatabaseReference myRef = null;
+    FirebaseDatabase secondaryDatabase = null;
+
+    String ISBN_reference = "";
+
 
     public DetailsFragment() {
         // Required empty public constructor
     }
 
+    public void writeNewBookmark(String title , String image_link ,String details_link, String userId) {
+        try {
+            Context mContext = requireActivity().getApplicationContext();
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setProjectId("mad-stuff-7f4ce")
+                    .setApiKey("AIzaSyBbTx3tyIOCOinpF3Fqq09CZWOg2GGkohE")
+                    .setApplicationId("1:446547976657:android:29448a2c63ea08769000f0")
+                    .setDatabaseUrl("https://mad-stuff-7f4ce-default-rtdb.asia-southeast1.firebasedatabase.app")
+                    .build();
+            FirebaseApp.initializeApp(mContext, options, "favourites");
+            Log.d("iterations", "true");
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        FirebaseApp app = FirebaseApp.getInstance("favourites");
+        secondaryDatabase = FirebaseDatabase.getInstance(app);
+        if (!details_link.contains("https"))
+        {
+            ISBN_reference = details_link;
+        }
+        Book user = new Book(title,image_link,details_link);
+        DatabaseReference myRef = secondaryDatabase.getReference("results");
+        myRef.child(userId).child(ISBN_reference).setValue(user);
+    }
+    public void deleteBookmark (String userId)
+    {
+        try {
+            Context mContext = requireActivity().getApplicationContext();
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setProjectId("mad-stuff-7f4ce")
+                    .setApiKey("AIzaSyBbTx3tyIOCOinpF3Fqq09CZWOg2GGkohE")
+                    .setApplicationId("1:446547976657:android:29448a2c63ea08769000f0")
+                    .setDatabaseUrl("https://mad-stuff-7f4ce-default-rtdb.asia-southeast1.firebasedatabase.app")
+                    .build();
+            FirebaseApp.initializeApp(mContext, options, "favourites");
+            Log.d("iterations", "true");
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        FirebaseApp app = FirebaseApp.getInstance("favourites");
+        secondaryDatabase = FirebaseDatabase.getInstance(app);
+        DatabaseReference myRef = secondaryDatabase.getReference("results");
+        myRef.child(userId).child(ISBN_reference).removeValue();
+
+    }
+
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        //check if followed via ISBN
+
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
 
         mAuth = FirebaseAuth.getInstance();
-
-
         //obtain url from previous fragment
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String details_link = sharedPref.getString("details_link", "empty");
@@ -136,6 +213,17 @@ public class DetailsFragment extends Fragment {
                                 description_input = "N/A";
                             }
 
+                            String ISBN = "";
+
+                            try {
+                                JsonArray industryIdentifiers = volumeInfo.getAsJsonArray("industryIdentifiers");
+                                ISBN_reference = industryIdentifiers.get(1).getAsJsonObject().get("identifier").getAsString();
+                                Log.d("GoogleAPI",ISBN_reference);
+                            }catch (Exception e)
+                            {
+                                Log.d("Google_URL ISBN" , e.toString());
+                            }
+
                             String release = volumeInfo.get("publishedDate").getAsString();
 
                             String length = volumeInfo.get("pageCount").getAsString();
@@ -162,16 +250,39 @@ public class DetailsFragment extends Fragment {
                         }
 
                     else if (url.toString().contains("jscmd=details")){
-                        JsonObject volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
+                        JsonObject volumeInfo = null;
+                        JsonObject detail = null;
+                        JsonArray works = null;
+                        String description_key = "";
 
+                        try{
+                            volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
+                        }catch (Exception e){
+                            Log.d("detailsURl volumeinfo", e.toString());
+                        }
                         //get works jsonobject to get description of book
+                        try{
+                            detail = volumeInfo.getAsJsonObject("details");
+                        }catch (Exception e){
+                            Log.d("detailsURl detail", e.toString());
+                        }
 
-                        JsonObject detail = volumeInfo.getAsJsonObject("details");
-                        JsonArray works = detail.getAsJsonArray("works");
+                        try {
+                            works = detail.getAsJsonArray("works");
+                        }catch (Exception e)
+                        {
+                            Log.d("detailsURl works", e.toString());
+                        }
 
                         //get key for description url
 
-                        String description_key = works.get(0).getAsJsonObject().get("key").getAsString();
+                        try {
+                            description_key = works.get(0).getAsJsonObject().get("key").getAsString();
+                        }catch (Exception e)
+                        {
+                            Log.d("detailsURl description_key", e.toString());
+                        }
+
 
 
 
@@ -198,58 +309,128 @@ public class DetailsFragment extends Fragment {
 
                         } catch ( Exception e)
                         {
-                            System.out.println(e);
+                            Log.d("worksURL_Description", e.toString());
                         }
                     }
 
                     else{
 
-                         JsonObject volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
-                        String title = volumeInfo.get("title").getAsString();
-
-
-
-                        String release = volumeInfo.get("publish_date").getAsString();
-
-                        JsonArray publishers = volumeInfo.getAsJsonArray("publishers");
-                        String publishers_data =  "";
-                        for (int x = 0 ; x < publishers.size() ; x ++)
-                        {
-                            JsonObject name = publishers.get(x).getAsJsonObject();
-                            publishers_data += name.get("name").getAsString();
-                            if (publishers.size() != 1)
-                            {
-                                publishers_data += ", ";
-                            }
-                        }
-                        JsonArray authors = volumeInfo.getAsJsonArray("authors");
-                        JsonObject [] authorsinfo_java_array = gson.fromJson(authors, JsonObject[].class);
-                        String [] authors_java_array = new String[authorsinfo_java_array.length];
-                        for (int x = 0; x < authors_java_array.length ; x++)
-                        {
-                            authors_java_array[x] = authorsinfo_java_array[x].get("name").getAsString();
-                        }
+                        JsonObject volumeInfo = null;
+                        String title = "";
+                        String release = "";
+                        JsonArray publishers = null;
+                        String publishers_data = "";
+                        JsonArray authors = null;
+                        JsonObject[] authorsinfo_java_array = null;
+                        String[] authors_java_array = null;
                         String length = "-1";
-                        //try catch since some json data lacks number of pages field
-                        try {
-                            length = volumeInfo.get("number_of_pages").getAsString();
-                        }catch (Exception e)
-                        {
-                            System.out.println(e);
-                        }
+                        JsonObject cover = null;
+                        String book_image = "";
+                        JsonArray works = null;
 
-                        JsonObject cover = volumeInfo.getAsJsonObject("cover");
+                            try {
+                                volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
 
-                        String book_image = cover.get("large").getAsString();
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL volumeinfo", e.toString());
+                            }
 
-                        JsonArray works = volumeInfo.getAsJsonArray("works");
+                            try {
+                                title = volumeInfo.get("title").getAsString();
+
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL title", e.toString());
+                            }
+
+                            try{
+                                release = volumeInfo.get("publish_date").getAsString();
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL release", e.toString());
+                            }
+
+                            try{
+                                publishers = volumeInfo.getAsJsonArray("publishers");
+
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL publishers", e.toString());
+                            }
+
+                            for (int x = 0; x < publishers.size(); x++) {
+                                JsonObject name = publishers.get(x).getAsJsonObject();
+                                publishers_data += name.get("name").getAsString();
+                                if (publishers.size() != 1) {
+                                    publishers_data += ", ";
+                                }
+                            }
+
+                            try{
+                                authors = volumeInfo.getAsJsonArray("authors");
+
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL authors", e.toString());
+                            }
+
+                            try {
+                                authorsinfo_java_array = gson.fromJson(authors, JsonObject[].class);
+
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL authorsinfo_java_array", e.toString());
+                            }
+
+                            try{
+                                authors_java_array = new String[authorsinfo_java_array.length];
+
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL authors_java_array", e.toString());
+                            }
 
 
+                             for (int x = 0; x < authors_java_array.length; x++) {
+                                authors_java_array[x] = authorsinfo_java_array[x].get("name").getAsString();
+                            }
 
-                        key_nytimes[0] = volumeInfo.get("key").getAsString();
+                            //try catch since some json data lacks number of pages field
+                            try {
+                                length = volumeInfo.get("number_of_pages").getAsString();
+                            } catch (Exception e) {
+                                Log.d("detailsURL_NumPages" , e.toString());
+                            }
 
-                        book = new BookDetails(title,authors_java_array,book_image,sharedPref.getString("description", "N/A"),ranking,"book",Integer.parseInt(length),publishers_data,release,"na");
+                            try {
+                                cover = volumeInfo.getAsJsonObject("cover");
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL cover", e.toString());
+                            }
 
+
+                            try{
+                                book_image = cover.get("large").getAsString();
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL book_image", e.toString());
+                            }
+
+
+                            try{
+                                works = volumeInfo.getAsJsonArray("works");
+
+                            }catch (Exception e)
+                            {
+                                Log.d("data_URL works", e.toString());
+                            }
+
+
+                            key_nytimes[0] = volumeInfo.get("key").getAsString();
+
+                            book = new BookDetails(title, authors_java_array, book_image, sharedPref.getString("description", "N/A"), ranking, "book", Integer.parseInt(length), publishers_data, release, "na");
 
                     }
 
@@ -262,9 +443,24 @@ public class DetailsFragment extends Fragment {
                         getActivity().runOnUiThread(() -> {
 
                             // Stuff that updates the UI
-                            String image_url = finalBook.getBook_Image().replace("http:", "https:");
-                            Picasso.get().load(image_url).into((ImageView) view.findViewById(R.id.details_Cover));
 
+                            String image_url = "";
+                            ImageView img = null;
+
+                            try{
+                                image_url = finalBook.getBook_Image().replace("http:", "https:");
+                                Picasso.get().load(image_url).into((ImageView) view.findViewById(R.id.details_Cover));
+                                img = view.findViewById(R.id.details_Cover);
+                                img.setTag(image_url);
+
+                            }catch (Exception e)
+                            {
+                                Log.d("picasso_fail" , e.toString());
+                                image_url = sharedPref.getString("image_link", "empty").replace("http:", "https:");
+                                Picasso.get().load(image_url).into((ImageView) view.findViewById(R.id.details_Cover));
+                                img = view.findViewById(R.id.details_Cover);
+                                img.setTag(image_url);
+                            }
 
                             TextView author = view.findViewById(R.id.details_Author);
                             String author_text = "";
@@ -276,6 +472,7 @@ public class DetailsFragment extends Fragment {
 
                             TextView title = view.findViewById(R.id.details_Title);
                             title.setText(finalBook.getTitle());
+                            title.setTag(finalBook.getTitle());
 
                             TextView length1 = view.findViewById(R.id.details_Length_Data);
                             //change input if length of book is unavailable
@@ -339,6 +536,48 @@ public class DetailsFragment extends Fragment {
                         });
                     }
 
+                    try {
+                        Context mContext = requireActivity().getApplicationContext();
+                        FirebaseOptions options = new FirebaseOptions.Builder()
+                                .setProjectId("mad-stuff-7f4ce")
+                                .setApiKey("AIzaSyBbTx3tyIOCOinpF3Fqq09CZWOg2GGkohE")
+                                .setApplicationId("1:446547976657:android:29448a2c63ea08769000f0")
+                                .setDatabaseUrl("https://mad-stuff-7f4ce-default-rtdb.asia-southeast1.firebasedatabase.app")
+                                .build();
+                        FirebaseApp.initializeApp(mContext, options, "favourites");
+                        Log.d("iterations", "true");
+                    } catch (Exception e)
+                    {
+                        System.out.println(e);
+                    }
+
+                    FirebaseApp app = FirebaseApp.getInstance("favourites");
+                    secondaryDatabase = FirebaseDatabase.getInstance(app);
+                    DatabaseReference myRef = secondaryDatabase.getReference("results");
+                    Query mQueryRef = myRef.child("02").child(ISBN_reference);
+                    Log.d("ISBN" , ISBN_reference);
+                    mQueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            boolean exists = snapshot.exists();
+                            ImageView img= view.findViewById(R.id.details_bookmark);
+
+                            if (exists) {
+                                Log.d("Follow_check", "true");
+                                img.setImageResource(R.drawable.checkedbookmark);
+                                img.setTag("checkedbookmark");
+                            }else {
+                                Log.d("Follow_check", "false");
+                                img.setImageResource(R.drawable.uncheckedbookmark);
+                                img.setTag("uncheckedbookmark");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
 
 
 
@@ -388,6 +627,33 @@ public class DetailsFragment extends Fragment {
 
 
 
+        view.findViewById(R.id.details_bookmark).setOnClickListener(v -> {
+            ImageView img= view.findViewById(R.id.details_bookmark);
+            String imageName = String.valueOf(img.getTag());
+            Log.d("imagenamestart" , imageName);
+            TextView title = view.findViewById(R.id.details_Title);
+            ImageView bookImg = view.findViewById(R.id.details_Cover);
+            if (imageName.equals("uncheckedbookmark"))
+            {
+                img.setImageResource(R.drawable.checkedbookmark);
+                img.setTag("checkedbookmark");
+                Log.d("details_link1",details_link + title.getTag().toString() + bookImg.getTag().toString());
+                writeNewBookmark(title.getTag().toString(), bookImg.getTag().toString(),details_link,"02");
+
+                //IN BOOKMARKS PAGE REMEBER TO PUTSARED PREFERENCES
+                // MAINFRAGMENT -> DETAILSFRAGMENT
+
+            }
+            else if (imageName.equals("checkedbookmark"))
+            {
+                img.setImageResource(R.drawable.uncheckedbookmark);
+                deleteBookmark("02");
+                img.setTag("uncheckedbookmark");
+
+            }
+
+
+        });
 
 
         return view;

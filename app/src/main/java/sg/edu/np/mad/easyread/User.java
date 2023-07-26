@@ -7,7 +7,8 @@ public class User {
     private String password;
     private String creationDate;
 
-   
+
+    private  boolean notification_setting;
 
     private String imageUrl;
 
@@ -19,6 +20,14 @@ public class User {
         this.email = email;
         this.imageUrl = imageUrl;
         this.userId = userId;
+
+    }
+    public boolean isNotification_setting() {
+        return notification_setting;
+    }
+
+    public void setNotification_setting(boolean notification_setting) {
+        this.notification_setting = notification_setting;
     }
 
     public String getImageUrl() {

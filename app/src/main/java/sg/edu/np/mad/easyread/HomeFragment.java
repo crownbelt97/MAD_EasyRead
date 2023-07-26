@@ -385,10 +385,12 @@ public class HomeFragment extends Fragment {
                     {
                         int rank = (int) tc_Detailed_List.get(x).getRating();
                         String details_link = tc_List.get(x).getDetails_Link();
+                        String image_link = tc_List.get(x).getBook_Image();
                         System.out.println(details_link);
                         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("details_link", details_link);
+                        editor.putString("image_link", image_link);
                         editor.putInt("rank", rank);
                         editor.apply();
                         ((MainActivity)getActivity()).replaceFragment(new DetailsFragment());
