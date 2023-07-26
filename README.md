@@ -53,10 +53,6 @@ Jeremy Chan Wei Wen : <br>
     - Search Profiles via username
     - Friends can follow and unfollow each other
     - Able to see Profile name, following, followers and likes
-- Where to buy to book & prices
-- Place order?
-- National library where to borrow book
-- Excerpt of book like a chapter <br>
 
 Phang Kah Yeng : <br>
 
@@ -72,15 +68,19 @@ Siu Chi Kit Wesley : <br>
 - Search <br>
     - Search by author
     - Search by title
-- Update UI on Book details <br>
+- Loading Page <br>
 
 
  Mikhail Adam Zahadi <br>
  - Reviews <br>
  - Favourites <br>
  - Rename to Bookmark in future <br>
- - Loading Page <br>
+ - Update UI on Book details where to buy <br>
 
-
+Potential <br>
+- Where to buy to book & prices <br>
+- Place order? <br>
+- National library where to borrow book <br>
+- Excerpt of book like a chapter <br>
 
  Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
