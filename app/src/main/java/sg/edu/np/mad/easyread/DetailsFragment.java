@@ -250,16 +250,39 @@ public class DetailsFragment extends Fragment {
                         }
 
                     else if (url.toString().contains("jscmd=details")){
-                        JsonObject volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
+                        JsonObject volumeInfo = null;
+                        JsonObject detail = null;
+                        JsonArray works = null;
+                        String description_key = "";
 
+                        try{
+                            volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
+                        }catch (Exception e){
+                            Log.d("detailsURl volumeinfo", e.toString());
+                        }
                         //get works jsonobject to get description of book
+                        try{
+                            detail = volumeInfo.getAsJsonObject("details");
+                        }catch (Exception e){
+                            Log.d("detailsURl detail", e.toString());
+                        }
 
-                        JsonObject detail = volumeInfo.getAsJsonObject("details");
-                        JsonArray works = detail.getAsJsonArray("works");
+                        try {
+                            works = detail.getAsJsonArray("works");
+                        }catch (Exception e)
+                        {
+                            Log.d("detailsURl works", e.toString());
+                        }
 
                         //get key for description url
 
-                        String description_key = works.get(0).getAsJsonObject().get("key").getAsString();
+                        try {
+                            description_key = works.get(0).getAsJsonObject().get("key").getAsString();
+                        }catch (Exception e)
+                        {
+                            Log.d("detailsURl description_key", e.toString());
+                        }
+
 
 
 
@@ -537,13 +560,16 @@ public class DetailsFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             boolean exists = snapshot.exists();
+                            ImageView img= view.findViewById(R.id.details_bookmark);
+
                             if (exists) {
                                 Log.d("Follow_check", "true");
-                                ImageView img= view.findViewById(R.id.details_bookmark);
                                 img.setImageResource(R.drawable.checkedbookmark);
                                 img.setTag("checkedbookmark");
                             }else {
                                 Log.d("Follow_check", "false");
+                                img.setImageResource(R.drawable.uncheckedbookmark);
+                                img.setTag("uncheckedbookmark");
                             }
                         }
 
