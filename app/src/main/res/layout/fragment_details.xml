@@ -89,6 +89,20 @@
                         app:layout_constraintStart_toEndOf="@+id/details_Cover"
                         app:layout_constraintTop_toBottomOf="@+id/details_Title" />
 
+                    <ImageView
+                        android:id="@+id/details_bookmark"
+                        android:layout_width="56dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="308dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:src = "@drawable/uncheckedbookmark"
+                        android:tag = "uncheckedbookmark"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.913" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

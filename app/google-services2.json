@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "446547976657",
+    "firebase_url": "https://mad-stuff-7f4ce-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mad-stuff-7f4ce",
+    "storage_bucket": "mad-stuff-7f4ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446547976657:android:29448a2c63ea08769000f0",
+        "android_client_info": {
+          "package_name": "sg.edu.np.mad.easyread"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446547976657-e6g2tl80v6tcc36b3rmjpso5a5i1mior.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbTx3tyIOCOinpF3Fqq09CZWOg2GGkohE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446547976657-e6g2tl80v6tcc36b3rmjpso5a5i1mior.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
