@@ -26,7 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment {
+public class SearchAuthorFragment extends Fragment {
 
     private ArrayList<News> bookArrayList;
     private String[] bookHeading;
@@ -37,7 +37,7 @@ public class SearchFragment extends Fragment {
     private ArrayList<BookDetails> tc_Detailed_List;
 
 
-    public SearchFragment() {
+    public SearchAuthorFragment() {
 
     }
 
@@ -46,7 +46,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_search_author, container, false);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SearchFragment extends Fragment {
         });
 
         view.findViewById(R.id.swap_Button).setOnClickListener(v -> {
-            ((MainActivity)getActivity()).replaceFragment(new SearchAuthorFragment());
+            ((MainActivity)getActivity()).replaceFragment(new SearchFragment());
         });
 
     }
@@ -85,7 +85,7 @@ public class SearchFragment extends Fragment {
 
         View view = getView();
 
-        String url = "https://www.googleapis.com/books/v1/volumes?q=" + query;
+        String url = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + query;
         Log.d("url", url);
 
         //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
