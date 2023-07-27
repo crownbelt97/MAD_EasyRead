@@ -1,6 +1,8 @@
 package sg.edu.np.mad.easyread;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +27,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import sg.edu.np.mad.easyread.R;
 
-public class TopchartFragment extends Fragment {
+public class TopchartFragment extends Fragment implements SelectListener{
 
     private ArrayList<News> bookArrayList;
     private String[] bookHeading;
@@ -36,10 +39,14 @@ public class TopchartFragment extends Fragment {
 
     private ArrayList<BookDetails> tc_Detailed_List;
 
+    List<Book> bookList = new ArrayList<Book>();
+
 
     public TopchartFragment() {
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +64,12 @@ public class TopchartFragment extends Fragment {
 
         bookArrayList = new ArrayList<>();
 
+
+
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=y6og1zAOyVjSobnuULUpQwC4ivOlVQ0u";
+
+        //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
+        MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList, this);
 
         //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
@@ -95,6 +107,8 @@ public class TopchartFragment extends Fragment {
                         //Creating BookDetails objects to put into ArrayList tc_Detailed_List that will be used later on to create 'News' objects for the recyclerview
                         BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
                         tc_Detailed_List.add(bookDetails);
+                        Book book = new Book( title, link, isbn );
+                        bookList.add(book);
 
                     }
 
@@ -114,8 +128,6 @@ public class TopchartFragment extends Fragment {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     //Set a fixed size for the RecyclerView
                     recyclerView.setHasFixedSize(true);
-                    //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
-                    MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList);
                     //Sets the created MyAdapter as the adapter for the recyclerView
                     recyclerView.setAdapter(myAdapter);
                     //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data
@@ -141,6 +153,23 @@ public class TopchartFragment extends Fragment {
 
 
     }
+
+    @Override
+    public void onItemClicked(int pos) {
+        Log.d("position" , "true");
+        int rank = pos + 1;
+        String details_link = bookList.get(pos).getDetails_Link();
+        String image_link = bookList.get(pos).getBook_Image();
+        System.out.println(details_link);
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("details_link", details_link);
+        editor.putString("image_link", image_link);
+        editor.putInt("rank", rank);
+        editor.apply();
+        ((MainActivity)getActivity()).replaceFragment(new DetailsFragment());
+    }
+
 
 //    private void dataInitialize() {
 //

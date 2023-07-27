@@ -129,7 +129,7 @@ public class HomeFragment extends Fragment {
 
 
         List<Book> tc_List = new ArrayList<Book>();
-        List<BookDetails> tc_Detailed_List = new ArrayList<BookDetails>();
+        //ist<BookDetails> tc_Detailed_List = new ArrayList<BookDetails>();
         List<Book> re_list = new ArrayList<>();
         List<Book> lr_list = new ArrayList<>();
 
@@ -138,7 +138,38 @@ public class HomeFragment extends Fragment {
         String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
         String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
 
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String book_data_check = sharedPref.getString("Book" + "0", "empty");
+        Log.d("book_data",book_data_check);
+        if (!book_data_check.equals("empty")) {
+            url = "";
+            for (int i = 0; i < 5; i++) {
+                String book_data = sharedPref.getString("Book" + i, "empty");
+                if (!book_data.equals("empty")) {
+                    String[] input_data = book_data.split("!-!-!");
+                    try {
+                        TextView tv = (TextView) view.findViewById(textViews[i]);
+                        ImageView iv = (ImageView) view.findViewById(imageViews[i]);
+                        tv.setText(input_data[0]);
+                        Log.d("input_data[0]", input_data[0]);
+                        Log.d("input_data[1]", input_data[1]);
+                        Log.d("input_data[2]", input_data[2]);
+                        Picasso.get().load(input_data[1]).fit().into(iv);
+                        Book book = new Book( input_data[0], input_data[1], input_data[2] );
+                        tc_List.add(book);
+                        //BookDetails bookDetails = new BookDetails(input_data[0], authorArray, link, null, rank, null, 0, null, null, null);
+
+                    } catch (Exception e) {
+                        Log.d("sharedpref_input_fail", e.toString());
+                    }
+                }
+            }
+            Log.d("url_Change" , "true");
+        }
+
         //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
+
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
             //Callback that is invoked when a network request is successful and receives a response from the server
@@ -177,7 +208,6 @@ public class HomeFragment extends Fragment {
                         if (i<5){
                             TextView tv = (TextView) view.findViewById(textViews[i]);
                             ImageView iv = (ImageView) view.findViewById(imageViews[i]);
-
                             tv.setText(title);
                             Picasso.get().load(link).fit().into(iv);
                         }
@@ -185,9 +215,16 @@ public class HomeFragment extends Fragment {
                         //Create Book and BookDetails objects for each book and adding it to ArrayLists so it can
                         //be reused on other fragments. (will implement in the later stage)
                         Book book = new Book( title, link, isbn );
-                        BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
+                        //BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
                         tc_List.add(book);
-                        tc_Detailed_List.add(bookDetails);
+                        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("Book" + i,title + "!-!-!" + link + "!-!-!" + isbn);
+                        Log.d("tag" , "Book" + i);
+                        editor.apply();
+                        Log.d("SharedPrefEnterBookTCLIST",title + "!-!-!" + link + "!-!-!" + isbn );
+
+                        //tc_Detailed_List.add(bookDetails);
 
                     }
 
@@ -349,9 +386,16 @@ public class HomeFragment extends Fragment {
             }
         }
 
+
+        //check if there is sharedpref already
+
+
         //Adds the request to the request queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
+        if (url.equals("")) {
+            Log.d("NYAPI_ran", "false");
+        }
         new MyTask().execute(url_ggl_re, null, null);
         new MyTask().execute(url_ggl_lr, null, null);
 
@@ -383,7 +427,8 @@ public class HomeFragment extends Fragment {
                 {
                     if (id == imageViews[x])
                     {
-                        int rank = (int) tc_Detailed_List.get(x).getRating();
+                        //int rank = (int) tc_Detailed_List.get(x).getRating();
+                        int rank = x + 1;
                         String details_link = tc_List.get(x).getDetails_Link();
                         String image_link = tc_List.get(x).getBook_Image();
                         System.out.println(details_link);
