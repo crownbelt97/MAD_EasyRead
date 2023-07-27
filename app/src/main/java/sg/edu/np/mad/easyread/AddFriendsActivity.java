@@ -2,6 +2,8 @@ package sg.edu.np.mad.easyread;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -100,6 +102,29 @@ public class AddFriendsActivity extends AppCompatActivity {
             // Handle navigation to the user's profile activity here
             navigateToUserProfile(selectedUser.getUserId(), selectedUser.getUsername());
         });
+
+
+            findViewById(R.id.imageView17).setOnClickListener(v -> {
+                // Create a new instance of the ProfileFragment
+                ProfileFragment profileFragment = new ProfileFragment();
+
+                // Get the FragmentManager
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
+                // Start a new FragmentTransaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the current fragment container with the ProfileFragment
+                fragmentTransaction.replace(android.R.id.content, profileFragment);
+
+                // Add the transaction to the back stack so the user can navigate back
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+            });
+
+
     }
 
     private void filterUsernames(String query) {
