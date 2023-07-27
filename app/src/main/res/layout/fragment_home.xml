@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
             android:scrollbars="none"
@@ -58,16 +58,206 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/details_Category"
+                    android:scrollbars="none"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            card_view:cardElevation="3dp"
+                            card_view:cardCornerRadius="4dp">
+
+                            <TextView
+                                android:id="@+id/category1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+
+                                android:paddingTop="13dp"
+                                android:paddingBottom="13dp"
+                                android:paddingLeft="23dp"
+                                android:paddingRight="23dp"
+                                android:text="Adventure"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/details_Category" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="3dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="3dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            card_view:cardElevation="3dp"
+                            card_view:cardCornerRadius="4dp"
+                            app:layout_constraintStart_toEndOf="@id/card_view2"
+                            app:layout_constraintTop_toTopOf="@id/details_Category">
+
+                            <TextView
+                                android:id="@+id/category2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:paddingTop="13dp"
+                                android:paddingBottom="13dp"
+                                android:paddingLeft="23dp"
+                                android:paddingRight="23dp"
+                                android:text="Mystery" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="3dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            card_view:cardElevation="3dp"
+                            card_view:cardCornerRadius="4dp"
+                            app:layout_constraintStart_toEndOf="@id/card_view2"
+                            app:layout_constraintTop_toTopOf="@id/details_Category">
+
+                            <TextView
+                                android:id="@+id/category3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:paddingTop="13dp"
+                                android:paddingBottom="13dp"
+                                android:paddingLeft="23dp"
+                                android:paddingRight="23dp"
+                                android:text="Humour" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="3dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            card_view:cardElevation="3dp"
+                            card_view:cardCornerRadius="4dp"
+                            app:layout_constraintStart_toEndOf="@id/card_view3"
+                            app:layout_constraintTop_toTopOf="@id/details_Category">
+
+                            <TextView
+                                android:id="@+id/category4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:paddingTop="13dp"
+                                android:paddingBottom="13dp"
+                                android:paddingLeft="23dp"
+                                android:paddingRight="23dp"
+                                android:text="Horror" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="3dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            card_view:cardElevation="3dp"
+                            card_view:cardCornerRadius="4dp"
+                            app:layout_constraintStart_toEndOf="@id/card_view4"
+                            app:layout_constraintTop_toTopOf="@id/details_Category">
+
+                            <TextView
+                                android:id="@+id/category5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:paddingTop="13dp"
+                                android:paddingBottom="13dp"
+                                android:paddingLeft="23dp"
+                                android:paddingRight="23dp"
+                                android:text="Romance" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="3dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            card_view:cardElevation="3dp"
+                            card_view:cardCornerRadius="4dp"
+                            app:layout_constraintStart_toEndOf="@id/card_view5"
+                            app:layout_constraintTop_toTopOf="@id/details_Category">
+
+                            <TextView
+                                android:id="@+id/category6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:paddingTop="13dp"
+                                android:paddingBottom="13dp"
+                                android:paddingLeft="23dp"
+                                android:paddingRight="23dp"
+                                android:text="Non-fiction" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
+
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Popular Now"
+                    android:layout_marginTop="20dp"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/verticalConstraintLayout" />
+                    app:layout_constraintTop_toBottomOf="@id/details_Category"
+   />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -78,7 +268,7 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/popularScrollView"
                     app:layout_constraintEnd_toStartOf="@+id/imageView18"
-                    app:layout_constraintTop_toTopOf="@id/verticalConstraintLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/details_Category" />
 
                 <ImageView
                     android:id="@+id/imageView18"
@@ -87,7 +277,7 @@
                     android:src="@drawable/baseline_arrow_forward_ios_24"
                     app:layout_constraintBottom_toTopOf="@+id/popularScrollView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/verticalConstraintLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/details_Category" />
 
                 <HorizontalScrollView
                     android:id="@+id/popularScrollView"
@@ -296,7 +486,7 @@
                     android:id="@+id/forgotPass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="Top Charts"
                     android:textColor="@color/black"
                     android:textSize="25sp"
@@ -548,7 +738,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="Books Recommended"
                     android:textColor="@color/black"
                     android:textSize="25sp"
