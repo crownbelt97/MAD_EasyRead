@@ -70,18 +70,15 @@ Siu Chi Kit Wesley : <br>
     - Search by title
 - Loading books in animation <br>
 - Linking of view all pages <br>
+- Modified books recommended to update at the start of the month <br>
 
 
  Mikhail Adam Zahadi <br>
  - Reviews <br>
  - Favourites <br>
  - Rename to Bookmark in future <br>
- - Update UI on Book details where to buy <br>
+ - Update UI on Book details <br>
+ - Where to buy to book & prices <br>
 
-Potential <br>
-- Where to buy to book & prices <br>
-- Place order? <br>
-- National library where to borrow book <br>
-- Excerpt of book like a chapter <br>
 
  Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
