@@ -13,7 +13,7 @@
         android:id="@+id/topchart"/>
 
     <item
-        android:title="Favourite"
+        android:title="Bookmarks"
         android:icon="@drawable/baseline_favorite_24"
         android:id="@+id/favourite"
         />
