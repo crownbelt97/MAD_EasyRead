@@ -249,7 +249,8 @@ public class HomeFragment extends Fragment {
                         JSONObject o = array.getJSONObject(i);
 
                         // Getting the title string and book_image link (that will be displayed through the picasso library)
-                        String title = o.getString("title");
+                        String t = o.getString("title");
+                        String title = t.substring(0, 1).toUpperCase() + t.substring(1).toLowerCase();
                         String link = o.getString("book_image");
 
                         //Accessing and getting the isbn13 of the book
@@ -411,7 +412,7 @@ public class HomeFragment extends Fragment {
                                     Book book = lr_list.get(x);
                                     Log.d("lr_list1",lr_list.toString());
                                     String image_url = book.getBook_Image().replace("http:", "https:");
-                                    lr_text_views.get(x).setText(book.getTitle().toUpperCase());
+                                    lr_text_views.get(x).setText(book.getTitle());
                                     Picasso.get().load(image_url).fit().into(lr_image_views.get(x));
                                     Log.d("image link",book.getBook_Image());
 
@@ -422,7 +423,7 @@ public class HomeFragment extends Fragment {
                                     Book book = re_list.get(x);
                                     Log.d("re_list1", re_list.toString());
                                     String image_url = book.getBook_Image().replace("http:", "https:");
-                                    re_text_views.get(x).setText(book.getTitle().toUpperCase());
+                                    re_text_views.get(x).setText(book.getTitle());
                                     Picasso.get().load(image_url).fit().into(re_image_views.get(x));
                                     Log.d("image link", book.getBook_Image());
 
