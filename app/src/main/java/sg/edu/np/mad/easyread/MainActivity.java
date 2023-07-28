@@ -14,6 +14,8 @@ import sg.edu.np.mad.easyread.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private Fragment currentFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,26 +25,31 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-
-            switch (item.getItemId()){
-
-
+            switch (item.getItemId()) {
                 case R.id.home:
-                    replaceFragment(new HomeFragment());
+                    if (!(currentFragment instanceof HomeFragment)) {
+                        replaceFragment(new HomeFragment());
+                    }
                     break;
                 case R.id.profile:
-                    replaceFragment(new ProfileFragment());
+                    if (!(currentFragment instanceof ProfileFragment)) {
+                        replaceFragment(new ProfileFragment());
+                    }
                     break;
                 case R.id.favourite:
-                    replaceFragment(new SettingsFragment());
+                    if (!(currentFragment instanceof SettingsFragment)) {
+                        replaceFragment(new SettingsFragment());
+                    }
                     break;
                 case R.id.topchart:
-                    replaceFragment(new TopchartFragment());
+                    if (!(currentFragment instanceof TopchartFragment)) {
+                        replaceFragment(new TopchartFragment());
+                    }
                     break;
             }
-
             return true;
         });
+
 
     }
 
@@ -50,10 +57,12 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setSelectedItemId(itemId);
     }
 
-    public void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment) {
+        currentFragment = fragment;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
 }

@@ -112,7 +112,7 @@ public class CategoryDisplayFragment extends Fragment {
             url = "https://www.googleapis.com/books/v1/volumes?q=subject:nonfiction";
         }
         else if ("Latest Releases".equals(categoryName)) {
-            url = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
+            url = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest";
         }
         else if ("Recommended".equals(categoryName)) {
 
