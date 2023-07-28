@@ -32,13 +32,51 @@
 "
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerShimmer"
+
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7">
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewTopChart"
             android:layout_width="413dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:paddingBottom="100dp"
+            android:layout_marginTop="25dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             tools:listitem="@layout/list_item" />

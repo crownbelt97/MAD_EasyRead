@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,6 +59,9 @@ public class HomeFragment extends Fragment {
 
     FirebaseAuth mAuth;
     ImageView imageView7;
+    ShimmerFrameLayout latestShimmer;
+    ShimmerFrameLayout topShimmer;
+    ShimmerFrameLayout recommendedShimmer;
 
     public HomeFragment()
     {
@@ -80,6 +85,20 @@ public class HomeFragment extends Fragment {
 
         // Layout inflater that instantiates a layout XML file into its corresponding View objects
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        latestShimmer = view.findViewById(R.id.shimmer);
+        topShimmer = view.findViewById(R.id.shimmer2);
+        recommendedShimmer = view.findViewById(R.id.shimmer3);
+
+        HorizontalScrollView hsv1 = view.findViewById(R.id.popularScrollView);
+        HorizontalScrollView hsv2 = view.findViewById(R.id.horizontalScrollView2);
+        HorizontalScrollView hsv3 = view.findViewById(R.id.horizontalScrollView3);
+
+        latestShimmer.startShimmer();
+        topShimmer.startShimmer();
+        recommendedShimmer.startShimmer();
+
+
 
         int[] catTextViews = {R.id.category1, R.id.category2, R.id.category3, R.id.category4, R.id.category5, R.id.category6};
         int[] viewAll = {R.id.latestAll, R.id.recommendedAll};
@@ -417,6 +436,19 @@ public class HomeFragment extends Fragment {
                                     Log.d("image link",book.getBook_Image());
 
                                 }
+
+
+                                hsv1.setVisibility(View.VISIBLE);
+                                hsv2.setVisibility(View.VISIBLE);
+                                hsv3.setVisibility(View.VISIBLE);
+
+                                recommendedShimmer.setVisibility(View.GONE);
+                                topShimmer.setVisibility(View.GONE);
+                                latestShimmer.setVisibility(View.GONE);
+
+                                recommendedShimmer.stopShimmer();
+                                topShimmer.stopShimmer();
+                                latestShimmer.stopShimmer();
                             }
                             else {
                                 for (int x = 0; x < 5; x++) {
@@ -461,6 +493,8 @@ public class HomeFragment extends Fragment {
         }
         new MyTask().execute(url_ggl_re, null, null);
         new MyTask().execute(url_ggl_lr, null, null);
+
+
 
         view.findViewById(R.id.imageView7).setOnClickListener(v -> {
             ((MainActivity)getActivity()).replaceFragment(new SearchFragment());

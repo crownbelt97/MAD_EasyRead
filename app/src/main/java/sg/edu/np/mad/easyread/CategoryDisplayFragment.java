@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +41,8 @@ public class CategoryDisplayFragment extends Fragment {
 
     private ArrayList<BookDetails> tc_Detailed_List;
 
+    ShimmerFrameLayout shimmerFrameLayout;
+
 
     public CategoryDisplayFragment() {
 
@@ -57,6 +60,7 @@ public class CategoryDisplayFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        shimmerFrameLayout=view.findViewById(R.id.recyclerShimmer);
 
 
 
@@ -186,6 +190,13 @@ public class CategoryDisplayFragment extends Fragment {
                     recyclerView.setAdapter(myAdapter);
                     //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data
                     myAdapter.notifyDataSetChanged();
+
+                    shimmerFrameLayout.stopShimmer();
+                    RecyclerView rv = view.findViewById(R.id.recyclerviewTopChart);
+                    rv.setVisibility(View.VISIBLE);
+                    shimmerFrameLayout.setVisibility(View.GONE);
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
