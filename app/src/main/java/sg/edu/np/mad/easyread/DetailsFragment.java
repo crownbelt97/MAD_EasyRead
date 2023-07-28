@@ -88,6 +88,9 @@ public class DetailsFragment extends Fragment {
         {
             ISBN_reference = details_link;
         }
+        if (Objects.equals(ISBN_reference, "")){
+            ISBN_reference = title;
+        }
         Book user = new Book(title,image_link,details_link);
         DatabaseReference myRef = secondaryDatabase.getReference("results");
         myRef.child(userId).child(ISBN_reference).setValue(user);
@@ -203,7 +206,7 @@ public class DetailsFragment extends Fragment {
                             String [] authors_java_array = null;
                             authors_count = 0;
                             String release = "";
-                            String length = "";
+                            String length = "-1";
                             String publisher =  "";
                             String format = "" ;
                             JsonObject imageLinks = null;
@@ -225,6 +228,7 @@ public class DetailsFragment extends Fragment {
 
                             try{
                                 authors_java_array = gson.fromJson(authors, String[].class);
+
                             }catch (Exception e){
                                 Log.d("GOOGLEAPIS_URL authors_java_array" , e.toString());
                             }
@@ -250,6 +254,7 @@ public class DetailsFragment extends Fragment {
                             }catch (Exception e)
                             {
                                 Log.d("Google_URL ISBN" , e.toString());
+
                             }
 
                             try {
@@ -410,14 +415,18 @@ public class DetailsFragment extends Fragment {
                             {
                                 Log.d("data_URL publishers", e.toString());
                             }
-
-                            for (int x = 0; x < publishers.size(); x++) {
-                                JsonObject name = publishers.get(x).getAsJsonObject();
-                                publishers_data += name.get("name").getAsString();
-                                if (publishers.size() != 1) {
-                                    publishers_data += ", ";
+                            try{
+                                for (int x = 0; x < publishers.size(); x++) {
+                                    JsonObject name = publishers.get(x).getAsJsonObject();
+                                    publishers_data += name.get("name").getAsString();
+                                    if (publishers.size() != 1) {
+                                        publishers_data += ", ";
+                                    }
                                 }
+                            }catch (Exception e){
+                                Log.d("data_URL publisher data",e.toString());
                             }
+
 
                             try{
                                 authors = volumeInfo.getAsJsonArray("authors");
@@ -437,6 +446,9 @@ public class DetailsFragment extends Fragment {
 
                             try{
                                 authors_java_array = new String[authorsinfo_java_array.length];
+                                for (int x = 0; x < authors_java_array.length; x++) {
+                                    authors_java_array[x] = authorsinfo_java_array[x].get("name").getAsString();
+                                }
 
                             }catch (Exception e)
                             {
@@ -444,9 +456,6 @@ public class DetailsFragment extends Fragment {
                             }
 
 
-                             for (int x = 0; x < authors_java_array.length; x++) {
-                                authors_java_array[x] = authorsinfo_java_array[x].get("name").getAsString();
-                            }
 
                             //try catch since some json data lacks number of pages field
                             try {
@@ -480,7 +489,7 @@ public class DetailsFragment extends Fragment {
                             }
 
 
-                            key_nytimes[0] = volumeInfo.get("key").getAsString();
+                            //key_nytimes[0] = volumeInfo.get("key").getAsString();
 
                             book = new BookDetails(title, authors_java_array, book_image, sharedPref.getString("description", "N/A"), ranking, "book", Integer.parseInt(length), publishers_data, release, "na");
 

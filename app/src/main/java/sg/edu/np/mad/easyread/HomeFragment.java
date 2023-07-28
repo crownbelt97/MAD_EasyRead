@@ -202,8 +202,9 @@ public class HomeFragment extends Fragment {
 
         //Url that will be used to retrieve the current top books from the NYTimes book api
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=y6og1zAOyVjSobnuULUpQwC4ivOlVQ0u";
-        String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
-        String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
+        String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business";
+        String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest";
+        //&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String book_data_check = sharedPref.getString("Book" + "0", "empty");
@@ -462,7 +463,7 @@ public class HomeFragment extends Fragment {
                 } catch (MalformedURLException e) {
                     Log.d("json", "malformedurlexception fail");
                 } catch (IOException i) {
-                    Log.d("json", "ioexception fail");
+                    Log.d("json", "ioexception fail " + urls[0]);
                 }
                 return message;
 

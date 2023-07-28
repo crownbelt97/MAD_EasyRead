@@ -30,8 +30,9 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CategoryDisplayFragment extends Fragment {
+public class CategoryDisplayFragment extends Fragment implements SelectListener{
 
     private ArrayList<News> bookArrayList;
     private String[] bookHeading;
@@ -40,6 +41,12 @@ public class CategoryDisplayFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private ArrayList<BookDetails> tc_Detailed_List;
+
+    List<Book> bookList = new ArrayList<Book>();
+
+
+
+    MyAdapter myAdapter = null;
 
     ShimmerFrameLayout shimmerFrameLayout;
 
@@ -68,6 +75,7 @@ public class CategoryDisplayFragment extends Fragment {
         view.findViewById(R.id.imageView17).setOnClickListener(v -> {
             ((MainActivity)getActivity()).replaceFragment(new HomeFragment());
         });
+
 
         searchBooks();
 
@@ -119,6 +127,9 @@ public class CategoryDisplayFragment extends Fragment {
 
         Log.d("url", url);
 
+        //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
+        myAdapter = new MyAdapter(getContext(), bookArrayList , this);
+
         //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
@@ -143,7 +154,8 @@ public class CategoryDisplayFragment extends Fragment {
                             img = img.replace("http://","https://");
 
                             //Accessing and getting the isbn13 of the book
-                            String id = o.getString("id");
+                            String selfLink = o.getString("selfLink");
+                            Log.d("selfLink" , selfLink);
 
                             //Getting the authors from the book but storing it in an array to match
                             // the class asNYTimes api stores the authors in a single string.
@@ -154,6 +166,7 @@ public class CategoryDisplayFragment extends Fragment {
                                 stringArray = new String[length];
                                 for (int x = 0; x < length; x++) {
                                     stringArray[x] = authorArray.optString(x);
+                                    Log.d("author_add_process",stringArray[x]);
                                 }
                             }
 
@@ -162,6 +175,8 @@ public class CategoryDisplayFragment extends Fragment {
                             //Creating BookDetails objects to put into ArrayList tc_Detailed_List that will be used later on to create 'News' objects for the recyclerview
                             BookDetails bookDetails = new BookDetails(title, stringArray, img, null, 0, null, 0, null, null, null);
                             tc_Detailed_List.add(bookDetails);
+                            Book book = new Book( title, img, selfLink );
+                            bookList.add(book);
                         } catch (Exception e2)
                         {
                             System.out.println(e2);
@@ -184,8 +199,6 @@ public class CategoryDisplayFragment extends Fragment {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     //Set a fixed size for the RecyclerView
                     recyclerView.setHasFixedSize(true);
-                    //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
-                    MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList, null);
                     //Sets the created MyAdapter as the adapter for the recyclerView
                     recyclerView.setAdapter(myAdapter);
                     //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data
@@ -212,11 +225,34 @@ public class CategoryDisplayFragment extends Fragment {
             }
         });
 
+
         //Adds the request to the request queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
 
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onItemClicked(int pos) {
+        Log.d("position" , "true");
+        int rank = -1;
+        String details_link = bookList.get(pos).getDetails_Link();
+        String image_link = bookList.get(pos).getBook_Image();
+        Log.d("detailsLinkclick",details_link);
+        Log.d("imageLinkclick",image_link);
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("details_link", details_link);
+        editor.putString("image_link", image_link);
+        editor.putInt("rank", rank);
+        editor.apply();
+        ((MainActivity)getActivity()).replaceFragment(new DetailsFragment());
     }
 
 //    private void dataInitialize() {

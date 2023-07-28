@@ -60,6 +60,7 @@ public class TopchartFragment extends Fragment implements SelectListener{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
         tc_Detailed_List = new ArrayList<BookDetails>();
@@ -160,6 +161,11 @@ public class TopchartFragment extends Fragment implements SelectListener{
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
 
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     }
 
