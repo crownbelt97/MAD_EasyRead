@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
     ShimmerFrameLayout latestShimmer;
     ShimmerFrameLayout topShimmer;
     ShimmerFrameLayout recommendedShimmer;
+    ShimmerFrameLayout tagShimmer;
 
     public HomeFragment()
     {
@@ -89,39 +90,24 @@ public class HomeFragment extends Fragment {
         latestShimmer = view.findViewById(R.id.shimmer);
         topShimmer = view.findViewById(R.id.shimmer2);
         recommendedShimmer = view.findViewById(R.id.shimmer3);
+        tagShimmer = view.findViewById(R.id.shimmerTags);
 
         HorizontalScrollView hsv1 = view.findViewById(R.id.popularScrollView);
         HorizontalScrollView hsv2 = view.findViewById(R.id.horizontalScrollView2);
         HorizontalScrollView hsv3 = view.findViewById(R.id.horizontalScrollView3);
+        HorizontalScrollView hsvTags = view.findViewById(R.id.details_Category);
 
         latestShimmer.startShimmer();
         topShimmer.startShimmer();
         recommendedShimmer.startShimmer();
+        tagShimmer.startShimmer();
 
 
 
         int[] catTextViews = {R.id.category1, R.id.category2, R.id.category3, R.id.category4, R.id.category5, R.id.category6};
         int[] viewAll = {R.id.latestAll, R.id.recommendedAll};
 
-        //category click listener
-        View.OnClickListener catClickListener = new View.OnClickListener() {
-            public void onClick(View v) {
-                // Get the text of the clicked TextView
-                TextView tv = (TextView) v;
-                String str = tv.getText().toString();
 
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("category", str);
-                editor.apply();
-
-                ((MainActivity) getActivity()).replaceFragment(new CategoryDisplayFragment());
-            }
-        };
-
-        for (int i = 0; i < catTextViews.length; i++) {
-            view.findViewById(catTextViews[i]).setOnClickListener(catClickListener);
-        }
 
         View.OnClickListener viewAllClickListener = new View.OnClickListener() {
             public void onClick(View v) {
@@ -441,14 +427,19 @@ public class HomeFragment extends Fragment {
                                 hsv1.setVisibility(View.VISIBLE);
                                 hsv2.setVisibility(View.VISIBLE);
                                 hsv3.setVisibility(View.VISIBLE);
+                                hsvTags.setVisibility(View.VISIBLE);
 
                                 recommendedShimmer.setVisibility(View.GONE);
                                 topShimmer.setVisibility(View.GONE);
                                 latestShimmer.setVisibility(View.GONE);
+                                tagShimmer.setVisibility(View.GONE);
 
                                 recommendedShimmer.stopShimmer();
                                 topShimmer.stopShimmer();
                                 latestShimmer.stopShimmer();
+                                tagShimmer.stopShimmer();
+
+
                             }
                             else {
                                 for (int x = 0; x < 5; x++) {
@@ -461,6 +452,7 @@ public class HomeFragment extends Fragment {
 
                                 }
                             }
+
                         });
 
                     }
@@ -499,6 +491,26 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.imageView7).setOnClickListener(v -> {
             ((MainActivity)getActivity()).replaceFragment(new SearchFragment());
         });
+
+        //category click listener
+        View.OnClickListener catClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                // Get the text of the clicked TextView
+                TextView tv = (TextView) v;
+                String str = tv.getText().toString();
+
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("category", str);
+                editor.apply();
+
+                ((MainActivity) getActivity()).replaceFragment(new CategoryDisplayFragment());
+            }
+        };
+
+        for (int i = 0; i < catTextViews.length; i++) {
+            view.findViewById(catTextViews[i]).setOnClickListener(catClickListener);
+        }
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             public void onClick(View v) {
