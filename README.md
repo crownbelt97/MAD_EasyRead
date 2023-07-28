@@ -64,11 +64,12 @@ Phang Kah Yeng : <br>
 
 
 Siu Chi Kit Wesley : <br>
-- Filter by category <br>
-- Search <br>
+- Added category options to home page <br>
+- Search function <br>
     - Search by author
     - Search by title
-- Loading Page <br>
+- Loading books in animation <br>
+- Linking of view all pages <br>
 
 
  Mikhail Adam Zahadi <br>
