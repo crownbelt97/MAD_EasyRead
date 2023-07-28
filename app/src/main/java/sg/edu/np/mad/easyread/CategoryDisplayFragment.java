@@ -94,6 +94,7 @@ public class CategoryDisplayFragment extends Fragment implements SelectListener{
 
         SharedPreferences sharedPreference = getActivity().getPreferences(Context.MODE_PRIVATE);
         String categoryName = sharedPreference.getString("category", "empty");
+        String recoString = sharedPreference.getString("reco","empty");
 
         TextView tv = view.findViewById(R.id.textView3);
         tv.setText(categoryName);
@@ -122,7 +123,8 @@ public class CategoryDisplayFragment extends Fragment implements SelectListener{
             url = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
         }
         else if ("Recommended".equals(categoryName)) {
-            url = "https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
+
+            url = "https://www.googleapis.com/books/v1/volumes?q=subject:" + recoString;
         }
 
         Log.d("url", url);

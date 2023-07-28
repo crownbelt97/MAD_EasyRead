@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,46 +108,7 @@ public class HomeFragment extends Fragment {
 
         int[] catTextViews = {R.id.category1, R.id.category2, R.id.category3, R.id.category4, R.id.category5, R.id.category6};
         int[] viewAll = {R.id.latestAll, R.id.recommendedAll};
-
-
-
-        View.OnClickListener viewAllClickListener = new View.OnClickListener() {
-            public void onClick(View v) {
-                // Get the ID of the clicked ImageView
-                int viewId = v.getId();
-
-                // Determine the corresponding category based on the viewId
-                String category;
-                switch (viewId) {
-                    case R.id.latestAll:
-                        category = "Latest Releases";
-                        break;
-                    case R.id.recommendedAll:
-                        category = "Recommended";
-                        break;
-                    default:
-                        category = "Category"; // Add a default value or handle other cases as needed
-                        break;
-                }
-
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("category", category);
-                editor.apply();
-
-                ((MainActivity) getActivity()).replaceFragment(new CategoryDisplayFragment());
-            }
-        };
-
-        for (int i = 0; i < viewAll.length; i++) {
-            view.findViewById(viewAll[i]).setOnClickListener(viewAllClickListener);
-        }
-
-        view.findViewById(R.id.topAll).setOnClickListener(v -> {
-            ((MainActivity) requireActivity()).replaceFragment(new TopchartFragment());
-            ((MainActivity) requireActivity()).setActiveItem(R.id.topchart);
-        });
-
+        String[] reco = {"thriller", "history", "cooking", "novel", "music", "literature", "fantasy", "science", "biography"};
 
 
 
@@ -200,13 +163,46 @@ public class HomeFragment extends Fragment {
         List<Book> re_list = new ArrayList<>();
         List<Book> lr_list = new ArrayList<>();
 
-        //Url that will be used to retrieve the current top books from the NYTimes book api
+
+
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=y6og1zAOyVjSobnuULUpQwC4ivOlVQ0u";
         String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business";
         String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest";
         //&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String recoString = sharedPref.getString("reco", "empty");
+
+        String lastUpdateDate = sharedPref.getString("last_update_date", ""); // Retrieve the last update date
+
+        if (recoString.equals("empty") || isFirstDayOfMonth(lastUpdateDate)) {
+
+
+            // Generate a random index to get a random category from the array
+            int randomIndex = (int) (Math.random() * reco.length);
+            String randomCategory = reco[randomIndex];
+
+            // Ensure the new recoString is different from the current one (if not empty)
+            if (!recoString.equals("empty")) {
+                while (randomCategory.equals(recoString)) {
+                    randomIndex = (int) (Math.random() * reco.length);
+                    randomCategory = reco[randomIndex];
+                }
+            }
+
+            // Save the new recoString and last update date in shared preferences
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("reco", randomCategory);
+            editor.putString("last_update_date", getCurrentDate()); // Store the current date as the last update date
+            editor.apply();
+
+            // Use the new recoString for further processing
+            recoString = randomCategory;
+        }
+
+        url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:" + recoString;
+
+
         String book_data_check = sharedPref.getString("Book" + "0", "empty");
         Log.d("book_data",book_data_check);
         if (!book_data_check.equals("empty")) {
@@ -493,6 +489,43 @@ public class HomeFragment extends Fragment {
             ((MainActivity)getActivity()).replaceFragment(new SearchFragment());
         });
 
+        View.OnClickListener viewAllClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                // Get the ID of the clicked ImageView
+                int viewId = v.getId();
+
+                // Determine the corresponding category based on the viewId
+                String category;
+                switch (viewId) {
+                    case R.id.latestAll:
+                        category = "Latest Releases";
+                        break;
+                    case R.id.recommendedAll:
+                        category = "Recommended";
+                        break;
+                    default:
+                        category = "Category"; // Add a default value or handle other cases as needed
+                        break;
+                }
+
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("category", category);
+                editor.apply();
+
+                ((MainActivity) getActivity()).replaceFragment(new CategoryDisplayFragment());
+            }
+        };
+
+        for (int i = 0; i < viewAll.length; i++) {
+            view.findViewById(viewAll[i]).setOnClickListener(viewAllClickListener);
+        }
+
+        view.findViewById(R.id.topAll).setOnClickListener(v -> {
+            ((MainActivity) requireActivity()).replaceFragment(new TopchartFragment());
+            ((MainActivity) requireActivity()).setActiveItem(R.id.topchart);
+        });
+
         //category click listener
         View.OnClickListener catClickListener = new View.OnClickListener() {
             public void onClick(View v) {
@@ -586,9 +619,17 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private boolean isFirstDayOfMonth(String lastUpdateDate) {
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.format("yyyy-MM-dd", calendar).toString();
 
+        return lastUpdateDate.isEmpty() || !lastUpdateDate.equals(currentDate);
+    }
 
-
+    private String getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        return DateFormat.format("yyyy-MM-dd", calendar).toString();
+    }
 
 
 
