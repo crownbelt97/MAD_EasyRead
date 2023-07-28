@@ -68,7 +68,7 @@ Siu Chi Kit Wesley : <br>
 - Search function <br>
     - Search by author
     - Search by title
-- Loading books in animation <br>
+- Added loading animations for the home page and recycler views <br>
 - Linking of view all pages <br>
 - Modified books recommended to update at the start of the month <br>
 
