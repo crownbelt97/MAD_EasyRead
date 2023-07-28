@@ -250,7 +250,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Popular Now"
+                    android:text="Latest Releases"
                     android:layout_marginTop="20dp"
                     android:textColor="@color/black"
                     android:textSize="25sp"
@@ -271,7 +271,7 @@
 <!--                    app:layout_constraintTop_toBottomOf="@+id/details_Category" />-->
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/latestAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
@@ -521,7 +521,7 @@
 <!--                    app:layout_constraintVertical_bias="0.571" />-->
 
                 <ImageView
-                    android:id="@+id/imageView19"
+                    android:id="@+id/topAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_arrow_forward_ios_24"
@@ -747,7 +747,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
 
                 <ImageView
-                    android:id="@+id/imageView21"
+                    android:id="@+id/recommendedAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/baseline_arrow_forward_ios_24"

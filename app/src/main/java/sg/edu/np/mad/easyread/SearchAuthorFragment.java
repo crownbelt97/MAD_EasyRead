@@ -181,41 +181,4 @@ public class SearchAuthorFragment extends Fragment {
 
     }
 
-//    private void dataInitialize() {
-//
-//
-//
-//        bookArrayList = new ArrayList<>();
-//
-//        bookHeading = new String[]{
-//                getString(R.string.head_1),
-//                getString(R.string.head_2),
-//                getString(R.string.head_3),
-//                getString(R.string.head_4),
-//                getString(R.string.head_5),
-//                getString(R.string.head_6),
-//                getString(R.string.head_7),
-//                getString(R.string.head_8),
-//                getString(R.string.head_9),
-//                getString(R.string.head_10),
-//        };
-//
-//        imageResourceID = new int[] {
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//                R.drawable.baseline_android_24,
-//        };
-//
-//        for(int i = 0; i< bookHeading.length; i++) {
-//            News news = new News(bookHeading[i], imageResourceID[i], "author", "rank");
-//            bookArrayList.add(news);
-//        }
-//    }
 }

@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setActiveItem(int itemId) {
+        binding.bottomNavigationView.setSelectedItemId(itemId);
+    }
+
     public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

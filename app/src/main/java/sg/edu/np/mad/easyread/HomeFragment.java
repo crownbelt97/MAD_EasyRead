@@ -82,7 +82,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         int[] catTextViews = {R.id.category1, R.id.category2, R.id.category3, R.id.category4, R.id.category5, R.id.category6};
+        int[] viewAll = {R.id.latestAll, R.id.recommendedAll};
 
+        //category click listener
         View.OnClickListener catClickListener = new View.OnClickListener() {
             public void onClick(View v) {
                 // Get the text of the clicked TextView
@@ -101,6 +103,45 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < catTextViews.length; i++) {
             view.findViewById(catTextViews[i]).setOnClickListener(catClickListener);
         }
+
+        View.OnClickListener viewAllClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                // Get the ID of the clicked ImageView
+                int viewId = v.getId();
+
+                // Determine the corresponding category based on the viewId
+                String category;
+                switch (viewId) {
+                    case R.id.latestAll:
+                        category = "Latest Releases";
+                        break;
+                    case R.id.recommendedAll:
+                        category = "Recommended";
+                        break;
+                    default:
+                        category = "Category"; // Add a default value or handle other cases as needed
+                        break;
+                }
+
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("category", category);
+                editor.apply();
+
+                ((MainActivity) getActivity()).replaceFragment(new CategoryDisplayFragment());
+            }
+        };
+
+        for (int i = 0; i < viewAll.length; i++) {
+            view.findViewById(viewAll[i]).setOnClickListener(viewAllClickListener);
+        }
+
+        view.findViewById(R.id.topAll).setOnClickListener(v -> {
+            ((MainActivity) requireActivity()).replaceFragment(new TopchartFragment());
+            ((MainActivity) requireActivity()).setActiveItem(R.id.topchart);
+        });
+
+
 
 
         // TOP CHARTS SECTION
