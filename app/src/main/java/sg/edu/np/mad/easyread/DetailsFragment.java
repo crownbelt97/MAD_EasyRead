@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -138,11 +139,16 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String currentUserId = currentUser.getUid();
+        Log.d("currentUserID",currentUserId);
+
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
 
 
-        mAuth = FirebaseAuth.getInstance();
+
         //obtain url from previous fragment
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         String details_link = sharedPref.getString("details_link", "empty");
@@ -616,18 +622,23 @@ public class DetailsFragment extends Fragment {
                         System.out.println(e);
                     }
 
+
+
                     FirebaseApp app = FirebaseApp.getInstance("favourites");
                     secondaryDatabase = FirebaseDatabase.getInstance(app);
                     DatabaseReference myRef = secondaryDatabase.getReference("results");
-                    Query mQueryRef = myRef.child("02").child(ISBN_reference);
+                    Query mQueryRef = myRef.child(currentUserId).child(ISBN_reference);
                     Log.d("ISBN" , ISBN_reference);
                     mQueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            boolean exists = snapshot.exists();
+                            String ISBN = snapshot.child(currentUserId).child(ISBN_reference).getKey();
+                            Log.d("snapshot",snapshot.toString());
+                            Log.d("snapshot_userdata",snapshot.child(currentUserId).toString());
+                            Log.d("ISBN_found",ISBN);
                             ImageView img= view.findViewById(R.id.details_bookmark);
 
-                            if (exists) {
+                            if (Objects.equals(ISBN, ISBN_reference) && snapshot.getValue() != null) {
                                 Log.d("Follow_check", "true");
                                 img.setImageResource(R.drawable.checkedbookmark);
                                 img.setTag("checkedbookmark");
@@ -703,7 +714,7 @@ public class DetailsFragment extends Fragment {
                 img.setImageResource(R.drawable.checkedbookmark);
                 img.setTag("checkedbookmark");
                 Log.d("details_link1",details_link + title.getTag().toString() + bookImg.getTag().toString());
-                writeNewBookmark(title.getTag().toString(), bookImg.getTag().toString(),details_link,"02");
+                writeNewBookmark(title.getTag().toString(), bookImg.getTag().toString(),details_link,currentUserId);
 
                 //IN BOOKMARKS PAGE REMEBER TO PUTSARED PREFERENCES
                 // MAINFRAGMENT -> DETAILSFRAGMENT
@@ -712,7 +723,7 @@ public class DetailsFragment extends Fragment {
             else if (imageName.equals("checkedbookmark"))
             {
                 img.setImageResource(R.drawable.uncheckedbookmark);
-                deleteBookmark("02");
+                deleteBookmark(currentUserId);
                 img.setTag("uncheckedbookmark");
 
             }

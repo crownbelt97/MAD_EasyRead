@@ -1,8 +1,14 @@
 package sg.edu.np.mad.easyread;
 
+
+
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +23,8 @@ import android.view.ViewGroup;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +37,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class SettingsFragment extends Fragment implements SelectListener{
+    FirebaseDatabase database;
+
+    DatabaseReference reference;
+    FirebaseAuth mAuth;
 
     private ArrayList<News> bookArrayList = new ArrayList<>();
 
@@ -79,10 +91,22 @@ public class SettingsFragment extends Fragment implements SelectListener{
         {
             System.out.println(e);
         }
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("users");
+
+        // Get the user ID of the current user
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String currentUserId = currentUser.getUid();
+        Log.d("currentUserID",currentUserId);
+
+
+
         FirebaseApp app = FirebaseApp.getInstance("favourites");
         secondaryDatabase = FirebaseDatabase.getInstance(app);
         DatabaseReference myRef = secondaryDatabase.getReference("results");
-        Query myQueryRef = myRef.child("02");
+        Query myQueryRef = myRef.child(currentUserId);
 
         myQueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -193,6 +217,17 @@ public class SettingsFragment extends Fragment implements SelectListener{
 
     @Override
     public void onItemClicked(int pos) {
-
+        Log.d("position" , "true");
+        int rank = -1;
+        String details_link = favouriteList.get(pos).getDetails_Link();
+        String image_link = favouriteList.get(pos).getBook_Image();
+        System.out.println(details_link);
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("details_link", details_link);
+        editor.putString("image_link", image_link);
+        editor.putInt("rank", rank);
+        editor.apply();
+        ((MainActivity)getActivity()).replaceFragment(new DetailsFragment());
     }
 }

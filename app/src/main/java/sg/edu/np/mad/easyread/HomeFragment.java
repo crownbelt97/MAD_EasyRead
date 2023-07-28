@@ -166,8 +166,8 @@ public class HomeFragment extends Fragment {
 
 
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=y6og1zAOyVjSobnuULUpQwC4ivOlVQ0u";
-        String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business";
-        String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest";
+        String url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:Business&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
+        String url_ggl_lr = "https://www.googleapis.com/books/v1/volumes?q=subject:Fiction&orderBy=newest&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
         //&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -200,7 +200,7 @@ public class HomeFragment extends Fragment {
             recoString = randomCategory;
         }
 
-        url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:" + recoString;
+        url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:" + recoString + "key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
 
 
         String book_data_check = sharedPref.getString("Book" + "0", "empty");
@@ -230,6 +230,90 @@ public class HomeFragment extends Fragment {
             }
             Log.d("url_Change" , "true");
         }
+
+        String book_data_check_newest = sharedPref.getString("Booknewest" + "0", "empty");
+        Log.d("book_data_newest",book_data_check_newest);
+        if (!book_data_check_newest.equals("empty")) {
+            url_ggl_lr = "";
+            for (int i = 0; i < 5; i++) {
+                String book_data = sharedPref.getString("Booknewest" + i, "empty");
+                if (!book_data.equals("empty")) {
+                    String[] input_data = book_data.split("!-!-!");
+                    try {
+                        Log.d("i", String.valueOf(i));
+                        TextView tv = (TextView) view.findViewById(lr_text_views.get(i).getId());
+                        ImageView iv = (ImageView) view.findViewById(lr_image_views.get(i).getId());
+                        input_data[1] = input_data[1].replace("http:", "https:");
+                        tv.setText(input_data[0]);
+                        Log.d("input_data[0]_lr", input_data[0]);
+                        Log.d("input_data[1]_lr", input_data[1]);
+                        Log.d("input_data[2]_lr", input_data[2]);
+                        Picasso.get().load(input_data[1]).fit().into(lr_image_views.get(i));
+                        //Picasso.get().load(input_data[1]).fit().into(iv);
+                        Book book = new Book( input_data[0], input_data[1], input_data[2] );
+                        lr_list.add(book);
+                        //BookDetails bookDetails = new BookDetails(input_data[0], authorArray, link, null, rank, null, 0, null, null, null);
+
+                    } catch (Exception e) {
+                        Log.d("sharedpref_input_fail lr", e.toString());
+                    }
+                }
+            }
+            Log.d("url_Change_lr" , "true");
+        }
+
+        String book_data_check_recommended = sharedPref.getString("Bookrecommended" + "0", "empty");
+        Log.d("book_data_newest",book_data_check_recommended);
+        if (!book_data_check_recommended.equals("empty")) {
+            url_ggl_re = "";
+            for (int i = 0; i < 5; i++) {
+                String book_data = sharedPref.getString("Bookrecommended" + i, "empty");
+                if (!book_data.equals("empty")) {
+                    String[] input_data = book_data.split("!-!-!");
+                    try {
+                        TextView tv = (TextView) view.findViewById(re_text_views.get(i).getId());
+                        ImageView iv = (ImageView) view.findViewById(re_image_views.get(i).getId());
+                        tv.setText(input_data[0]);
+                        input_data[1] = input_data[1].replace("http:", "https:");
+                        Log.d("input_data[0]_re", input_data[0]);
+                        Log.d("input_data[1]_re", input_data[1]);
+                        Log.d("input_data[2]_re", input_data[2]);
+                        Picasso.get().load(input_data[1]).fit().into(iv);
+                        Book book = new Book( input_data[0], input_data[1], input_data[2] );
+                        re_list.add(book);
+                        //BookDetails bookDetails = new BookDetails(input_data[0], authorArray, link, null, rank, null, 0, null, null, null);
+
+                    } catch (Exception e) {
+                        Log.d("sharedpref_input_fail re", e.toString());
+                        Log.d("input_data[0]_re", input_data[0]);
+                        Log.d("input_data[1]_re", input_data[1]);
+                        Log.d("input_data[2]_re", input_data[2]);
+
+                    }
+                }
+            }
+            Log.d("url_Change_re" , "true");
+        }
+
+        if (!book_data_check_recommended.equals("empty") && !book_data_check_newest.equals("empty") && !book_data_check.equals("empty")){
+            hsv1.setVisibility(View.VISIBLE);
+            hsv2.setVisibility(View.VISIBLE);
+            hsv3.setVisibility(View.VISIBLE);
+            hsvTags.setVisibility(View.VISIBLE);
+
+            recommendedShimmer.setVisibility(View.GONE);
+            topShimmer.setVisibility(View.GONE);
+            latestShimmer.setVisibility(View.GONE);
+            tagShimmer.setVisibility(View.GONE);
+
+            recommendedShimmer.stopShimmer();
+            topShimmer.stopShimmer();
+            latestShimmer.stopShimmer();
+            tagShimmer.stopShimmer();
+            Log.d("skip api","true");
+        }
+
+
 
         //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
 
@@ -387,9 +471,21 @@ public class HomeFragment extends Fragment {
                                         Book book = new Book(title, book_image, selfLink);
                                         if (url.toString().contains("orderBy=newest")) {
                                             System.out.println(lr_list);
+                                            SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPref.edit();
+                                            editor.putString("Booknewest" + y,title + "!-!-!" + book_image + "!-!-!" + selfLink);
+                                            Log.d("tag" , "Book" + y);
+                                            editor.apply();
+                                            Log.d("SharedPrefEnterBookLRLIST",title + "!-!-!" + book_image + "!-!-!" + selfLink );
                                             lr_list.add(book);
                                         } else {
                                             System.out.println(re_list);
+                                            SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPref.edit();
+                                            editor.putString("Bookrecommended" + y,title + "!-!-!" + book_image + "!-!-!" + selfLink);
+                                            Log.d("tag" , "Book" + y);
+                                            editor.apply();
+                                            Log.d("SharedPrefEnterBookRELIST",title + "!-!-!" + book_image + "!-!-!" + selfLink );
                                             re_list.add(book);
                                         }
 
@@ -480,8 +576,12 @@ public class HomeFragment extends Fragment {
         if (url.equals("")) {
             Log.d("NYAPI_ran", "false");
         }
-        new MyTask().execute(url_ggl_re, null, null);
-        new MyTask().execute(url_ggl_lr, null, null);
+        if (!book_data_check_recommended.equals("empty") && !book_data_check_newest.equals("empty") && !book_data_check.equals("empty")){
+            Log.d("google_api-ran","true");
+            new MyTask().execute(url_ggl_re, null, null);
+            new MyTask().execute(url_ggl_lr, null, null);
+        }
+
 
 
 
