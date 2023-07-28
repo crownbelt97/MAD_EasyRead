@@ -259,16 +259,16 @@
                     app:layout_constraintTop_toBottomOf="@id/details_Category"
    />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:text="View all"
-                    android:textColor="@color/second_app_theme"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/popularScrollView"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView18"
-                    app:layout_constraintTop_toBottomOf="@+id/details_Category" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="6dp"-->
+<!--                    android:text="View all"-->
+<!--                    android:textColor="@color/second_app_theme"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/popularScrollView"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/imageView18"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/details_Category" />-->
 
                 <ImageView
                     android:id="@+id/imageView18"
@@ -308,7 +308,7 @@
                             <ImageView
                                 android:id="@+id/lr_imageview1"
                                 android:layout_width="150dp"
-                                android:layout_height="250dp"
+                                android:layout_height="230dp"
                                 android:src="@drawable/baseline_android_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintHorizontal_weight="1"
@@ -347,7 +347,7 @@
                             <ImageView
                                 android:id="@+id/lr_imageview2"
                                 android:layout_width="150dp"
-                                android:layout_height="250dp"
+                                android:layout_height="230dp"
                                 android:src="@drawable/baseline_android_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintHorizontal_weight="1"
@@ -384,7 +384,7 @@
                             <ImageView
                                 android:id="@+id/lr_imageview3"
                                 android:layout_width="150dp"
-                                android:layout_height="250dp"
+                                android:layout_height="230dp"
                                 android:src="@drawable/baseline_android_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintHorizontal_weight="1"
@@ -422,7 +422,7 @@
                             <ImageView
                                 android:id="@+id/lr_imageview4"
                                 android:layout_width="150dp"
-                                android:layout_height="250dp"
+                                android:layout_height="230dp"
                                 android:src="@drawable/baseline_android_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintHorizontal_weight="1"
@@ -459,7 +459,7 @@
                             <ImageView
                                 android:id="@+id/lr_imageview5"
                                 android:layout_width="150dp"
-                                android:layout_height="250dp"
+                                android:layout_height="230dp"
                                 android:src="@drawable/baseline_android_24"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintHorizontal_weight="1"
@@ -495,30 +495,30 @@
                     app:layout_constraintTop_toBottomOf="@+id/popularScrollView" />
 
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:text="View all"
-                    android:textColor="@color/second_app_theme"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView19"
-                    app:layout_constraintTop_toBottomOf="@+id/popularScrollView" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView5"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="6dp"-->
+<!--                    android:text="View all"-->
+<!--                    android:textColor="@color/second_app_theme"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView2"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/imageView19"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/popularScrollView" />-->
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:text="View all"
-                    android:textColor="@color/second_app_theme"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView3"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView21"
-                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
-                    app:layout_constraintVertical_bias="0.571" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView6"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="6dp"-->
+<!--                    android:text="View all"-->
+<!--                    android:textColor="@color/second_app_theme"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView3"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/imageView21"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"-->
+<!--                    app:layout_constraintVertical_bias="0.571" />-->
 
                 <ImageView
                     android:id="@+id/imageView19"
