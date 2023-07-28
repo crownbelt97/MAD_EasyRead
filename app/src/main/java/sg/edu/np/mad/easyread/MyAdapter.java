@@ -18,12 +18,14 @@ import sg.edu.np.mad.easyread.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
+    private final SelectListener selectListener;
     Context context;
     ArrayList<News> newsArrayList;
 
-    public MyAdapter(Context context, ArrayList<News> newsArrayList) {
+    public MyAdapter(Context context, ArrayList<News> newsArrayList, SelectListener selectListener) {
         this.context = context;
         this.newsArrayList = newsArrayList;
+        this.selectListener = selectListener;
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
-        return new MyViewHolder(v);
+        return new MyViewHolder(v , selectListener);
     }
 
     @Override
@@ -57,12 +59,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         TextView tvRank;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView , SelectListener  selectListener) {
             super(itemView);
             titleImage = itemView.findViewById(R.id.title_image);
             tvHeading = itemView.findViewById(R.id.tvHeading);
             tvAuthor = itemView.findViewById(R.id.tvAuthor);
             tvRank = itemView.findViewById(R.id.tvRank);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (selectListener != null){
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION){
+                            selectListener.onItemClicked(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }

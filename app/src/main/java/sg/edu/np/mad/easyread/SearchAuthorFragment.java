@@ -154,7 +154,7 @@ public class SearchAuthorFragment extends Fragment {
                     //Set a fixed size for the RecyclerView
                     recyclerView.setHasFixedSize(true);
                     //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
-                    MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList);
+                    MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList , null);
                     //Sets the created MyAdapter as the adapter for the recyclerView
                     recyclerView.setAdapter(myAdapter);
                     //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data

@@ -197,13 +197,43 @@ public class DetailsFragment extends Fragment {
                         // parse json data to obtain neccessary fields
                         for (Map.Entry<String, Object> pair : retMap.entrySet()) {
                             String key = pair.getKey();
+                            JsonObject volumeinfo = null;
+                            String title = "";
+                            JsonArray authors = null;
+                            String [] authors_java_array = null;
+                            authors_count = 0;
+                            String release = "";
+                            String length = "";
+                            String publisher =  "";
+                            String format = "" ;
+                            JsonObject imageLinks = null;
+                            String book_image = "";
+
+
                             JsonObject volumeInfo = jsonObject.getAsJsonObject("volumeInfo");
-                            String title = volumeInfo.get("title").getAsString();
+                            try {
+                                title = volumeInfo.get("title").getAsString();
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL title" , e.toString());
+                            }
 
-                            JsonArray authors = volumeInfo.getAsJsonArray("authors");
-                            String [] authors_java_array = gson.fromJson(authors, String[].class);
-                            authors_count = authors_java_array.length;
+                            try{
+                                authors = volumeInfo.getAsJsonArray("authors");
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL authors" , e.toString());
+                            }
 
+                            try{
+                                authors_java_array = gson.fromJson(authors, String[].class);
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL authors_java_array" , e.toString());
+                            }
+
+                            try{
+                                authors_count = authors_java_array.length;
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL authors_count" , e.toString());
+                            }
 
                             try {
                                 description_input = volumeInfo.get("description").getAsString();
@@ -212,8 +242,6 @@ public class DetailsFragment extends Fragment {
                             {
                                 description_input = "N/A";
                             }
-
-                            String ISBN = "";
 
                             try {
                                 JsonArray industryIdentifiers = volumeInfo.getAsJsonArray("industryIdentifiers");
@@ -224,17 +252,41 @@ public class DetailsFragment extends Fragment {
                                 Log.d("Google_URL ISBN" , e.toString());
                             }
 
-                            String release = volumeInfo.get("publishedDate").getAsString();
+                            try {
+                                release = volumeInfo.get("publishedDate").getAsString();
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL release" , e.toString());
+                            }
 
-                            String length = volumeInfo.get("pageCount").getAsString();
+                            try{
+                                length = volumeInfo.get("pageCount").getAsString();
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL length" , e.toString());
+                            }
 
-                            String publisher = volumeInfo.get("publisher").getAsString();
+                            try {
+                                publisher = volumeInfo.get("publisher").getAsString();
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL publisher" , e.toString());
+                            }
 
-                            String format = volumeInfo.get("printType").getAsString();
+                            try {
+                                format = volumeInfo.get("printType").getAsString();
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL format" , e.toString());
+                            }
 
-                            JsonObject imageLinks = volumeInfo.getAsJsonObject("imageLinks");
+                            try {
+                                imageLinks = volumeInfo.getAsJsonObject("imageLinks");
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL imageLinks" , e.toString());
+                            }
 
-                            String book_image = imageLinks.get("thumbnail").getAsString();
+                            try {
+                                book_image = imageLinks.get("thumbnail").getAsString();
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL book_image" , e.toString());
+                            }
 
                             try {
                                 ratings = volumeInfo.get("averageRating").getAsDouble();
@@ -526,7 +578,11 @@ public class DetailsFragment extends Fragment {
 
 
 
-                            sharedPref.edit().clear().apply();
+
+                            sharedPref.edit().remove("details_link").apply();
+                            sharedPref.edit().remove("description_url").apply();
+                            sharedPref.edit().remove("image_link").apply();
+                            sharedPref.edit().remove("description").apply();
 
                             System.out.println(sharedPref.getString("details_link", "empty"));
 
