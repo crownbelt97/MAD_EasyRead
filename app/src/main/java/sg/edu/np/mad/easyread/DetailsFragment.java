@@ -349,6 +349,7 @@ public class DetailsFragment extends Fragment {
 
                         try{
                             volumeInfo = jsonObject.getAsJsonObject("ISBN:" + details_link);
+                            ISBN_reference = details_link;
                         }catch (Exception e){
                             Log.d("detailsURl volumeinfo", e.toString());
                         }
@@ -676,7 +677,9 @@ public class DetailsFragment extends Fragment {
                             Log.d("snapshot",snapshot.toString());
                             Log.d("snapshot_userdata",snapshot.child(currentUserId).toString());
                             Log.d("ISBN_found",ISBN);
+                            Log.d("ISBNReference",ISBN_reference);
                             ImageView img= view.findViewById(R.id.details_bookmark);
+
 
                             if (Objects.equals(ISBN, ISBN_reference) && snapshot.getValue() != null) {
                                 Log.d("Follow_check", "true");
