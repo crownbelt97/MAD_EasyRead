@@ -66,6 +66,8 @@ public class HomeFragment extends Fragment {
     ShimmerFrameLayout recommendedShimmer;
     ShimmerFrameLayout tagShimmer;
 
+    private static boolean runningTask = false;
+
     public HomeFragment()
     {
 
@@ -85,6 +87,8 @@ public class HomeFragment extends Fragment {
         if (actionBar != null) {
             actionBar.hide();
         }
+
+
 
         // Layout inflater that instantiates a layout XML file into its corresponding View objects
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -401,6 +405,7 @@ public class HomeFragment extends Fragment {
 
         class MyTask extends AsyncTask<String, Void, String> {
 
+
             protected String doInBackground(String... urls) {
                 String message = "";
                 String Response_content = "";
@@ -561,8 +566,16 @@ public class HomeFragment extends Fragment {
 
 
             }
+            @Override
             protected void onPostExecute(String result) {
+                runningTask = false;
                 Log.d("json",result);
+            }
+
+            @Override
+            protected void onCancelled() {
+                // Optional: You can do something if the task is cancelled
+                runningTask = false; // Set runningTask to false if the task is cancelled
             }
         }
 
@@ -581,6 +594,12 @@ public class HomeFragment extends Fragment {
             new MyTask().execute(url_ggl_re, null, null);
             new MyTask().execute(url_ggl_lr, null, null);
         }
+        else if (!runningTask) {
+            runningTask = true;
+            new MyTask().execute(url_ggl_re, null, null);
+            new MyTask().execute(url_ggl_lr, null, null);
+        }
+
 
 
 
