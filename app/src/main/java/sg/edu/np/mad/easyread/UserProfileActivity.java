@@ -3,7 +3,10 @@ package sg.edu.np.mad.easyread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -11,34 +14,54 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class UserProfileActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class UserProfileActivity extends AppCompatActivity implements SelectListener{
 
     Button followBtn;
     FirebaseDatabase database;
+    FirebaseDatabase secondaryDatabase = null;
+    MyAdapter myAdapter = null;
     DatabaseReference reference;
     FirebaseAuth mAuth;
-
     TextView profileUsernameTextView;
     TextView profileFollowingTextView;
     TextView profileFollowersTextView;
+    ShimmerFrameLayout shimmerFrameLayout;
+    private RecyclerView recyclerView;
+    private ArrayList<News> bookArrayList = new ArrayList<>();
 
     private DatabaseReference followersReference;
     private DatabaseReference followingReference;
     private DatabaseReference notificationReference;
+
+
+    Context mContext = this;
+
+    Context nContext = getBaseContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +70,37 @@ public class UserProfileActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_user_profile);
+        shimmerFrameLayout=findViewById(R.id.recyclerShimmer);
+
+        ArrayList<Book> favouriteList = new ArrayList<>();
+
 
         followBtn = findViewById(R.id.FollowProfileBtn);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users");
 
+
+
+
+        try {
+            Context mContext = this;
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setProjectId("mad-stuff-7f4ce")
+                    .setApiKey("AIzaSyBbTx3tyIOCOinpF3Fqq09CZWOg2GGkohE")
+                    .setApplicationId("1:446547976657:android:29448a2c63ea08769000f0")
+                    .setDatabaseUrl("https://mad-stuff-7f4ce-default-rtdb.asia-southeast1.firebasedatabase.app")
+                    .build();
+            FirebaseApp.initializeApp(mContext, options, "favourites");
+            Log.d("iterations", "true");
+        } catch (Exception e)
+        {
+            System.out.println(e);
+        }
         // Get the user ID of the current user
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String currentUserId = currentUser.getUid();
+        Log.d("currentUserID",currentUserId);
 
 
 
@@ -68,7 +113,66 @@ public class UserProfileActivity extends AppCompatActivity {
         String targetUsername = intent.getStringExtra("username");
         DatabaseReference userProfileReference = reference.child(targetUserId);
 
+        FirebaseApp app = FirebaseApp.getInstance("favourites");
+        secondaryDatabase = FirebaseDatabase.getInstance(app);
+        DatabaseReference myRef = secondaryDatabase.getReference("results");
+        Query myQueryRef = myRef.child(targetUserId);
+
         notificationReference = reference.child(targetUserId).child("notification_setting");
+        myQueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                // TODO add if statment to check identity
+                Log.d("database access", "true");
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    Log.d("ISBN_Number", userSnapshot.getValue().toString());
+                    String image = userSnapshot.child("book_Image").getValue().toString();
+                    String details_link = Objects.requireNonNull(userSnapshot.child("details_Link").getValue()).toString();
+                    String title = Objects.requireNonNull(userSnapshot.child("title").getValue()).toString();
+                    Log.d("data_bookimage", image);
+                    Log.d("data_details_link", details_link);
+                    Log.d("data_title", title);
+                    //BookDetails bookDetails = new BookDetails(title, null, image, null, 0, null, 0, null, null, null);
+                    Book book = new Book(title, image, details_link);
+                    Log.d("book", book.getBook_Image());
+                    favouriteList.add(book);
+                }
+                for (int i = 0; i < favouriteList.size(); i++) {
+
+                    //String authorDisplay = "By " + favourites_Detailed_List.get(i).getAuthor(0);
+                    News news = new News(favouriteList.get(i).getTitle(), favouriteList.get(i).getBook_Image(),null, null);
+                    Log.d("i" , news.toString());
+                    bookArrayList.add(news);
+                }
+                Log.d("bookArrayList",bookArrayList.toString());
+                myAdapter = new MyAdapter(  UserProfileActivity.this, bookArrayList , null);
+                //Assigns the RecyclerView widget to the recyclerView variable
+                recyclerView = findViewById(R.id.recyclerviewFavourites);
+                //Creates a new instance of LinearLayoutManager and assigns it as the layout manager for the recyclerView
+                recyclerView.setLayoutManager(new LinearLayoutManager(UserProfileActivity.this));
+                //Set a fixed size for the RecyclerView
+                recyclerView.setHasFixedSize(true);
+                //Sets the created MyAdapter as the adapter for the recyclerView
+                recyclerView.setAdapter(myAdapter);
+                //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data
+                myAdapter.notifyDataSetChanged();
+
+
+                Log.d("view","true");
+                shimmerFrameLayout.stopShimmer();
+                recyclerView.setVisibility(View.VISIBLE);
+                shimmerFrameLayout.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         notificationReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -306,4 +410,14 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onViewCreated(@NonNull View view, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+    }
+
+    @Override
+    public void onItemClicked(int pos) {
+
+    }
 }

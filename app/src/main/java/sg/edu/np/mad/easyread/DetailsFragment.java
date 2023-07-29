@@ -231,6 +231,8 @@ public class DetailsFragment extends Fragment {
                             String format = "" ;
                             JsonObject imageLinks = null;
                             String book_image = "";
+                            JsonArray categories= null;
+
 
 
                             JsonObject volumeInfo = jsonObject.getAsJsonObject("volumeInfo");

@@ -63,7 +63,7 @@ public class SettingsFragment extends Fragment implements SelectListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-       Log.d("onCreateView","true");
+       Log.d("onCreateView",bookArrayList.toString());
        //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
        myAdapter = new MyAdapter(getContext(), bookArrayList , this);
         // Inflate the layout for this fragment
@@ -157,57 +157,7 @@ public class SettingsFragment extends Fragment implements SelectListener{
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        }); /*{
-            @Override
-            public void onData(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                for (DataSnapshot userSnapshot: snapshot.getChildren()) {
-                    Log.d("ISBN_Number",userSnapshot.getValue().toString());
-                    String image = userSnapshot.child("book_Image").getValue().toString();
-                    String details_link = Objects.requireNonNull(userSnapshot.child("details_Link").getValue()).toString();
-                    String title = Objects.requireNonNull(userSnapshot.child("title").getValue()).toString();
-                    Log.d("data_bookimage", image);
-                    Log.d("data_details_link", details_link);
-                    Log.d("data_title", title);
-                    BookDetails bookDetails = new BookDetails(title, null, image, null, 0, null, 0, null, null, null);
-                    favourites_Detailed_List.add(bookDetails);
-                    for (int i = 0; i < favourites_Detailed_List.size(); i++) {
-
-                        //String authorDisplay = "By " + favourites_Detailed_List.get(i).getAuthor(0);
-                        News news = new News(favourites_Detailed_List.get(i).getTitle(), favourites_Detailed_List.get(i).getBook_Image(),null, null);
-                        Log.d("i" , String.valueOf(i));
-                        bookArrayList.add(news);
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {}
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot userSnapshot: snapshot.getChildren()) {
-                    String image = Objects.requireNonNull(userSnapshot.child("book_Image").getValue()).toString();
-                    String details_link = Objects.requireNonNull(userSnapshot.child("details_Link").getValue()).toString();
-                    String title = Objects.requireNonNull(userSnapshot.child("title").getValue()).toString();
-                    Log.d("data_bookimage" , image);
-                    Log.d("data_details_link" , details_link);
-                    Log.d("data_title" , title);
-                }
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {}
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
-
+        });
     }
 
     @Override

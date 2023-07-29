@@ -1,17 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserProfileActivity">
+    tools:context="sg.edu.np.mad.easyread.UserProfileActivity">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F2F1F7"
-        tools:context="sg.edu.np.mad.easyread.ProfileFragment">
+        android:background="#F2F1F7">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/recyclerShimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginTop="500dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                    <include layout="@layout/list_item_shimmer"></include>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewFavourites"
+            android:layout_width="413dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="500dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout5"
+            tools:listitem="@layout/list_item" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewFavouritesfiller"
+            android:layout_width="413dp"
+            android:layout_height="100dp"
+            android:paddingBottom="100dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout5"
+            tools:listitem="@layout/list_item" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -189,7 +261,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="25dp"
-                android:text="Favourites"
+                android:text="Bookmarks"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -214,4 +286,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

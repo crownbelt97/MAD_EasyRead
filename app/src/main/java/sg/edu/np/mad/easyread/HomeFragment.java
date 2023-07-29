@@ -204,13 +204,12 @@ public class HomeFragment extends Fragment {
             recoString = randomCategory;
         }
 
-        url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:" + recoString + "key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
+        url_ggl_re = "https://www.googleapis.com/books/v1/volumes?q=subject:" + recoString + "&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s";
 
 
         String book_data_check = sharedPref.getString("Book" + "0", "empty");
         Log.d("book_data",book_data_check);
         if (!book_data_check.equals("empty")) {
-            url = "";
             for (int i = 0; i < 5; i++) {
                 String book_data = sharedPref.getString("Book" + i, "empty");
                 if (!book_data.equals("empty")) {
@@ -238,7 +237,6 @@ public class HomeFragment extends Fragment {
         String book_data_check_newest = sharedPref.getString("Booknewest" + "0", "empty");
         Log.d("book_data_newest",book_data_check_newest);
         if (!book_data_check_newest.equals("empty")) {
-            url_ggl_lr = "";
             for (int i = 0; i < 5; i++) {
                 String book_data = sharedPref.getString("Booknewest" + i, "empty");
                 if (!book_data.equals("empty")) {
@@ -267,9 +265,8 @@ public class HomeFragment extends Fragment {
         }
 
         String book_data_check_recommended = sharedPref.getString("Bookrecommended" + "0", "empty");
-        Log.d("book_data_newest",book_data_check_recommended);
+        Log.d("book_data_recommended",book_data_check_recommended);
         if (!book_data_check_recommended.equals("empty")) {
-            url_ggl_re = "";
             for (int i = 0; i < 5; i++) {
                 String book_data = sharedPref.getString("Bookrecommended" + i, "empty");
                 if (!book_data.equals("empty")) {
@@ -474,6 +471,7 @@ public class HomeFragment extends Fragment {
                                         // use data to add to book class
                                         // book class used for objects to be displayed
                                         Book book = new Book(title, book_image, selfLink);
+                                        Log.d("url",url.toString());
                                         if (url.toString().contains("orderBy=newest")) {
                                             System.out.println(lr_list);
                                             SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
@@ -484,11 +482,11 @@ public class HomeFragment extends Fragment {
                                             Log.d("SharedPrefEnterBookLRLIST",title + "!-!-!" + book_image + "!-!-!" + selfLink );
                                             lr_list.add(book);
                                         } else {
-                                            System.out.println(re_list);
+                                            Log.d("re_list",re_list.toString());
                                             SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPref.edit();
                                             editor.putString("Bookrecommended" + y,title + "!-!-!" + book_image + "!-!-!" + selfLink);
-                                            Log.d("tag" , "Book" + y);
+                                            Log.d("tagre" , "Book" + y);
                                             editor.apply();
                                             Log.d("SharedPrefEnterBookRELIST",title + "!-!-!" + book_image + "!-!-!" + selfLink );
                                             re_list.add(book);
@@ -521,23 +519,6 @@ public class HomeFragment extends Fragment {
 
                                 }
 
-
-                                hsv1.setVisibility(View.VISIBLE);
-                                hsv2.setVisibility(View.VISIBLE);
-                                hsv3.setVisibility(View.VISIBLE);
-                                hsvTags.setVisibility(View.VISIBLE);
-
-                                recommendedShimmer.setVisibility(View.GONE);
-                                topShimmer.setVisibility(View.GONE);
-                                latestShimmer.setVisibility(View.GONE);
-                                tagShimmer.setVisibility(View.GONE);
-
-                                recommendedShimmer.stopShimmer();
-                                topShimmer.stopShimmer();
-                                latestShimmer.stopShimmer();
-                                tagShimmer.stopShimmer();
-
-
                             }
                             else {
                                 for (int x = 0; x < 5; x++) {
@@ -550,6 +531,20 @@ public class HomeFragment extends Fragment {
 
                                 }
                             }
+                            hsv1.setVisibility(View.VISIBLE);
+                            hsv2.setVisibility(View.VISIBLE);
+                            hsv3.setVisibility(View.VISIBLE);
+                            hsvTags.setVisibility(View.VISIBLE);
+
+                            recommendedShimmer.setVisibility(View.GONE);
+                            topShimmer.setVisibility(View.GONE);
+                            latestShimmer.setVisibility(View.GONE);
+                            tagShimmer.setVisibility(View.GONE);
+
+                            recommendedShimmer.stopShimmer();
+                            topShimmer.stopShimmer();
+                            latestShimmer.stopShimmer();
+                            tagShimmer.stopShimmer();
 
                         });
 
@@ -589,8 +584,9 @@ public class HomeFragment extends Fragment {
         if (url.equals("")) {
             Log.d("NYAPI_ran", "false");
         }
-        if (!book_data_check_recommended.equals("empty") && !book_data_check_newest.equals("empty") && !book_data_check.equals("empty")){
-            Log.d("google_api-ran","true");
+        if (book_data_check_recommended.equals("empty") || book_data_check_newest.equals("empty") || sharedPref.getString("Book" + "0", "empty").equals("empty")){
+            Log.d("google_api-ran",book_data_check + book_data_check_newest + book_data_check_recommended);
+
             new MyTask().execute(url_ggl_re, null, null);
             new MyTask().execute(url_ggl_lr, null, null);
         }
