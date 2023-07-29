@@ -594,11 +594,6 @@ public class HomeFragment extends Fragment {
             new MyTask().execute(url_ggl_re, null, null);
             new MyTask().execute(url_ggl_lr, null, null);
         }
-        else if (!runningTask) {
-            runningTask = true;
-            new MyTask().execute(url_ggl_re, null, null);
-            new MyTask().execute(url_ggl_lr, null, null);
-        }
 
 
 
