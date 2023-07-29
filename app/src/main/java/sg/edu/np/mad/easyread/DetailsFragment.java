@@ -232,6 +232,7 @@ public class DetailsFragment extends Fragment {
                             JsonObject imageLinks = null;
                             String book_image = "";
                             JsonArray categories= null;
+                            String category_input = "";
 
 
 
@@ -244,6 +245,18 @@ public class DetailsFragment extends Fragment {
 
                             try{
                                 authors = volumeInfo.getAsJsonArray("authors");
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL authors" , e.toString());
+                            }
+
+                            try{
+                                categories = volumeInfo.getAsJsonArray("categories");
+                            }catch (Exception e){
+                                Log.d("GOOGLEAPIS_URL authors" , e.toString());
+                            }
+
+                            try{
+                                category_input = categories.get(0).getAsString();
                             }catch (Exception e){
                                 Log.d("GOOGLEAPIS_URL authors" , e.toString());
                             }

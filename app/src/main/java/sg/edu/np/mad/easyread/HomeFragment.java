@@ -234,6 +234,7 @@ public class HomeFragment extends Fragment {
             Log.d("url_Change" , "true");
         }
 
+
         String book_data_check_newest = sharedPref.getString("Booknewest" + "0", "empty");
         Log.d("book_data_newest",book_data_check_newest);
         if (!book_data_check_newest.equals("empty")) {
@@ -350,8 +351,14 @@ public class HomeFragment extends Fragment {
                         String authors = o.getString("author");
                         String[] authorArray = {authors};
 
-                        //Getting the rank of the book but changing the type to double to match the class
-                        double rank = o.getInt("rank");
+
+                        //Getting the rank of the book
+                        String rank = o.getString("rank");
+
+                        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+
+
 
                         //Setting the images and titles of the books to the respective textviews and imageviews
                         //if the count is under 5, as there are 5 books in the main page.
@@ -367,8 +374,6 @@ public class HomeFragment extends Fragment {
                         Book book = new Book( title, link, isbn );
                         //BookDetails bookDetails = new BookDetails(title, authorArray, link, null, rank, null, 0, null, null, null);
                         tc_List.add(book);
-                        SharedPreferences sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("Book" + i,title + "!-!-!" + link + "!-!-!" + isbn);
                         Log.d("tag" , "Book" + i);
                         editor.apply();

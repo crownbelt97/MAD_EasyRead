@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -168,11 +169,25 @@ public class SettingsFragment extends Fragment implements SelectListener{
     @Override
     public void onItemClicked(int pos) {
         Log.d("position" , "true");
-        int rank = -1;
+        int rank = 0;
         String details_link = favouriteList.get(pos).getDetails_Link();
         String image_link = favouriteList.get(pos).getBook_Image();
+        String title = favouriteList.get(pos).getTitle();
         System.out.println(details_link);
+        Log.d("details_link",details_link);
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        if (!details_link.contains("https")){
+            for ( int i = 0; i < 15; i ++){
+                String book_data = sharedPref.getString("Book" + i, "empty");
+                String[] input_data = book_data.split("!-!-!");
+                Log.d("inputdata[2]",input_data[2]);
+                if (input_data[2].toLowerCase().contains(details_link.toLowerCase())){
+                    rank = i + 1;
+                    Log.d("rnk_change","true");
+
+                }
+            }
+        }
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("details_link", details_link);
         editor.putString("image_link", image_link);
