@@ -21,6 +21,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/details_bookmark"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/uncheckedbookmark"
+            android:tag="uncheckedbookmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
@@ -32,15 +45,19 @@
             app:layout_constraintStart_toEndOf="@+id/imageView17"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
         <ScrollView
             android:id="@+id/verticalScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:layout_marginTop="20dp"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView7"
             tools:layout_editor_absoluteY="78dp">
 
             <LinearLayout
@@ -70,7 +87,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
-                        android:text="Book Name"
+                        android:maxWidth="200dp"
+                        android:maxLines="4"
+                        android:ellipsize="end"
+                        android:text="Title"
                         android:textColor="@color/black"
                         android:textSize="23sp"
                         android:textStyle="bold"
@@ -89,19 +109,7 @@
                         app:layout_constraintStart_toEndOf="@+id/details_Cover"
                         app:layout_constraintTop_toBottomOf="@+id/details_Title" />
 
-                    <ImageView
-                        android:id="@+id/details_bookmark"
-                        android:layout_width="56dp"
-                        android:layout_height="64dp"
-                        android:layout_marginStart="308dp"
-                        android:layout_weight="1"
-                        android:scaleType="fitXY"
-                        android:src = "@drawable/uncheckedbookmark"
-                        android:tag = "uncheckedbookmark"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.913" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
