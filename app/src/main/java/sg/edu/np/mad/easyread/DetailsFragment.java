@@ -15,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,6 +64,8 @@ public class DetailsFragment extends Fragment {
     FirebaseDatabase secondaryDatabase = null;
 
     String ISBN_reference = "";
+
+    ShimmerFrameLayout shimmerContent;
 
 
     public DetailsFragment() {
@@ -145,7 +150,16 @@ public class DetailsFragment extends Fragment {
         Log.d("currentUserID",currentUserId);
 
 
+
         View view = inflater.inflate(R.layout.fragment_details, container, false);
+
+        shimmerContent = view.findViewById(R.id.shimmer);
+
+
+        ScrollView sv = view.findViewById(R.id.verticalScrollView);
+
+
+        shimmerContent.startShimmer();
 
 
 
@@ -507,6 +521,8 @@ public class DetailsFragment extends Fragment {
 
                     if (book != null && !url.toString().contains("jscmd=details"))
                     {
+
+
                         getActivity().runOnUiThread(() -> {
 
                             // Stuff that updates the UI
@@ -574,6 +590,8 @@ public class DetailsFragment extends Fragment {
                             }
 
 
+
+
                             TextView format = view.findViewById(R.id.details_Format_Data);
                             format.setText(finalBook.getFormat());
 
@@ -601,7 +619,14 @@ public class DetailsFragment extends Fragment {
 
                             System.out.println(sharedPref.getString("details_link", "empty"));
 
+                            sv.setVisibility(View.VISIBLE);
 
+                            shimmerContent.setVisibility(View.GONE);
+
+
+                            shimmerContent.stopShimmer();
+
+                            Log.d("skip api","true");
 
 
                         });

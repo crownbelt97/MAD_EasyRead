@@ -11,73 +11,17 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
-        <ImageView
-            android:id="@+id/imageView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/baseline_arrow_back_ios_new_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/details_bookmark"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/uncheckedbookmark"
-            android:tag="uncheckedbookmark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Book Name"
-            android:textSize="25sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView17"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/shimmer"
-            android:layout_marginTop="75dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView7">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/details_shimmer">
-
-                </include>
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <ScrollView
-            android:id="@+id/verticalScrollView"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="20dp"
-            android:visibility="invisible"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView7"
-            tools:layout_editor_absoluteY="78dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,44 +34,47 @@
                     android:background="@drawable/outline_topbottom">
 
                     <ImageView
-                        android:id="@+id/details_Cover"
+                        android:id="@+id/details_Cover2"
                         android:layout_width="126dp"
                         android:layout_height="170dp"
                         android:layout_marginLeft="30dp"
                         android:layout_weight="1"
                         android:scaleType="fitXY"
+                        android:background="@color/shimmer_color"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/avatars" />
+                 />
 
                     <TextView
-                        android:id="@+id/details_Title"
+                        android:id="@+id/details_Title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
+                        android:ellipsize="end"
                         android:maxWidth="200dp"
                         android:maxLines="4"
-                        android:ellipsize="end"
-                        android:text="Title"
-                        android:textColor="@color/black"
+                        android:text="Titleffffff"
+
+                        android:background="@color/shimmer_color"
+                        android:textColor="@color/shimmer_color"
                         android:textSize="23sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/details_Cover"
-                        app:layout_constraintTop_toTopOf="@+id/details_Cover" />
+                        app:layout_constraintStart_toEndOf="@+id/details_Cover2"
+                        app:layout_constraintTop_toTopOf="@+id/details_Cover2" />
 
                     <TextView
-                        android:id="@+id/details_Author"
+                        android:id="@+id/details_Author2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="5dp"
                         android:text="By Book Author"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
-                        app:layout_constraintStart_toEndOf="@+id/details_Cover"
-                        app:layout_constraintTop_toBottomOf="@+id/details_Title" />
-
+                        app:layout_constraintStart_toEndOf="@+id/details_Cover2"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Title2" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -139,120 +86,135 @@
 
 
                     <TextView
-                        android:id="@+id/details_Ratings"
+                        android:id="@+id/details_Ratings2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="30dp"
                         android:text="Ratings"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/details_Length"
+                        android:id="@+id/details_Length2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="15dp"
                         android:text="Length"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/details_Ratings" />
+                        app:layout_constraintTop_toBottomOf="@id/details_Ratings2" />
 
                     <TextView
-                        android:id="@+id/details_Format"
+                        android:id="@+id/details_Format2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="15dp"
                         android:text="Format"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/details_Length" />
+                        app:layout_constraintTop_toBottomOf="@id/details_Length2" />
 
                     <TextView
-                        android:id="@+id/details_Publisher"
+                        android:id="@+id/details_Publisher2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="15dp"
                         android:text="Publisher"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/details_Format" />
+                        app:layout_constraintTop_toBottomOf="@id/details_Format2" />
 
                     <TextView
-                        android:id="@+id/details_Released"
+                        android:id="@+id/details_Released2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="15dp"
                         android:text="Released"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/details_Publisher" />
+                        app:layout_constraintTop_toBottomOf="@id/details_Publisher2" />
 
                     <TextView
-                        android:id="@+id/details_Rating_Data"
+                        android:id="@+id/details_Rating_Data2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="50dp"
                         android:layout_marginTop="30dp"
                         android:text="3.5/5"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
-                        app:layout_constraintStart_toEndOf="@+id/details_Ratings"
+                        app:layout_constraintStart_toEndOf="@+id/details_Ratings2"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/details_Length_Data"
+                        android:id="@+id/details_Length_Data2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="1000 Pages"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
-                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
-                        app:layout_constraintTop_toBottomOf="@+id/details_Rating_Data" />
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data2"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Rating_Data2" />
 
                     <TextView
-                        android:id="@+id/details_Format_Data"
+                        android:id="@+id/details_Format_Data2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Book"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
-                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
-                        app:layout_constraintTop_toBottomOf="@+id/details_Length_Data" />
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data2"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Length_Data2" />
 
                     <TextView
-                        android:id="@+id/details_Publisher_Data"
+                        android:id="@+id/details_Publisher_Data2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Book Publisher"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
-                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
-                        app:layout_constraintTop_toBottomOf="@+id/details_Format_Data" />
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data2"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Format_Data2" />
 
                     <TextView
-                        android:id="@+id/details_Released_Data"
+                        android:id="@+id/details_Released_Data2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="13 October 2020"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
-                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data"
-                        app:layout_constraintTop_toBottomOf="@+id/details_Publisher_Data" />
+                        app:layout_constraintStart_toStartOf="@+id/details_Rating_Data2"
+                        app:layout_constraintTop_toBottomOf="@+id/details_Publisher_Data2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -263,12 +225,13 @@
 
 
                     <TextView
-                        android:id="@+id/details_Category"
+                        android:id="@+id/details_Category2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/category_btn"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:padding="9dp"
                         android:text="Hardcover Fiction"
                         app:layout_constraintStart_toStartOf="parent"
@@ -283,30 +246,34 @@
 
 
                     <TextView
-                        android:id="@+id/details_Description"
+                        android:id="@+id/details_Description2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="20dp"
                         android:text="Description"
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/details_Description_Data"
+                        android:id="@+id/details_Description_Data2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
+                        android:layout_marginLeft="60dp"
+
                         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                        android:textColor="@color/black"
+                        android:textColor="@color/shimmer_color"
+                        android:background="@color/shimmer_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/details_Description" />
+                        app:layout_constraintTop_toBottomOf="@id/details_Description2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ScrollView
