@@ -11,26 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/baseline_arrow_back_ios_new_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/recyclerShimmer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:layout_marginTop="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView17">
+            tools:layout_editor_absoluteY="70dp">
 
             <ScrollView
                 android:layout_width="wrap_content"
@@ -71,25 +60,22 @@
             android:id="@+id/recyclerviewFavourites"
             android:layout_width="413dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:paddingBottom="100dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView17"
             tools:listitem="@layout/list_item" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="19dp"
             android:text="Bookmarks"
             android:textSize="25dp"
-            app:layout_constraintStart_toEndOf="@+id/imageView17"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="54dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

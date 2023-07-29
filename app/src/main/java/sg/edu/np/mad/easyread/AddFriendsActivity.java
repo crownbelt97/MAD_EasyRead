@@ -2,6 +2,7 @@ package sg.edu.np.mad.easyread;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -93,6 +95,14 @@ public class AddFriendsActivity extends AppCompatActivity {
 
 
         // Set item click listener for the ListView
+
+        ImageView back = findViewById(R.id.imageView17);
+
+        back.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        });
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             String selectedUsername = displayedUsernames.get(position);
             User selectedUser = usersList.stream()

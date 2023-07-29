@@ -1,6 +1,8 @@
 package sg.edu.np.mad.easyread;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchAuthorFragment extends Fragment {
+public class SearchAuthorFragment extends Fragment implements SelectListener{
 
     private ArrayList<News> bookArrayList;
     private String[] bookHeading;
@@ -35,6 +37,8 @@ public class SearchAuthorFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private ArrayList<BookDetails> tc_Detailed_List;
+
+    private ArrayList<Book> book_List = new ArrayList<>();
 
 
     public SearchAuthorFragment() {
@@ -88,6 +92,9 @@ public class SearchAuthorFragment extends Fragment {
         String url = "https://www.googleapis.com/books/v1/volumes?q=inauthor:" + query;
         Log.d("url", url);
 
+        //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
+        MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList , this);
+
         //JsonObjectRequest is a part of the Volley library and is used to send a network request with a JSON payload and receive a JSON response from a server
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
@@ -112,7 +119,7 @@ public class SearchAuthorFragment extends Fragment {
                             img = img.replace("http://","https://");
 
                             //Accessing and getting the isbn13 of the book
-                            String id = o.getString("id");
+                            String selfLink = o.getString("selfLink");
 
                             //Getting the authors from the book but storing it in an array to match
                             // the class asNYTimes api stores the authors in a single string.
@@ -130,6 +137,8 @@ public class SearchAuthorFragment extends Fragment {
 
                             //Creating BookDetails objects to put into ArrayList tc_Detailed_List that will be used later on to create 'News' objects for the recyclerview
                             BookDetails bookDetails = new BookDetails(title, stringArray, img, null, 0, null, 0, null, null, null);
+                            Book book = new Book(title,img,selfLink);
+                            book_List.add(book);
                             tc_Detailed_List.add(bookDetails);
                         } catch (Exception e2)
                         {
@@ -140,11 +149,13 @@ public class SearchAuthorFragment extends Fragment {
 
                     //For loop to iterate through the tc_Detailed_List of BookDetails objects to create 'News' objects
                     //which will be added to the bookArrayList which will be used to display into the recyclerview
-                    for (int i = 0; i < tc_Detailed_List.size(); i++) {
+                    if (tc_Detailed_List.size() <= 10) {
+                        for (int i = 0; i < tc_Detailed_List.size(); i++) {
 
-                        String authorDisplay = "By " + tc_Detailed_List.get(i).getAuthor(0);
-                        News news = new News(tc_Detailed_List.get(i).getTitle(), tc_Detailed_List.get(i).getBook_Image(), authorDisplay, null);
-                        bookArrayList.add(news);
+                            String authorDisplay = "By " + tc_Detailed_List.get(i).getAuthor(0);
+                            News news = new News(tc_Detailed_List.get(i).getTitle(), tc_Detailed_List.get(i).getBook_Image(), authorDisplay, null);
+                            bookArrayList.add(news);
+                        }
                     }
 
                     //Assigns the RecyclerView widget to the recyclerView variable
@@ -153,8 +164,6 @@ public class SearchAuthorFragment extends Fragment {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     //Set a fixed size for the RecyclerView
                     recyclerView.setHasFixedSize(true);
-                    //The adapter is responsible for binding the data to the RecyclerView and creating the necessary views for each item
-                    MyAdapter myAdapter = new MyAdapter(getContext(), bookArrayList , null);
                     //Sets the created MyAdapter as the adapter for the recyclerView
                     recyclerView.setAdapter(myAdapter);
                     //Notifies the adapter that the underlying data has changed, triggering a refresh of the RecyclerView to reflect any updates made to the data
@@ -181,4 +190,39 @@ public class SearchAuthorFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onItemClicked(int pos) {
+
+        Log.d("position" , "true");
+        int rank = 0;
+        String details_link = book_List.get(pos).getDetails_Link();
+        String image_link = book_List.get(pos).getBook_Image();
+        String title = book_List.get(pos).getTitle();
+        System.out.println(details_link);
+        Log.d("details_link",details_link);
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        if (!details_link.contains("https")){
+            for ( int i = 0; i < 15; i ++){
+                String book_data = sharedPref.getString("Book" + i, "empty");
+                String[] input_data = book_data.split("!-!-!");
+                Log.d("inputdata[2]",input_data[2]);
+                if (input_data[2].toLowerCase().contains(details_link.toLowerCase())){
+                    rank = i + 1;
+                    Log.d("rnk_change","true");
+
+                }
+            }
+        }
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("details_link", details_link);
+        editor.putString("image_link", image_link);
+        editor.putInt("rank", rank);
+        editor.apply();
+        ((MainActivity)getActivity()).replaceFragment(new DetailsFragment());
+    }
 }

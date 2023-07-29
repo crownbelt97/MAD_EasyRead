@@ -749,7 +749,9 @@ public class DetailsFragment extends Fragment {
             new MyTask().execute(details_link, null, null);
         }
 
-
+        view.findViewById(R.id.imageView17).setOnClickListener(v -> {
+            ((MainActivity)getActivity()).replaceFragment(new HomeFragment());
+        });
 
         view.findViewById(R.id.details_bookmark).setOnClickListener(v -> {
             ImageView img= view.findViewById(R.id.details_bookmark);

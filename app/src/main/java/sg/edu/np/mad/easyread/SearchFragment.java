@@ -40,6 +40,8 @@ public class SearchFragment extends Fragment implements SelectListener{
 
     private ArrayList<Book> book_List = new ArrayList<>();
 
+
+
     private int size = 0;
 
 
@@ -157,11 +159,13 @@ public class SearchFragment extends Fragment implements SelectListener{
 
                     //For loop to iterate through the tc_Detailed_List of BookDetails objects to create 'News' objects
                     //which will be added to the bookArrayList which will be used to display into the recyclerview
-                    for (int i = 0; i < tc_Detailed_List.size(); i++) {
-                        Log.d("tc_list",""+i);
-                        String authorDisplay = "By " + tc_Detailed_List.get(i).getAuthor(0);
-                        News news = new News(tc_Detailed_List.get(i).getTitle(), tc_Detailed_List.get(i).getBook_Image(), authorDisplay, null);
-                        bookArrayList.add(news);
+                    if (tc_Detailed_List.size() <= 10) {
+                        for (int i = 0; i < tc_Detailed_List.size(); i++) {
+                            Log.d("tc_list", "" + i);
+                            String authorDisplay = "By " + tc_Detailed_List.get(i).getAuthor(0);
+                            News news = new News(tc_Detailed_List.get(i).getTitle(), tc_Detailed_List.get(i).getBook_Image(), authorDisplay, null);
+                            bookArrayList.add(news);
+                        }
                     }
 
                     //Assigns the RecyclerView widget to the recyclerView variable
