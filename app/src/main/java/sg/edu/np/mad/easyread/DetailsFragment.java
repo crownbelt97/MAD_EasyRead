@@ -252,13 +252,15 @@ public class DetailsFragment extends Fragment {
                             try{
                                 categories = volumeInfo.getAsJsonArray("categories");
                             }catch (Exception e){
-                                Log.d("GOOGLEAPIS_URL authors" , e.toString());
+                                Log.d("GOOGLEAPIS_URL categories" , e.toString());
                             }
 
                             try{
                                 category_input = categories.get(0).getAsString();
                             }catch (Exception e){
-                                Log.d("GOOGLEAPIS_URL authors" , e.toString());
+                                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                                category_input = sharedPref.getString("reco", "empty");
+                                Log.d("GOOGLEAPIS_URL category input" , e.toString());
                             }
 
                             try{
@@ -336,7 +338,7 @@ public class DetailsFragment extends Fragment {
                             }
                             //add details to bookdetails class
                             //used for details fragment
-                            book = new BookDetails(title,authors_java_array,book_image,description_input,ratings,format,Integer.parseInt(length),publisher,release,"na");
+                            book = new BookDetails(title,authors_java_array,book_image,description_input,ratings,format,Integer.parseInt(length),publisher,release,category_input);
 
                             }
                         }
@@ -527,7 +529,7 @@ public class DetailsFragment extends Fragment {
 
                             //key_nytimes[0] = volumeInfo.get("key").getAsString();
 
-                            book = new BookDetails(title, authors_java_array, book_image, sharedPref.getString("description", "N/A"), ranking, "book", Integer.parseInt(length), publishers_data, release, "na");
+                            book = new BookDetails(title, authors_java_array, book_image, sharedPref.getString("description", "N/A"), ranking, "book", Integer.parseInt(length), publishers_data, release, "New York Times bestseller");
 
                     }
 
@@ -616,6 +618,9 @@ public class DetailsFragment extends Fragment {
 
                             TextView release = view.findViewById(R.id.details_Released_Data);
                             release.setText(finalBook.getRelease());
+
+                            TextView category = view.findViewById(R.id.details_Category);
+                            category.setText(finalBook.getCategory());
 
                             TextView description = view.findViewById(R.id.details_Description_Data);
 

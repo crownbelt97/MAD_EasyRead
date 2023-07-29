@@ -49,6 +49,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,9 +111,11 @@ public class HomeFragment extends Fragment {
 
 
 
+
+
         int[] catTextViews = {R.id.category1, R.id.category2, R.id.category3, R.id.category4, R.id.category5, R.id.category6};
         int[] viewAll = {R.id.latestAll, R.id.recommendedAll};
-        String[] reco = {"thriller", "history", "cooking", "novel", "music", "literature", "fantasy", "science", "biography"};
+        String[] reco = {"Thriller", "History", "Cooking", "Novel", "Music", "Literature", "Fantasy", "Science", "Biography"};
 
 
 
@@ -175,6 +178,21 @@ public class HomeFragment extends Fragment {
         //&key=AIzaSyC5eD17c8IFcJI2_bxxDx22cXGSUZBRp0s
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String clear_check = sharedPref.getString("Cleared","empty");
+        Log.d("clear_check",clear_check);
+        if ( NewWeek("Friday") && clear_check.equals("empty")){
+            Log.d("clearall","true");
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear().apply();
+            editor.putString("Cleared","true");
+            editor.apply();
+        }
+
+        if(NewWeek("Monday")){
+            sharedPref.edit().remove("Cleared").apply();
+        }
+
+
         String recoString = sharedPref.getString("reco", "empty");
 
         String lastUpdateDate = sharedPref.getString("last_update_date", ""); // Retrieve the last update date
@@ -744,6 +762,23 @@ public class HomeFragment extends Fragment {
     private String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         return DateFormat.format("yyyy-MM-dd", calendar).toString();
+    }
+
+    private boolean NewWeek (String date){
+        Calendar calendar = Calendar.getInstance();
+        Date d = new Date();
+        calendar.setTime(d);
+        boolean day = false;
+        if (date.equals("Friday")){
+            day = calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY;
+            Log.d("look","hereFri");
+            System.out.println(day);
+        }else if(date.equals("Monday")){
+        day = calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+        Log.d("look","hereMon");
+        System.out.println(day);
+        }
+        return day;
     }
 
 
