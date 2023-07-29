@@ -14,7 +14,7 @@
 
     <item
         android:title="Bookmarks"
-        android:icon="@drawable/baseline_favorite_24"
+        android:icon="@drawable/blackbookmark"
         android:id="@+id/favourite"
         />
 
