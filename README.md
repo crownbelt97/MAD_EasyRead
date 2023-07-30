@@ -1,3 +1,5 @@
+# EASYREAD
+
 Group Members:
 
 Jeremy Chan Wei Wen - S10247153 <br>
@@ -8,16 +10,15 @@ Mikhail Adam Zahadi - S10239784 <br>
 EasyRead is an book browsing application to find online books to read. EasyRead helps users in finding out what new books are released and what 
 books are recommended for the user. Users can scroll through top charts of books, favourite books they like and search books by categories like Fiction. <br>
 
+# Download our app
+
 ### **Link**: [Click here](https://play.google.com/store/apps/details?id=sg.edu.np.mad.easyread) <br>
 
-Description and explanation of how MAD concepts are applied
-- Fragments
-- Recycler view
-- Firebase
-- Git/Github
-- Persistent storage (Transfer string data between fragment using Shared Preferences) <br>
+# Tools used
 
-Stage 1 Contributions <br>
+# Contributions
+
+## Stage 1 Contributions <br>
 
 Jeremy Chan Wei Wen : <br>
 - Navigation Bar <br>
@@ -45,7 +46,7 @@ Mikhail Adam Zahadi : <br>
 - Display Google Books API call data in BookDetails Fragment
 - Display respective API call data in Home Fragment, Popular Now and Recommended For You
 
-Stage 2 Plan: <br>
+## Stage 2 Contributions: <br>
 
 Jeremy Chan Wei Wen : <br>
 - Front-end <br>
@@ -74,11 +75,11 @@ Siu Chi Kit Wesley : <br>
 
 
  Mikhail Adam Zahadi <br>
- - Reviews <br>
+ - Shared preferences to store the books <br>
  - Favourites <br>
  - Rename to Bookmark in future <br>
  - Update UI on Book details <br>
- - Where to buy to book & prices <br>
+ - Where to buy to book  <br>
 
-
+# Appendices
  Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
