@@ -8,7 +8,7 @@ Phang Kah Yeng - S10245147 <br>
 Siu Chi Kit Wesley - S10243612 <br>
 Mikhail Adam Zahadi - S10239784 <br>
 
-## Introduction
+## Introduction and features
 
 ### 🔍 Unveil the Literary Gems
 
