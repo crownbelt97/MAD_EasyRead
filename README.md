@@ -47,17 +47,19 @@ Personalise your profiles through custom profile photos and usernames. <br>
 
 Jeremy Chan Wei Wen : <br>
 - Navigation Bar <br>
-- Recylcer View for Home Page <br>
+- Recycler View for Home Page <br>
 - Creating the Main Actitvity and respective Fragments e.g Top Chart <br>
 - UI for Top Charts, Favourites and Profile Fragments <br>
-- Uploaded Application <br>
+- Uploaded Application to Google Play Console<br>
 
 Phang Kah Yeng : <br>
 - UI Welcome Page <br>
+- Account Database <br>
 - UI and Back-end for Log In Page <br>
 - UI and Back-end for Sign Up Page <br>
 - Forgot and reset password feature <br>
 - Storing Profile data in Database <br>
+- Designed App Icon <br>
 
 Siu Chi Kit Wesley : <br>
 - UI for Home and BookDetails Fragment  <br>
@@ -74,17 +76,23 @@ Mikhail Adam Zahadi : <br>
 ## Stage 2 Contributions: <br>
 
 Jeremy Chan Wei Wen : <br>
-- Front-end <br>
+- Front-end throughout the whole App <br>
+    - HomePage
+    - Profile Page
+    - Top Charts
+    - Friend's Profile Page
 - Social Feature
     - Search Profiles via username
     - Friends can follow and unfollow each other
-    - Able to see Profile name, following, followers and likes
+    - Able to see Friend's profile name, following, followers and bookmarks
 
 Phang Kah Yeng : <br>
 - Notifications <br>
 - Edit Profile <br>
     - Upload profile picture
-    - Update username 
+    - Update username
+    - Update email
+    - View Joined date
     - Password reset using authentication firebase
 - Improved UI to make the app more visually appealing for users<br>
 
@@ -113,7 +121,7 @@ Siu Chi Kit Wesley : <br>
 
 ## Wireframe
 
-### **Link**: [Click here](https://www.figma.com/file/9uA0oDTLLg7DdTzcwP1Uk2/MAD-Wireframe?type=design&node-id=0-1&mode=design) <br>
+### **Figma Link**: [Click here](https://www.figma.com/file/9uA0oDTLLg7DdTzcwP1Uk2/MAD-Wireframe?type=design&node-id=0-1&mode=design) <br>
 
 ## Credits
 - Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
