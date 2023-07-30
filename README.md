@@ -84,5 +84,5 @@ Siu Chi Kit Wesley : <br>
  - Update UI on Book details <br>
  - Where to buy to book  <br>
 
-# Appendices
+# Appendix
  Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
