@@ -20,7 +20,7 @@ Be in the know! EasyRead helps users find out what new books are released, what 
 
 ### 🔖 Bookmark the Books YOU are Interested In
 
-EasyRead allows you to save and organize your favorite finds with ease. Keep track of the books that pique your interest, ensuring they do not get forgotten  <br>
+EasyRead allows you to save and organise your favorite finds with ease. Keep track of the books that pique your interest, ensuring they do not get forgotten  <br>
 
 ### 👫 Connect with Your Friends
 
