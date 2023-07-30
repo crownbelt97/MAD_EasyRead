@@ -343,6 +343,9 @@ public class HomeFragment extends Fragment {
             //Callback that is invoked when a network request is successful and receives a response from the server
             @Override
             public void onResponse(JSONObject response) {
+                if (!isAdded()) {
+                    return; // Fragment is not attached, do nothing
+                }
                 //Try and catch blocks part of volley library as part of exception handling
                 try {
 
