@@ -1,3 +1,5 @@
+# EASYREAD
+
 Group Members:
 
 Jeremy Chan Wei Wen - S10247153 <br>
@@ -8,6 +10,8 @@ Mikhail Adam Zahadi - S10239784 <br>
 EasyRead is an book browsing application to find online books to read. EasyRead helps users in finding out what new books are released and what 
 books are recommended for the user. Users can scroll through top charts of books, favourite books they like and search books by categories like Fiction. <br>
 
+# Download our app
+
 ### **Link**: [Click here](https://play.google.com/store/apps/details?id=sg.edu.np.mad.easyread) <br>
 
 Description and explanation of how MAD concepts are applied
@@ -16,6 +20,8 @@ Description and explanation of how MAD concepts are applied
 - Firebase
 - Git/Github
 - Persistent storage (Transfer string data between fragment using Shared Preferences) <br>
+
+# Contributions
 
 Stage 1 Contributions <br>
 
