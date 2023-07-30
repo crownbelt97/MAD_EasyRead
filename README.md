@@ -94,7 +94,7 @@ Siu Chi Kit Wesley : <br>
     - Search by author
     - Search by title
 - Added loading animations for the home page, book details and recycler views <br>
-- Linking of view all pages <br>
+- Linking of view all buttons to their respective pages <br>
 - Modified books recommended to update at the start of the month <br>
 
 
