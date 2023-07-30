@@ -1,6 +1,6 @@
 # EASYREAD
 
-Group Members:
+## Group Members:
 
 Jeremy Chan Wei Wen - S10247153 <br>
 Phang Kah Yeng - S10245147 <br>
