@@ -55,7 +55,6 @@ Jeremy Chan Wei Wen : <br>
     - Able to see Profile name, following, followers and likes
 
 Phang Kah Yeng : <br>
-
 - Notifications <br>
 - Edit Profile <br>
     - Upload profile picture
