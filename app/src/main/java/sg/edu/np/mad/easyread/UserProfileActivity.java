@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -52,6 +53,7 @@ public class UserProfileActivity extends AppCompatActivity implements SelectList
     TextView profileFollowingTextView;
     TextView profileFollowersTextView;
     ShimmerFrameLayout shimmerFrameLayout;
+    ImageView profileImage;
     private RecyclerView recyclerView;
     private ArrayList<News> bookArrayList = new ArrayList<>();
 
@@ -80,7 +82,7 @@ public class UserProfileActivity extends AppCompatActivity implements SelectList
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users");
-
+        profileImage = findViewById(R.id.profileImage);
 
 
 
@@ -205,7 +207,16 @@ public class UserProfileActivity extends AppCompatActivity implements SelectList
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String usernameDB = String.valueOf(dataSnapshot.child("username").getValue(String.class));
+                    String imageUrl = String.valueOf(dataSnapshot.child("profileImageURL").getValue(String.class));
                     profileUsernameTextView.setText(usernameDB);
+
+                    if (imageUrl != null && !imageUrl.isEmpty()) {
+
+                        Glide.with(UserProfileActivity.this)
+                                .load(imageUrl)
+                                .placeholder(R.drawable.profile_icon)
+                                .into(profileImage);
+                    }
                 }
             }
 

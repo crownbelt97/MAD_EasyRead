@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@id/constraintLayout5"
             tools:listitem="@layout/list_item" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
             android:layout_width="143dp"
             android:layout_height="113dp"
@@ -105,7 +105,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_android_24" />
-
         <TextView
             android:id="@+id/profileUsernameTextView"
             android:layout_width="wrap_content"
