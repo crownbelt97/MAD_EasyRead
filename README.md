@@ -111,5 +111,9 @@ Siu Chi Kit Wesley : <br>
 
 ### **Link**: [Click here](https://docs.google.com/document/d/1Wqs01JBVruF7LGwIBALQq7nHq4fkNoeiSwjuWkDDcAo/edit?usp=sharing) <br>
 
+## Wireframe
+
+### **Link**: [Click here](https://www.figma.com/file/9uA0oDTLLg7DdTzcwP1Uk2/MAD-Wireframe?type=design&node-id=0-1&mode=design) <br>
+
 ## Credits
 - Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
