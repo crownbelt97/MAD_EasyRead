@@ -109,7 +109,7 @@ Siu Chi Kit Wesley : <br>
 
 ## User guide
 
-### **Link**: [Click here]() <br>
+### **Link**: [Click here](https://docs.google.com/document/d/1Wqs01JBVruF7LGwIBALQq7nHq4fkNoeiSwjuWkDDcAo/edit?usp=sharing) <br>
 
 ## Credits
 - Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
