@@ -18,7 +18,7 @@ books are recommended for the user. Users can scroll through top charts of books
 
 # Contributions
 
-Stage 1 Contributions <br>
+## Stage 1 Contributions <br>
 
 Jeremy Chan Wei Wen : <br>
 - Navigation Bar <br>
@@ -46,7 +46,7 @@ Mikhail Adam Zahadi : <br>
 - Display Google Books API call data in BookDetails Fragment
 - Display respective API call data in Home Fragment, Popular Now and Recommended For You
 
-Stage 2 Plan: <br>
+## Stage 2 Contributions: <br>
 
 Jeremy Chan Wei Wen : <br>
 - Front-end <br>
