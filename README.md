@@ -14,7 +14,7 @@ Mikhail Adam Zahadi - S10239784 <br>
 
 No more searching in the dark for the perfect book! EasyRead allows users to explore a wide range of titles, through categories or even through title or author if the user has a specific type of book in mind. <br>
 
-### 📰 Stay Up-to-Date with Book Buzz:
+### 📰 Stay Up-to-Date with Book Buzz
 
 Be in the know! EasyRead helps users find out what new books are released, what are the top books are at the moment from the NYTimes bestsellers list, and even gives users new recommendations every month, to get a taste of fresh perspectives and thrilling stories. <br>
 
@@ -22,7 +22,8 @@ Be in the know! EasyRead helps users find out what new books are released, what 
 
 EasyRead allows you to save and organize your favorite finds with ease. Keep track of the books that pique your interest, ensuring they do not get forgotten  <br>
 
-👫 Connect with Your Friends!
+### 👫 Connect with Your Friends!
+
 Reading becomes even more exciting when shared with friends! Connect with fellow book lovers on EasyRead to find inspiration through their bookmarks on their profiles. <br>
 
 # Download our app
