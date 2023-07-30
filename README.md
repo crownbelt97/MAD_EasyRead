@@ -58,6 +58,7 @@ Phang Kah Yeng : <br>
 
 - Notifications <br>
 - Edit Profile <br>
+    - Upload profile picture
     - Update username 
     - Password reset using authentication firebase
 - Improved UI to make the app more visually appealing for users<br>
