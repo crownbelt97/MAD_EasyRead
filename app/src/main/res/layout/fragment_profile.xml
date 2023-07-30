@@ -22,8 +22,8 @@
             tools:context="sg.edu.np.mad.easyread.ProfileFragment">
 
             <!-- User Profile Image -->
-            <ImageView
-                android:id="@+id/imageView2"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
                 android:layout_width="143dp"
                 android:layout_height="113dp"
                 android:layout_marginTop="60dp"
@@ -32,7 +32,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_android_24" />
-
             <!-- Username TextView -->
             <TextView
                 android:id="@+id/usernameTextView"
@@ -43,7 +42,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
             <!-- Following, Followers, Likes TextViews -->
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -15,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +56,7 @@ public class ProfileFragment extends Fragment {
 
     Switch notificationBtn;
 
+    ImageView profileImage;
 
     public ProfileFragment() {
 
@@ -79,6 +82,7 @@ public class ProfileFragment extends Fragment {
         followingCount = view.findViewById(R.id.followingCount);
         followersCount = view.findViewById(R.id.ProfileFollowertextView);
         notificationBtn = view.findViewById(R.id.notificationBtn);
+        profileImage = view.findViewById(R.id.profileImage);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -98,6 +102,7 @@ public class ProfileFragment extends Fragment {
                             String usernameDB = String.valueOf(userSnapshot.child("username").getValue(String.class));
                             String followingCountDB = String.valueOf(userSnapshot.child("followingCount").getValue(long.class));
                             String followersCountDB = String.valueOf(userSnapshot.child("followersCount").getValue(long.class));
+                            String imageUrl = String.valueOf(userSnapshot.child("profileImageURL").getValue(String.class));
                             usernameTextView.setText(usernameDB);
                             if (followingCountDB == "null"){
                                 followingCount.setText("0");
@@ -110,6 +115,15 @@ public class ProfileFragment extends Fragment {
                             }
                             else {
                                 followersCount.setText(followersCountDB);
+                            }
+
+                            if (imageUrl != null && !imageUrl.isEmpty()) {
+
+                                Glide.with(requireContext())
+                                        .load(imageUrl)
+                                        .placeholder(R.drawable.profile_icon)
+                                        .into(profileImage);
+
                             }
 
                             break;
