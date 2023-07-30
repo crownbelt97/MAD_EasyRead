@@ -27,7 +27,7 @@ EasyRead allows you to save and organise your favorite finds with ease. Keep tra
 Reading becomes even more exciting when shared with friends! Connect with fellow book lovers on EasyRead to find inspiration through the bookmarks on their profiles. <br>
 
 
-### 🌟 Customise your profiles 
+### 🌟 Customise your profile
 
 Personalise your profiles through custom profile photos and usernames. <br>
 
