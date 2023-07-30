@@ -39,6 +39,7 @@ Personalise your profiles through custom profile photos and usernames. <br>
 
 - Android Studio <br>
 - Figma <br>
+- Photoshop <br>
 
 # Contributions
 
@@ -103,7 +104,6 @@ Siu Chi Kit Wesley : <br>
  - Favourites <br>
  - Rename to Bookmark in future <br>
  - Update UI on Book details <br>
- - Where to buy to book  <br>
 
 # Appendix
 
