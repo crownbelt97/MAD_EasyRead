@@ -7,8 +7,10 @@ Phang Kah Yeng - S10245147 <br>
 Siu Chi Kit Wesley - S10243612 <br>
 Mikhail Adam Zahadi - S10239784 <br>
 
-EasyRead is an book browsing application to find online books to read. EasyRead helps users in finding out what new books are released and what 
-books are recommended for the user. Users can scroll through top charts of books, favourite books they like and search books by categories like Fiction. <br>
+## Introduction
+
+EasyRead is a book browsing application to help users find online books to read and connect with their friends. EasyRead helps users find out what new books are released, what 
+books are recommended for the user, and what are the top books at the moment from the NYTimes bestsellers list. Users can search for specific books by title or author, and bookmark those they are interested in. There are also categories to help users explore different genres of books and find boooks they like. You can also connect with your friends and find what they are interested in through their bookmarks. <br>
 
 # Download our app
 
