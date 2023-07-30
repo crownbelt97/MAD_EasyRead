@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -164,12 +165,20 @@ public class UserProfileActivity extends AppCompatActivity implements SelectList
                 recyclerView.setVisibility(View.VISIBLE);
                 shimmerFrameLayout.setVisibility(View.GONE);
 
+                ImageView back = findViewById(R.id.profileBack);
+
+                back.setOnClickListener(v -> {
+                    Intent intent = new Intent(UserProfileActivity.this, AddFriendsActivity.class);
+                    startActivity(intent);
+                });
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
 
 

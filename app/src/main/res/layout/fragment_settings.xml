@@ -11,6 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Bookmarks"
+            android:textSize="25dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="54dp" />
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/recyclerShimmer"
             android:layout_width="match_parent"
@@ -61,21 +73,15 @@
             android:layout_width="413dp"
             android:layout_height="wrap_content"
             android:paddingBottom="100dp"
+            android:layout_marginTop="20dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView3"
             tools:listitem="@layout/list_item" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:text="Bookmarks"
-            android:textSize="25dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="54dp" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

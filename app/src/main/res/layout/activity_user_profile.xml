@@ -14,6 +14,16 @@
         android:layout_height="match_parent"
         android:background="#F2F1F7">
 
+        <ImageView
+            android:id="@+id/profileBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/recyclerShimmer"
             android:layout_width="match_parent"
