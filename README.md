@@ -14,6 +14,8 @@ books are recommended for the user. Users can scroll through top charts of books
 
 ### **Link**: [Click here](https://play.google.com/store/apps/details?id=sg.edu.np.mad.easyread) <br>
 
+# concepts
+
 Description and explanation of how MAD concepts are applied
 - Fragments
 - Recycler view
