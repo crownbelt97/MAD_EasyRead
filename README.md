@@ -76,11 +76,11 @@ Siu Chi Kit Wesley : <br>
 
 
  Mikhail Adam Zahadi <br>
- - Reviews <br>
+ - Shared preferences to store the books <br>
  - Favourites <br>
  - Rename to Bookmark in future <br>
  - Update UI on Book details <br>
- - Where to buy to book & prices <br>
+ - Where to buy to book  <br>
 
 # Appendices
  Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
