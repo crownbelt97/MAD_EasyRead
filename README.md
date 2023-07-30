@@ -22,9 +22,9 @@ Be in the know! EasyRead helps users find out what new books are released, what 
 
 EasyRead allows you to save and organize your favorite finds with ease. Keep track of the books that pique your interest, ensuring they do not get forgotten  <br>
 
-### 👫 Connect with Your Friends!
+### 👫 Connect with Your Friends
 
-Reading becomes even more exciting when shared with friends! Connect with fellow book lovers on EasyRead to find inspiration through their bookmarks on their profiles. <br>
+Reading becomes even more exciting when shared with friends! Connect with fellow book lovers on EasyRead to find inspiration through the bookmarks on their profiles. <br>
 
 
 ### 🌟 Customise your profiles 
