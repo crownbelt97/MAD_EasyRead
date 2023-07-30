@@ -16,6 +16,9 @@ books are recommended for the user. Users can scroll through top charts of books
 
 # Tools used
 
+- Android Studio <br>
+- Figma <br>
+
 # Contributions
 
 ## Stage 1 Contributions <br>
