@@ -123,7 +123,6 @@ public class ProfileFragment extends Fragment {
                                         .load(imageUrl)
                                         .placeholder(R.drawable.profile_icon)
                                         .into(profileImage);
-
                             }
 
                             break;
