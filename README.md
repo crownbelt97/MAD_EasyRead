@@ -1,4 +1,5 @@
 # EASYREAD
+EasyRead is a book browsing application to help users find online books to read and connect with their friends. <br>
 
 ## Group Members:
 
@@ -9,8 +10,20 @@ Mikhail Adam Zahadi - S10239784 <br>
 
 ## Introduction
 
-EasyRead is a book browsing application to help users find online books to read and connect with their friends. EasyRead helps users find out what new books are released, what 
-books are recommended for the user, and what are the top books at the moment from the NYTimes bestsellers list. Users can search for specific books by title or author, and bookmark those they are interested in. There are also categories to help users explore different genres of books and find boooks they like. You can also connect with your friends and find what they are interested in through their bookmarks. <br>
+### 🔍 Unveil the Literary Gems
+
+No more searching in the dark for the perfect book! EasyRead allows users to explore a wide range of titles, through categories or even through title or author if the user has a specific type of book in mind. <br>
+
+### 📰 Stay Up-to-Date with Book Buzz:
+
+Be in the know! EasyRead helps users find out what new books are released, what are the top books are at the moment from the NYTimes bestsellers list, and even gives users new recommendations every month, to get a taste of fresh perspectives and thrilling stories. <br>
+
+### 🔖 Bookmark the Books YOU are Interested In
+
+EasyRead allows you to save and organize your favorite finds with ease. Keep track of the books that pique your interest, ensuring they do not get forgotten  <br>
+
+👫 Connect with Your Friends!
+Reading becomes even more exciting when shared with friends! Connect with fellow book lovers on EasyRead to find inspiration through their bookmarks on their profiles. <br>
 
 # Download our app
 
