@@ -1,4 +1,4 @@
-# EASYREAD
+# 📚 EASYREAD
 EasyRead is a book browsing application to help users find online books to read and connect with their friends. <br>
 
 ## Group Members:
