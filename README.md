@@ -14,14 +14,7 @@ books are recommended for the user. Users can scroll through top charts of books
 
 ### **Link**: [Click here](https://play.google.com/store/apps/details?id=sg.edu.np.mad.easyread) <br>
 
-# concepts
-
-Description and explanation of how MAD concepts are applied
-- Fragments
-- Recycler view
-- Firebase
-- Git/Github
-- Persistent storage (Transfer string data between fragment using Shared Preferences) <br>
+# Tools used
 
 # Contributions
 
@@ -89,5 +82,5 @@ Siu Chi Kit Wesley : <br>
  - Update UI on Book details <br>
  - Where to buy to book & prices <br>
 
-
+# Appendices
  Bookmark Image taken from : https://www.flaticon.com/free-icon/bookmark_494568 <br>
