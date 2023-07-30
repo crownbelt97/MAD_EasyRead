@@ -39,7 +39,7 @@ Personalise your profiles through custom profile photos and usernames. <br>
 
 - Android Studio <br>
 - Figma <br>
-- Photoshop <br>
+- Adobe Photoshop <br>
 
 # Contributions
 
